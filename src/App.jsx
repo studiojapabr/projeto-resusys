@@ -60,6 +60,8 @@ const Styles = () => <style>{`
   @keyframes popIn     { 0%{opacity:0;transform:scale(0.5)} 60%{transform:scale(1.05)} 100%{opacity:1;transform:scale(1)} }
   @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
   @keyframes spin      { to { transform: rotate(360deg); } }
+  @keyframes marqueeLeft  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  @keyframes marqueeRight { from{transform:translateX(-50%)} to{transform:translateX(0)} }
   .btn-hover-grad:hover { background: linear-gradient(135deg, #e04543 0%, #fc3a4b 50%, #8d000e 100%) !important; transform: scale(1.08); }
 `}</style>;
 
@@ -153,6 +155,33 @@ const Loading = () => (
 );
 
 // ═══════════════════════════════════════════
+// COMPONENTE: MARQUEE TITLE (estilo Sonance)
+// ═══════════════════════════════════════════
+const MarqueeTitle = ({ line1, line2, mb = 14, color = D.white, speed = 14 }) => {
+  const textStyle = {
+    fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95,
+    textTransform: "uppercase", letterSpacing: -1, color,
+    whiteSpace: "nowrap", paddingRight: 48, flexShrink: 0,
+  };
+  const rowStyle = (dir) => ({
+    display: "flex", overflow: "hidden",
+    animation: `${dir} ${speed}s linear infinite`,
+    willChange: "transform",
+  });
+  const items = [...Array(6)];
+  return (
+    <div style={{ overflow: "hidden", marginBottom: mb }}>
+      <div style={rowStyle("marqueeLeft")}>
+        {items.map((_, i) => <span key={i} style={textStyle}>{line1}</span>)}
+      </div>
+      <div style={rowStyle("marqueeRight")}>
+        {items.map((_, i) => <span key={i} style={textStyle}>{line2}</span>)}
+      </div>
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════
 // TELA: LANDING
 // ═══════════════════════════════════════════
 const Landing = ({ go }) => (
@@ -163,7 +192,7 @@ const Landing = ({ go }) => (
           <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 30px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 14, letterSpacing: -1 }}>CONCLUA TAREFAS E GANHE SUAS RECOMPENSAS.</h1>
+        <MarqueeTitle line1="CONCLUA TAREFAS" line2="GANHE RECOMPENSAS." mb={14} />
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>SIGN UP</Btn>
@@ -200,7 +229,7 @@ const LoginScreen = ({ go }) => {
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
             <span onClick={() => go("landing")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>BEM-VINDO DE VOLTA.</h1>
+          <MarqueeTitle line1="BEM-VINDO" line2="DE VOLTA." mb={28} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -242,7 +271,7 @@ const RegisterScreen = ({ go }) => {
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>CRIE SUA CONTA ABAIXO E ACESSE AS TAREFAS.</h1>
+          <MarqueeTitle line1="CRIE SUA CONTA" line2="ACESSE AS TAREFAS." mb={28} />
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -344,7 +373,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.95, margin: "24px 0 10px 4px", animation: "fadeUp 0.5s ease-out 0.1s both", letterSpacing: -1, color: D.white }}>TAREFAS ABAIXO!</h1>
+        <MarqueeTitle line1="TAREFAS" line2="ABAIXO!" mb={10} speed={10} />
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.5s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
@@ -473,7 +502,7 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ padding: "0 20px", maxWidth: 430, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100dvh", paddingTop: 40, paddingBottom: 40 }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.5s ease-out">
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.5s ease-out", boxShadow: `0 4px 15px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -1, lineHeight: 0.95 }}>VALOR SOLICITADO!</h2>
+        <MarqueeTitle line1="VALOR" line2="SOLICITADO!" mb={14} speed={10} />
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <Btn onClick={() => go("dashboard")}>VOLTAR</Btn>
       </Glass>
@@ -488,7 +517,7 @@ const Withdrawal = ({ go, profile }) => {
           <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
           <span onClick={() => go("dashboard")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 10, letterSpacing: -1 }}>PARABÉNS PELO SEU SAQUE!</h1>
+        <MarqueeTitle line1="PARABÉNS" line2="PELO SEU SAQUE!" mb={10} />
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>
