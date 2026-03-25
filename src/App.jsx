@@ -157,7 +157,7 @@ const Loading = () => (
 // ═══════════════════════════════════════════
 const Landing = ({ go }) => (
   <BG>
-    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, margin: "0 auto" }}>
+    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.8s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <span style={{ fontSize: 40, color: D.red, textShadow: `0 0 30px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
