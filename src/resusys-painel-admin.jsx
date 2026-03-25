@@ -142,7 +142,7 @@ const IC = {
 };
 
 const LogoutBtn = ({ onClick }) => {
-  const [hov, setHov] = React.useState(false);
+  const [hov, setHov] = useState(false);
   return (
     <div
       onClick={onClick}
