@@ -141,6 +141,30 @@ const IC = {
   link: (c="white") => <svg width="12" height="12" viewBox="0 0 24 24" fill={c}><path d="M7.835,16.17c-.23-.23-.446-.482-.641-.748-.325-.446-.227-1.072,.22-1.397,.446-.325,1.071-.227,1.397,.219,.129,.178,.274,.349,.437,.511,.803,.803,1.87,1.245,3.005,1.245s2.203-.442,3.005-1.245l5.5-5.5c1.657-1.657,1.657-4.354,0-6.011s-4.354-1.657-6.011,0l-1.058,1.058c-.391,.391-1.023,.391-1.414,0s-.391-1.023,0-1.414l1.058-1.058c2.437-2.438,6.402-2.438,8.839,0,2.437,2.437,2.437,6.402,0,8.839l-5.5,5.5c-1.18,1.181-2.75,1.831-4.419,1.831s-3.239-.65-4.418-1.83Zm-1.582,7.83c1.67,0,3.239-.65,4.419-1.831l1.058-1.058c.391-.39,.391-1.023,0-1.414-.39-.391-1.023-.39-1.414,0l-1.059,1.058c-.803,.803-1.87,1.245-3.005,1.245s-2.202-.442-3.005-1.245-1.245-1.87-1.245-3.005,.442-2.203,1.245-3.005l5.5-5.5c.803-.803,1.87-1.245,3.005-1.245s2.203,.442,3.005,1.245c.16,.161,.306,.332,.436,.51,.324,.447,.949,.547,1.397,.221,.447-.325,.546-.95,.221-1.397-.19-.262-.405-.513-.639-.747-1.181-1.182-2.751-1.832-4.42-1.832s-3.239,.65-4.419,1.831L1.834,13.331C.653,14.511,.003,16.081,.003,17.75c0,1.669,.65,3.239,1.831,4.419,1.18,1.181,2.749,1.831,4.419,1.831Z"/></svg>,
 };
 
+const LogoutBtn = ({ onClick }) => {
+  const [hov, setHov] = React.useState(false);
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      title="Sair"
+      style={{
+        width: 36, height: 36, borderRadius: "50%",
+        background: hov ? D.btnGrad : "rgba(255,255,255,0.08)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "pointer", transition: "all 0.3s",
+        boxShadow: hov ? `0 4px 15px ${D.redGlow}` : "none",
+      }}
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.3s" }}>
+        <path d="M22.829,9.172,18.95,5.293a1,1,0,0,0-1.414,1.414L21.414,10.5H9a1,1,0,0,0,0,2H21.414l-3.878,3.793a1,1,0,1,0,1.414,1.414l3.879-3.879A3,3,0,0,0,22.829,9.172Z"/>
+        <path d="M15,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9a1,1,0,0,0,0-2H5A3,3,0,0,0,2,4V20a3,3,0,0,0,3,3h10a1,1,0,0,0,0-2Z"/>
+      </svg>
+    </div>
+  );
+};
+
 // ═══════════════════════════════════════════
 // ABA: OVERVIEW
 // ═══════════════════════════════════════════
@@ -627,7 +651,8 @@ export default function AdminApp() {
     <><Styles /><BG>
       <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 20, boxSizing: "border-box" }}>
         {/* Top Nav */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "14px 20px", marginTop: 16, marginBottom: 0, gap: 10 }} a="fadeUp 0.5s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, marginBottom: 0 }} a="fadeUp 0.5s ease-out">
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "space-between" }}>
           {[
             { k: "overview", icon: IC.grid },
             { k: "submissions", icon: IC.inbox },
@@ -641,13 +666,12 @@ export default function AdminApp() {
               <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 4px 15px ${D.redGlow}` : "none", position: "relative", transition: "all 0.3s" }}>
                 {t.icon(active ? "white" : "rgba(255,255,255,0.4)")}
                 {pendingCount > 0 && !active && (
-                  <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
+                  <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
                 )}
               </div>
             );
           })}
-          <div onClick={handleLogout} style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }} title="Sair">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.60)"><path d="M22.829,9.172,18.95,5.293a1,1,0,0,0-1.414,1.414L21.414,10.5H9a1,1,0,0,0,0,2H21.414l-3.878,3.793a1,1,0,1,0,1.414,1.414l3.879-3.879A3,3,0,0,0,22.829,9.172Z"/><path d="M15,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9a1,1,0,0,0,0-2H5A3,3,0,0,0,2,4V20a3,3,0,0,0,3,3h10a1,1,0,0,0,0-2Z"/></svg>
+          <LogoutBtn onClick={handleLogout} />
           </div>
         </Glass>
 
