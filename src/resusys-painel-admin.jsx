@@ -208,9 +208,9 @@ const ASubs = ({ subs, setSubs }) => {
   return (
     <div>
       <ToastC msg={toast?.m} type={toast?.t} />
-      <div style={{ display: "flex", gap: 10, marginBottom: 18 }}>
+      <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 14px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 14, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 11, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 14, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -625,7 +625,7 @@ export default function AdminApp() {
 
   return (
     <><Styles /><BG>
-      <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 20 }}>
+      <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 20, boxSizing: "border-box" }}>
         {/* Top Nav */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "14px 20px", marginTop: 16, marginBottom: 0, gap: 10 }} a="fadeUp 0.5s ease-out">
           {[
