@@ -161,7 +161,7 @@ const Landing = ({ go }) => (
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.8s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 30px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
-          <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 16 }}>|</span> RESUSYSTEM</span>
+          <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 14, letterSpacing: -1 }}>CONCLUA TAREFAS E GANHE SUAS RECOMPENSAS.</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
@@ -198,7 +198,7 @@ const LoginScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
-            <span onClick={() => go("landing")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 16 }}>|</span> VOLTAR</span>
+            <span onClick={() => go("landing")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>BEM-VINDO DE VOLTA.</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -240,7 +240,7 @@ const RegisterScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
-            <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 16 }}>|</span> RESUSYSTEM</span>
+            <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>CRIE SUA CONTA ABAIXO E ACESSE AS TAREFAS.</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
@@ -346,7 +346,7 @@ const UserDash = ({ profile, go, onLogout }) => {
 
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.95, margin: "24px 0 10px 4px", animation: "fadeUp 0.5s ease-out 0.1s both", letterSpacing: -1, color: D.white }}>TAREFAS ABAIXO!</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.5s ease-out 0.15s both" }}>
-          <span style={{ fontFamily: D.sora, fontSize: 13, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
+          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
         <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.5s ease-out 0.2s both" }}>
           {[
@@ -381,7 +381,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><span style={{ fontWeight: 800, fontSize: 15, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span></div>
+                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
@@ -486,7 +486,7 @@ const Withdrawal = ({ go, profile }) => {
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
-          <span onClick={() => go("dashboard")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 16 }}>|</span> VOLTAR</span>
+          <span onClick={() => go("dashboard")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 10, letterSpacing: -1 }}>PARABÉNS PELO SEU SAQUE!</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>

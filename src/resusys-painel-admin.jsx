@@ -210,7 +210,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 11, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -641,7 +641,7 @@ export default function AdminApp() {
               <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 4px 15px ${D.redGlow}` : "none", position: "relative", transition: "all 0.3s" }}>
                 {t.icon(active ? "white" : "rgba(255,255,255,0.4)")}
                 {pendingCount > 0 && !active && (
-                  <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
+                  <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
                 )}
               </div>
             );
@@ -653,7 +653,7 @@ export default function AdminApp() {
 
         <div style={{ margin: "24px 0 18px 4px" }}>
           <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
-          <h1 style={{ fontFamily: D.sora, fontSize: 32, fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
