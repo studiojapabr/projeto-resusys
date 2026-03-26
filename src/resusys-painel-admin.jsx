@@ -15,14 +15,14 @@ const supabase = createClient(
 // ═══════════════════════════════════════════
 const D = {
   bg1: "#050505", bg2: "#111111",
-  glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
+  glass: "rgba(255,255,255,0.06)", glassBorder: "rgba(255,255,255,0.14)", blur: "blur(22px)",
   radius: "999px", radiusSm: "20px",
-  red: "#c1ff16", redDark: "#7aac00", redGlow: "rgba(193,255,22,0.26)",
-  green: "#c1ff16", greenGlow: "rgba(193,255,22,0.22)",
+  red: "#c1ff16", redDark: "#86b700", redGlow: "rgba(193,255,22,0.38)",
+  green: "#c1ff16", greenGlow: "rgba(193,255,22,0.32)",
   yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: "linear-gradient(135deg, #d3ff64 0%, #b6f10f 55%, #7aac00 100%)",
-  cardGrad: "linear-gradient(145deg, rgba(193,255,22,0.12) 0%, rgba(255,255,255,0.025) 100%)",
+  btnGrad: "linear-gradient(135deg, #d8ff6a 0%, #c1ff16 55%, #95cc00 100%)",
+  cardGrad: "linear-gradient(145deg, rgba(193,255,22,0.16) 0%, rgba(255,255,255,0.03) 100%)",
   sora: "'Sora', sans-serif",
 };
 
@@ -32,31 +32,31 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(193,255,22,0.22); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(193,255,22,0.35); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(193,255,22,0.65) !important; box-shadow: 0 0 0 2px rgba(193,255,22,0.14), 0 0 14px rgba(193,255,22,0.18); }
+  input:focus, textarea:focus { outline: none; border-color: rgba(193,255,22,0.9) !important; box-shadow: 0 0 0 2px rgba(193,255,22,0.18), 0 0 24px rgba(193,255,22,0.24); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(193,255,22,0.18)} 50%{box-shadow:0 0 24px rgba(193,255,22,0.28)} }
-  @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(193,255,22,0.55); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(193,255,22,0.65); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(193,255,22,0.45); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(193,255,22,0.55); animation:pulseDot 2s infinite; }
-  @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
-  @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 15px rgba(193,255,22,0.25)} 50%{box-shadow:0 0 40px rgba(193,255,22,0.45)} }
+  @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.7} 100%{transform:scale(2.5);opacity:0} }
+  .pulse-dot-red { width:10px; height:10px; background:#c1ff16; border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:#c1ff16; animation:pulseDot 1.5s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:#c1ff16; border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:#c1ff16; animation:pulseDot 1.5s infinite; }
+  @keyframes glowPulse { 0%,100%{opacity:0.25} 50%{opacity:0.55} }
+  @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
   @keyframes countUp   { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
-  @keyframes popIn     { 0%{opacity:0;transform:scale(0.45)} 60%{transform:scale(1.02)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes popIn     { 0%{opacity:0;transform:scale(0.5)} 60%{transform:scale(1.05)} 100%{opacity:1;transform:scale(1)} }
   @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
   @keyframes spin      { to { transform: rotate(360deg); } }
-  .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
-  .premium-glass:hover { transform: scale(1.02); border-color: rgba(193,255,22,0.26) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.30), 0 0 18px rgba(193,255,22,0.14), inset 0 1px 0 rgba(255,255,255,0.08); }
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #d3ff64 0%, #b6f10f 55%, #7aac00 100%) !important; transform: scale(1.02); box-shadow: 0 0 18px rgba(193,255,22,0.22), 0 10px 22px rgba(0,0,0,0.30); }
+  .premium-glass { transition: all 0.2s ease; box-shadow: 0 20px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08); }
+  .premium-glass:hover { transform: scale(1.02); border-color: rgba(193,255,22,0.42) !important; box-shadow: 0 20px 52px rgba(0,0,0,0.55), 0 0 32px rgba(193,255,22,0.20), inset 0 1px 0 rgba(255,255,255,0.12); }
+  .btn-hover-grad:hover { background: linear-gradient(135deg, #d8ff6a 0%, #c1ff16 55%, #95cc00 100%) !important; transform: scale(1.04); box-shadow: 0 0 26px rgba(193,255,22,0.38), 0 12px 30px rgba(0,0,0,0.45); }
 `}</style>;
 
 const Spotlight = () => {
@@ -64,7 +64,7 @@ const Spotlight = () => {
   const hm = (e) => { const el = ref.current; if (!el) return; const r = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - r.left) + "px"; el.style.top = (e.clientY - r.top) + "px"; };
   const hl = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const p = ref.current?.parentElement; if (!p) return; p.addEventListener("mousemove", hm); p.addEventListener("mouseleave", hl); return () => { p.removeEventListener("mousemove", hm); p.removeEventListener("mouseleave", hl); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(193,255,22,0.14) 0%, rgba(193,255,22,0.07) 30%, rgba(193,255,22,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(193,255,22,0.20) 0%, rgba(193,255,22,0.10) 30%, rgba(193,255,22,0.04) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -90,7 +90,7 @@ const Av = ({ ini, sz = 40 }) => (
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(193,255,22,0.40)", boxShadow: `0 6px 18px ${D.redGlow}` }, success: { background: "linear-gradient(135deg,#d3ff64,#b6f10f)", color: "#0A0A0A", border: "1px solid rgba(193,255,22,0.42)", boxShadow: `0 6px 18px ${D.greenGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(193,255,22,0.55)", boxShadow: `0 8px 26px ${D.redGlow}` }, success: { background: "linear-gradient(135deg,#d8ff6a,#c1ff16)", color: "#0A0A0A", border: "1px solid rgba(193,255,22,0.58)", boxShadow: `0 8px 24px ${D.greenGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -104,13 +104,13 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(193,255,22,0.22)" : D.faint, border: `1.5px solid ${active ? "rgba(193,255,22,0.32)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
-    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.green : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: active ? `0 0 10px ${D.greenGlow}` : "none" }} />
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(193,255,22,0.30)" : D.faint, border: `1.5px solid ${active ? "rgba(193,255,22,0.45)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.green : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: active ? `0 0 12px ${D.greenGlow}` : "none" }} />
   </div>
 );
 
 const ToastC = ({ msg, type }) => msg ? (
-  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(193,255,22,0.88)" : "rgba(239,68,68,0.88)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: type === "success" ? "#0A0A0A" : "white", boxShadow: `0 8px 28px ${type === "success" ? D.greenGlow : "rgba(239,68,68,0.28)"}`, backdropFilter: "blur(10px)" }}>{msg}</div>
+  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.3s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(193,255,22,0.92)" : "rgba(239,68,68,0.92)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: type === "success" ? "#0A0A0A" : "white", boxShadow: `0 10px 40px ${type === "success" ? D.greenGlow : "rgba(239,68,68,0.35)"}`, backdropFilter: "blur(10px)" }}>{msg}</div>
 ) : null;
 
 const BG_IMG = imgBackground;
@@ -118,13 +118,13 @@ const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", opacity: 0.95, pointerEvents: "none" }} />}
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 45%, ${D.bg1} 80%)`, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(193,255,22,0.08), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
-    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end" }}>{children}</div>
+    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(193,255,22,0.12), transparent 70%)", borderRadius: "50%", filter: "blur(60px)", pointerEvents: "none", animation: "glowPulse 5s ease-in-out infinite" }} />
+    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>{children}</div>
   </div>
 );
 
 const StatC = ({ icon, val, label, color = D.red, d = 0 }) => (
-  <Glass s={{ padding: "22px 18px", flex: 1, minWidth: 0 }} a={`fadeUp 0.6s ease-out ${d}s both`}>
+  <Glass s={{ padding: "22px 18px", flex: 1, minWidth: 0 }} a={`fadeUp 0.5s ease-out ${d}s both`}>
     <div style={{ marginBottom: 8 }}>{icon}</div>
     <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", animation: `countUp 0.5s ease-out ${d + 0.15}s both` }}>{val}</div>
     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, fontWeight: 600, marginTop: 3, textTransform: "uppercase", letterSpacing: 0.8 }}>{label}</div>
@@ -167,8 +167,8 @@ const LogoutBtn = ({ onClick }) => {
         width: 36, height: 36, borderRadius: "50%",
         background: hov ? D.btnGrad : "rgba(255,255,255,0.08)",
         display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "pointer", transition: "all 0.2s ease",
-        boxShadow: hov ? `0 3px 10px ${D.redGlow}` : "none",
+        cursor: "pointer", transition: "all 0.3s",
+        boxShadow: hov ? `0 4px 15px ${D.redGlow}` : "none",
       }}
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.3s" }}>
@@ -190,10 +190,10 @@ const AOverview = ({ subs, withs, usrs }) => (
       <StatC icon={IC.users(D.green)} val={usrs.length} label="Usuários" color={D.green} d={0.1} />
       <StatC icon={IC.dollar(D.purple)} val={`R$${withs.reduce((s, w) => s + Number(w.valor), 0).toFixed(0)}`} label="Total saques" color={D.purple} d={0.15} />
     </div>
-    <Glass s={{ padding: "28px 24px" }} a="fadeUp 0.6s ease-out 0.2s both">
+    <Glass s={{ padding: "28px 24px" }} a="fadeUp 0.5s ease-out 0.2s both">
       <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 14 }}>ATIVIDADE RECENTE</div>
       {subs.slice(0, 4).map((s, i) => (
-        <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "20px 18px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 12, animation: `slideRight 0.35s ease-out ${0.25 + i * 0.04}s both` }}>
+        <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "20px 18px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 12, animation: `slideRight 0.3s ease-out ${0.25 + i * 0.04}s both` }}>
           <Av ini={s.user_initials} sz={32} />
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase" }}>{s.user_name}</div>
@@ -248,13 +248,13 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {f.map((s, i) => (
-          <Glass key={s.id} s={{ padding: "28px 24px" }} a={`slideUp 0.35s ease-out ${i * 0.04}s both`}>
+          <Glass key={s.id} s={{ padding: "28px 24px" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Av ini={s.user_initials} sz={38} />
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -279,8 +279,8 @@ const ASubs = ({ subs, setSubs }) => {
         ))}
       </div>
       {sel && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setSel(null)}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 400, animation: "scaleIn 0.35s ease-out" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.2s" }} onClick={() => setSel(null)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 400, animation: "scaleIn 0.3s ease-out" }}>
             <Glass s={{ padding: "24px 20px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -350,7 +350,7 @@ const AWiths = ({ withs, setWiths }) => {
       {withs.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, textTransform: "uppercase" }}>Nenhum saque.</div>}
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {withs.map((w, i) => (
-          <Glass key={w.id} s={{ padding: "28px 24px" }} a={`slideUp 0.45s ease-out ${i * 0.06}s both`}>
+          <Glass key={w.id} s={{ padding: "28px 24px" }} a={`slideUp 0.4s ease-out ${i * 0.06}s both`}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
               <div>
                 <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>{w.user_name}</div>
@@ -405,7 +405,7 @@ const AUsers = ({ usrs, setUsrs }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {f.map((u, i) => (
-          <Glass key={u.id} s={{ padding: "28px 24px" }} a={`slideUp 0.35s ease-out ${i * 0.04}s both`}>
+          <Glass key={u.id} s={{ padding: "28px 24px" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Av ini={(u.name || "U").split(" ").map(w => w[0]).join("").slice(0, 2)} sz={38} />
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -482,7 +482,7 @@ const AMissions = ({ missions, setMissions }) => {
     const [f, setF] = useState(mission || { titulo: "", desc: "", valor: "", tipo: "deposito", link: "", ativa: true, max: "", exp: "" });
     const set = (k, v) => setF(p => ({ ...p, [k]: v }));
     return (
-      <div style={{ animation: "fadeUp 0.45s ease-out" }}>
+      <div style={{ animation: "fadeUp 0.4s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
           <div onClick={() => { setView("list"); setEditing(null); }} style={{ cursor: "pointer" }}>{IC.x(D.dim, 18)}</div>
@@ -524,7 +524,7 @@ const AMissions = ({ missions, setMissions }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {missions.map((m, i) => (
-          <Glass key={m.id} s={{ padding: "28px 24px", opacity: m.ativa ? 1 : 0.45, transition: "opacity 0.3s" }} a={`slideUp 0.45s ease-out ${i * 0.05}s both`}>
+          <Glass key={m.id} s={{ padding: "28px 24px", opacity: m.ativa ? 1 : 0.45, transition: "opacity 0.3s" }} a={`slideUp 0.35s ease-out ${i * 0.05}s both`}>
             <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, paddingTop: 2 }}>
                 {IC.grip("rgba(255,255,255,0.10)")}
@@ -540,7 +540,7 @@ const AMissions = ({ missions, setMissions }) => {
                 </div>
                 {m.descricao && <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{m.descricao}</p>}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8 }}>
-                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.green, textShadow: `0 0 8px ${D.greenGlow}` }}>R$ {Number(m.valor).toFixed(2).replace(".", ",")}</span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.green, textShadow: `0 0 12px ${D.greenGlow}` }}>R$ {Number(m.valor).toFixed(2).replace(".", ",")}</span>
                   {m.max_sub && <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Máx: {m.max_sub}</span>}
                 </div>
                 {m.link && (
@@ -558,8 +558,8 @@ const AMissions = ({ missions, setMissions }) => {
         ))}
       </div>
       {del && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDel(null)}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.35s" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.2s" }} onClick={() => setDel(null)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.3s" }}>
             <Glass s={{ padding: "28px 24px", textAlign: "center" }}>
               <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444", 24)}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>DELETAR?</h3>
@@ -648,7 +648,7 @@ export default function AdminApp() {
   if (!session || profile?.role !== "admin") {
     return (
       <><Styles /><BG>
-        <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 20px 44px" }}>
+        <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
           <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>RESUSYS</span>
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
@@ -663,9 +663,9 @@ export default function AdminApp() {
 
   return (
     <><Styles /><BG>
-      <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 44, boxSizing: "border-box" }}>
+      <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 20, boxSizing: "border-box" }}>
         {/* Top Nav */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, marginBottom: 0 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, marginBottom: 0 }} a="fadeUp 0.5s ease-out">
           <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "space-between" }}>
           {[
             { k: "overview", icon: IC.grid },
@@ -677,7 +677,7 @@ export default function AdminApp() {
             const active = adminTab === t.k;
             const pendingCount = t.k === "submissions" ? subs.filter(s => s.status === "pendente").length : t.k === "withdrawals" ? withs.filter(w => w.status === "pendente").length : 0;
             return (
-              <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 3px 10px ${D.greenGlow}` : "none", position: "relative", transition: "all 0.2s ease" }}>
+              <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 4px 15px ${D.greenGlow}` : "none", position: "relative", transition: "all 0.2s ease" }}>
                 {t.icon(active ? "white" : "rgba(255,255,255,0.4)")}
                 {pendingCount > 0 && !active && (
                   <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
@@ -690,14 +690,14 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "24px 0 18px 4px" }}>
-          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 16px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
+          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
           ? <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>
           : (
-            <div key={adminTab} style={{ animation: "fadeIn 0.3s ease-out" }}>
+            <div key={adminTab} style={{ animation: "fadeIn 0.25s ease-out" }}>
               {adminTab === "overview" && <AOverview subs={subs} withs={withs} usrs={usrs} />}
               {adminTab === "submissions" && <ASubs subs={subs} setSubs={setSubs} />}
               {adminTab === "withdrawals" && <AWiths withs={withs} setWiths={setWiths} />}
