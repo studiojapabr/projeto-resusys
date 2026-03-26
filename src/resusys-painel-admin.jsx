@@ -14,15 +14,15 @@ const supabase = createClient(
 // DESIGN SYSTEM v2.0 — PREMIUM iGAMING 2026
 // ═══════════════════════════════════════════
 const D = {
-  bg1: "#0A0A0A", bg2: "#121212",
+  bg1: "#050505", bg2: "#111111",
   glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
   radius: "999px", radiusSm: "20px",
-  red: "#FFFFFF", redDark: "#7A7A7A", redGlow: "rgba(0,0,0,0.35)",
-  green: "#FFFFFF", greenGlow: "rgba(0,0,0,0.35)",
-  yellow: "#A0A0A0", blue: "#A0A0A0", purple: "#A0A0A0",
+  red: "#fc4c00", redDark: "#fc4c00", redGlow: "rgba(252,76,0,0.26)",
+  green: "#fc4c00", greenGlow: "rgba(252,76,0,0.22)",
+  yellow: "#fc4c00", blue: "#fc4c00", purple: "#fc4c00",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: "linear-gradient(135deg, #2A2A2A 0%, #2A2A2A 55%, #3A3A3A 100%)",
-  cardGrad: "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+  btnGrad: "#fc4c00",
+  cardGrad: "rgba(255,255,255,0.025)",
   sora: "'Sora', sans-serif",
 };
 
@@ -32,21 +32,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(252,76,0,0.22); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(255,255,255,0.22) !important; box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 14px rgba(0,0,0,0.35); }
+  input:focus, textarea:focus { outline: none; border-color: rgba(252,76,0,0.65) !important; box-shadow: 0 0 0 2px rgba(252,76,0,0.14), 0 0 14px rgba(252,76,0,0.18); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(255,255,255,0.10)} 50%{box-shadow:0 0 24px rgba(255,255,255,0.14)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(252,76,0,0.18)} 50%{box-shadow:0 0 24px rgba(252,76,0,0.28)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(255,255,255,0.35); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,255,255,0.50); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(255,255,255,0.30); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,255,255,0.42); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(252,76,0,0.55); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(252,76,0,0.65); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(252,76,0,0.45); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(252,76,0,0.55); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -55,8 +55,8 @@ const Styles = () => <style>{`
   @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
-  .premium-glass:hover { transform: scale(1.02); border-color: rgba(255,255,255,0.20) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.30), 0 0 18px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.08); }
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #2A2A2A 0%, #2A2A2A 55%, #3A3A3A 100%) !important; transform: scale(1.02); box-shadow: 0 0 18px rgba(255,255,255,0.06), 0 10px 22px rgba(0,0,0,0.30); }
+  .premium-glass:hover { transform: scale(1.02); border-color: rgba(252,76,0,0.26) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.30), 0 0 18px rgba(252,76,0,0.14), inset 0 1px 0 rgba(255,255,255,0.08); }
+  .btn-hover-grad:hover { transform: scale(1.02); box-shadow: 0 0 18px rgba(252,76,0,0.22), 0 10px 22px rgba(0,0,0,0.30); }
 `}</style>;
 
 const Spotlight = () => {
@@ -64,7 +64,7 @@ const Spotlight = () => {
   const hm = (e) => { const el = ref.current; if (!el) return; const r = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - r.left) + "px"; el.style.top = (e.clientY - r.top) + "px"; };
   const hl = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const p = ref.current?.parentElement; if (!p) return; p.addEventListener("mousemove", hm); p.addEventListener("mouseleave", hl); return () => { p.removeEventListener("mousemove", hm); p.removeEventListener("mouseleave", hl); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "rgba(252,76,0,0.10)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -80,7 +80,7 @@ const BadgeC = ({ l, c = D.red }) => (
 );
 
 const SB = ({ status }) => {
-  const m = { pendente: { l: "PENDENTE", c: D.yellow }, aprovado: { l: "APROVADO", c: D.green }, recusado: { l: "RECUSADO", c: "#A0A0A0" }, pago: { l: "PAGO", c: D.green }, ativo: { l: "ATIVO", c: D.green }, bloqueado: { l: "BLOQ.", c: "#A0A0A0" } };
+  const m = { pendente: { l: "PENDENTE", c: D.yellow }, aprovado: { l: "APROVADO", c: D.green }, recusado: { l: "RECUSADO", c: D.red }, pago: { l: "PAGO", c: D.green }, ativo: { l: "ATIVO", c: D.green }, bloqueado: { l: "BLOQ.", c: D.red } };
   const s = m[status] || m.pendente;
   return <BadgeC l={s.l} c={s.c} />;
 };
@@ -90,7 +90,7 @@ const Av = ({ ini, sz = 40 }) => (
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#FFFFFF", border: "1px solid rgba(255,255,255,0.14)", boxShadow: `0 6px 18px rgba(0,0,0,0.25)` }, success: { background: D.btnGrad, color: "#FFFFFF", border: "1px solid rgba(255,255,255,0.14)", boxShadow: `0 6px 18px rgba(0,0,0,0.25)` }, danger: { background: "transparent", color: "rgba(255,255,255,0.75)", border: "1.5px solid rgba(255,255,255,0.12)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(252,76,0,0.40)", boxShadow: `0 6px 18px ${D.redGlow}` }, success: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(252,76,0,0.42)", boxShadow: `0 6px 18px ${D.greenGlow}` }, danger: { background: "transparent", color: "#fc4c00", border: "1.5px solid rgba(252,76,0,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -104,21 +104,21 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(255,255,255,0.18)" : D.faint, border: `1.5px solid ${active ? "rgba(255,255,255,0.26)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(252,76,0,0.22)" : D.faint, border: `1.5px solid ${active ? "rgba(252,76,0,0.32)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
     <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.green : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: active ? `0 0 10px ${D.greenGlow}` : "none" }} />
   </div>
 );
 
 const ToastC = ({ msg, type }) => msg ? (
-  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.09)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: "white", boxShadow: `0 8px 28px rgba(0,0,0,0.35)`, backdropFilter: "blur(10px)" }}>{msg}</div>
+  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(252,76,0,0.90)" : "rgba(252,76,0,0.90)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: "#0A0A0A", boxShadow: `0 8px 28px ${type === "success" ? D.greenGlow : "rgba(252,76,0,0.28)"}`, backdropFilter: "blur(10px)" }}>{msg}</div>
 ) : null;
 
 const BG_IMG = imgBackground;
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", opacity: 0.95, pointerEvents: "none" }} />}
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 45%, ${D.bg1} 80%)`, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "rgba(0,0,0,0.60)", pointerEvents: "none" }} />
+    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "rgba(252,76,0,0.10)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end" }}>{children}</div>
   </div>
 );
@@ -269,8 +269,8 @@ const ASubs = ({ subs, setSubs }) => {
                 <div onClick={() => setSel(s)} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.eye(D.muted)}</div>
                 {s.status === "pendente" && (
                   <>
-                    <div onClick={() => approve(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.14)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.green, 13)}</div>
-                    <div onClick={() => reject(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x("rgba(255,255,255,0.75)", 13)}</div>
+                    <div onClick={() => approve(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(252,76,0,0.08)", border: "1px solid rgba(252,76,0,0.18)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.green, 13)}</div>
+                    <div onClick={() => reject(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(252,76,0,0.06)", border: "1px solid rgba(252,76,0,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x(D.red, 13)}</div>
                   </>
                 )}
               </div>
@@ -312,7 +312,7 @@ const ASubs = ({ subs, setSubs }) => {
               {sel.status === "pendente" && (
                 <div style={{ display: "flex", gap: 10 }}>
                   <Btn v="success" onClick={() => approve(sel.id)} s={{ flex: 1 }}>{IC.check()} APROVAR</Btn>
-                  <Btn v="danger" onClick={() => reject(sel.id)} s={{ flex: 1 }}>{IC.x("rgba(255,255,255,0.75)")} RECUSAR</Btn>
+                      <Btn v="danger" onClick={() => reject(sel.id)} s={{ flex: 1 }}>{IC.x(D.red)} RECUSAR</Btn>
                 </div>
               )}
             </Glass>
@@ -400,7 +400,7 @@ const AUsers = ({ usrs, setUsrs }) => {
       </Glass>
       <div style={{ display: "flex", gap: 10, marginBottom: 18, flexWrap: "wrap" }}>
         <BadgeC l={`${usrs.filter(u => u.status === "ativo").length} ativos`} c={D.green} />
-        <BadgeC l={`${usrs.filter(u => u.status === "bloqueado").length} bloq.`} c="#A0A0A0" />
+        <BadgeC l={`${usrs.filter(u => u.status === "bloqueado").length} bloq.`} c={D.red} />
         <BadgeC l={`R$ ${usrs.reduce((s, u) => s + Number(u.saldo || 0), 0).toFixed(0)} saldos`} c={D.purple} />
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
@@ -419,8 +419,8 @@ const AUsers = ({ usrs, setUsrs }) => {
                   <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Missões: <span style={{ fontWeight: 700, color: "rgba(255,255,255,0.65)" }}>{u.missoes_cnt || 0}</span></span>
                 </div>
               </div>
-              <div onClick={() => toggle(u.id, u.status)} style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.05)", border: `1px solid ${u.status === "bloqueado" ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
-                {u.status === "bloqueado" ? IC.check(D.green, 12) : IC.ban("rgba(255,255,255,0.75)")}
+              <div onClick={() => toggle(u.id, u.status)} style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(252,76,0,0.08)" : "rgba(252,76,0,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(252,76,0,0.18)" : "rgba(252,76,0,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
+                {u.status === "bloqueado" ? IC.check(D.green, 12) : IC.ban(D.red)}
               </div>
             </div>
           </Glass>
@@ -534,9 +534,9 @@ const AMissions = ({ missions, setMissions }) => {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap", marginBottom: 5 }}>
-                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", textDecoration: m.ativa ? "none" : "line-through", textDecorationColor: "rgba(255,255,255,0.35)" }}>{m.titulo}</span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", textDecoration: m.ativa ? "none" : "line-through", textDecorationColor: "rgba(252,76,0,0.4)" }}>{m.titulo}</span>
                   <div onClick={() => { setEditing(m); setView("edit"); }} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.edit(D.muted)}</div>
-                  <div onClick={() => setDel(m)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.trash("rgba(255,255,255,0.75)")}</div>
+                  <div onClick={() => setDel(m)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(252,76,0,0.05)", border: "1px solid rgba(252,76,0,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.trash(D.red)}</div>
                 </div>
                 {m.descricao && <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{m.descricao}</p>}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8 }}>
@@ -550,7 +550,7 @@ const AMissions = ({ missions, setMissions }) => {
                 )}
                 <div style={{ display: "flex", gap: 7, alignItems: "center" }}>
                   <Tog active={m.ativa} onToggle={() => toggle(m.id, m.ativa)} />
-                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, color: m.ativa ? D.green : "rgba(255,255,255,0.55)", textTransform: "uppercase" }}>{m.ativa ? "ATIVA" : "OFF"}</span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, color: m.ativa ? D.green : "rgba(252,76,0,0.6)", textTransform: "uppercase" }}>{m.ativa ? "ATIVA" : "OFF"}</span>
                 </div>
               </div>
             </div>
@@ -561,12 +561,12 @@ const AMissions = ({ missions, setMissions }) => {
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDel(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.35s" }}>
             <Glass s={{ padding: "28px 24px", textAlign: "center" }}>
-              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(255,255,255,0.06)", border: "2px solid rgba(255,255,255,0.14)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("rgba(255,255,255,0.75)", 24)}</div>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(252,76,0,0.08)", border: "2px solid rgba(252,76,0,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash(D.red, 24)}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>DELETAR?</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>"{del.titulo}"</p>
               <div style={{ display: "flex", gap: 10 }}>
                 <Btn v="outline" onClick={() => setDel(null)} s={{ flex: 1 }}>CANCELAR</Btn>
-                <Btn v="danger" onClick={() => remove(del.id)} s={{ flex: 1, background: "rgba(255,255,255,0.06)" }}>{IC.trash("rgba(255,255,255,0.75)")} DELETAR</Btn>
+                <Btn v="danger" onClick={() => remove(del.id)} s={{ flex: 1, background: "rgba(252,76,0,0.08)" }}>{IC.trash(D.red)} DELETAR</Btn>
               </div>
             </Glass>
           </div>
@@ -642,7 +642,7 @@ export default function AdminApp() {
   const handleLogout = async () => { await supabase.auth.signOut(); setProfile(null); setSession(null); };
 
   // Loading inicial
-  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(255,255,255,0.16)`, borderTopColor: D.green, animation: "spin 0.8s linear infinite" }} /></div></>;
+  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(252,76,0,0.18)`, borderTopColor: D.green, animation: "spin 0.8s linear infinite" }} /></div></>;
 
   // Não autenticado ou sem permissão
   if (!session || profile?.role !== "admin") {

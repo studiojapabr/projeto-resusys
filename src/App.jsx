@@ -20,15 +20,15 @@ const supabase = createClient(
 // DESIGN SYSTEM v2.0 — PREMIUM iGAMING 2026
 // ═══════════════════════════════════════════
 const D = {
-  bg1: "#0A0A0A", bg2: "#121212", bgCenter: "rgba(255,255,255,0.06)",
+  bg1: "#050505", bg2: "#111111", bgCenter: "rgba(252,76,0,0.08)",
   glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
   radius: "999px", radiusSm: "20px",
-  red: "#FFFFFF", redDark: "#7A7A7A", redGlow: "rgba(0,0,0,0.35)",
-  green: "#FFFFFF", greenGlow: "rgba(0,0,0,0.35)",
-  yellow: "#A0A0A0", blue: "#A0A0A0", purple: "#A0A0A0",
+  red: "#fc4c00", redDark: "#fc4c00", redGlow: "rgba(252,76,0,0.26)",
+  green: "#fc4c00", greenGlow: "rgba(252,76,0,0.22)",
+  yellow: "#fc4c00", blue: "#fc4c00", purple: "#fc4c00",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: "linear-gradient(135deg, #2A2A2A 0%, #2A2A2A 55%, #3A3A3A 100%)",
-  cardGrad: "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+  btnGrad: "#fc4c00",
+  cardGrad: "rgba(255,255,255,0.025)",
   sora: "'Sora', sans-serif",
 };
 
@@ -39,21 +39,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(252,76,0,0.22); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(255,255,255,0.22) !important; box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 14px rgba(0,0,0,0.35); }
+  input:focus, textarea:focus { outline: none; border-color: rgba(252,76,0,0.65) !important; box-shadow: 0 0 0 2px rgba(252,76,0,0.14), 0 0 14px rgba(252,76,0,0.18); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(255,255,255,0.10)} 50%{box-shadow:0 0 24px rgba(255,255,255,0.14)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(252,76,0,0.18)} 50%{box-shadow:0 0 24px rgba(252,76,0,0.28)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(255,255,255,0.35); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,255,255,0.50); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(255,255,255,0.30); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,255,255,0.42); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(252,76,0,0.55); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(252,76,0,0.65); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(252,76,0,0.45); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(252,76,0,0.55); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -62,8 +62,8 @@ const Styles = () => <style>{`
   @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
-  .premium-glass:hover { transform: scale(1.02); border-color: rgba(255,255,255,0.20) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.30), 0 0 18px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.08); }
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #2A2A2A 0%, #2A2A2A 55%, #3A3A3A 100%) !important; transform: scale(1.02); box-shadow: 0 0 18px rgba(255,255,255,0.06), 0 10px 22px rgba(0,0,0,0.30); }
+  .premium-glass:hover { transform: scale(1.02); border-color: rgba(252,76,0,0.26) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.30), 0 0 18px rgba(252,76,0,0.14), inset 0 1px 0 rgba(255,255,255,0.08); }
+  .btn-hover-grad:hover { transform: scale(1.02); box-shadow: 0 0 18px rgba(252,76,0,0.22), 0 10px 22px rgba(0,0,0,0.30); }
 `}</style>;
 
 const Spotlight = () => {
@@ -71,7 +71,7 @@ const Spotlight = () => {
   const handleMove = (e) => { const el = ref.current; if (!el) return; const rect = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - rect.left) + "px"; el.style.top = (e.clientY - rect.top) + "px"; };
   const handleLeave = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const parent = ref.current?.parentElement; if (!parent) return; parent.addEventListener("mousemove", handleMove); parent.addEventListener("mouseleave", handleLeave); return () => { parent.removeEventListener("mousemove", handleMove); parent.removeEventListener("mouseleave", handleLeave); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 30%, rgba(255,255,255,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "rgba(252,76,0,0.10)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -88,9 +88,9 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#FFFFFF", border: "1px solid rgba(255,255,255,0.14)", boxShadow: `0 6px 18px rgba(0,0,0,0.25)` },
-    success: { background: D.btnGrad, color: "#FFFFFF", border: "1px solid rgba(255,255,255,0.14)", boxShadow: `0 6px 18px rgba(0,0,0,0.25)` },
-    danger: { background: "transparent", color: "rgba(255,255,255,0.75)", border: "1.5px solid rgba(255,255,255,0.12)" },
+    primary: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(252,76,0,0.40)", boxShadow: `0 6px 18px ${D.redGlow}` },
+    success: { background: D.btnGrad, color: "#0A0A0A", border: "1px solid rgba(252,76,0,0.42)", boxShadow: `0 6px 18px ${D.greenGlow}` },
+    danger: { background: "transparent", color: "#fc4c00", border: "1.5px solid rgba(252,76,0,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
   };
@@ -116,14 +116,14 @@ const Chk = ({ checked, onChange, label }) => (
 );
 
 const ToastC = ({ msg, type }) => msg ? (
-  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.09)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: "white", boxShadow: `0 8px 28px rgba(0,0,0,0.35)`, backdropFilter: "blur(10px)" }}>{msg}</div>
+  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "rgba(252,76,0,0.90)" : "rgba(252,76,0,0.90)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: "#0A0A0A", boxShadow: `0 8px 28px ${type === "success" ? D.greenGlow : "rgba(252,76,0,0.28)"}`, backdropFilter: "blur(10px)" }}>{msg}</div>
 ) : null;
 
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 0.95, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 45%, ${D.bg1} 80%)`, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "rgba(0,0,0,0.60)", pointerEvents: "none" }} />
+    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "rgba(252,76,0,0.10)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end" }}>{children}</div>
   </div>
 );
@@ -139,7 +139,7 @@ const IC = {
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: `drop-shadow(0px 8px 16px rgba(255,255,255,0.10))` }} />
+    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: `drop-shadow(0px 8px 16px rgba(252,76,0,0.28))` }} />
   </div>
 );
 
@@ -149,7 +149,7 @@ const MIcon = () => (
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(255,255,255,0.16)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(252,76,0,0.18)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>
@@ -357,7 +357,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             { href: "https://t.me/SEU_CANAL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
             { href: "https://tiktok.com/@SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
           ].map(({ href, icon }, idx) => (
-            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 44, height: 44, borderRadius: "50%", border: `1.5px solid ${D.red}`, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: D.red, boxShadow: `0 0 10px ${D.redGlow}`, transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
+            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 44, height: 44, borderRadius: "50%", border: `1.5px solid ${D.red}`, background: "rgba(252,76,0,0.06)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: D.red, boxShadow: `0 0 10px ${D.redGlow}`, transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
         </div>
 
@@ -370,25 +370,25 @@ const UserDash = ({ profile, go, onLogout }) => {
                   const completed = done[m.id];
                   const aprovado = done[m.id] === "aprovado";
                   return (
-                    <Glass key={m.id} s={{ padding: "28px 24px", background: completed ? (aprovado ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.04)") : D.glass, borderColor: completed ? "rgba(255,255,255,0.16)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
-                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,${completed ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)"},transparent 70%)`, pointerEvents: "none" }} />
+                    <Glass key={m.id} s={{ padding: "28px 24px", background: completed ? (aprovado ? "rgba(252,76,0,0.08)" : "rgba(252,76,0,0.06)") : D.glass, borderColor: completed ? "rgba(252,76,0,0.18)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
+                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: completed ? "rgba(252,76,0,0.07)" : "rgba(252,76,0,0.04)", pointerEvents: "none" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1, zIndex: 1 }}>
-                          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: completed ? "rgba(255,255,255,0.68)" : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}><span className={completed ? "pulse-dot-green" : "pulse-dot-red"} /> TAREFA {String(i + 1).padStart(2, "0")}</span>
+                          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: completed ? "rgba(252,76,0,0.60)" : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}><span className={completed ? "pulse-dot-green" : "pulse-dot-red"} /> TAREFA {String(i + 1).padStart(2, "0")}</span>
                           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "8px 0 10px", color: completed ? D.muted : D.white, letterSpacing: 0.5 }}>{m.titulo}</h2>
-                          <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: completed ? "rgba(255,255,255,0.72)" : D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>VALOR: {m.valor}R$</p>
+                          <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: completed ? "rgba(252,76,0,0.75)" : D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>VALOR: {m.valor}R$</p>
                           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                             {aprovado
-                              ? <div style={{ padding: "10px 22px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.16)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.green, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.green, 13)} CONCLUÍDO</div>
+                              ? <div style={{ padding: "10px 22px", background: "rgba(252,76,0,0.12)", border: "1px solid rgba(252,76,0,0.30)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.green, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.green, 13)} CONCLUÍDO</div>
                               : completed
-                                ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
+                                ? <div style={{ padding: "10px 22px", background: "rgba(252,76,0,0.10)", border: "1px solid rgba(252,76,0,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
                             <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease" }}><span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
-                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.22) 50%, rgba(0,0,0,0.18) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(28px)", pointerEvents: "none" }} />
+                          <div style={{ position: "absolute", inset: -20, background: "rgba(252,76,0,0.22)", borderRadius: "50%", filter: "blur(28px)", pointerEvents: "none" }} />
                           <MIcon />
                         </div>
                       </div>
@@ -421,7 +421,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8, letterSpacing: 0.5 }}>ENVIAR COMPROVANTE</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 22, fontWeight: 500, textTransform: "uppercase" }}>Envie o print para validação.</p>
-              <div onClick={() => document.getElementById("fileInput").click()} style={{ border: `1px solid ${file ? "rgba(255,255,255,0.18)" : D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", cursor: "pointer", marginBottom: 18, background: file ? "rgba(255,255,255,0.06)" : D.glass, transition: "all 0.2s ease" }}>
+              <div onClick={() => document.getElementById("fileInput").click()} style={{ border: `1px solid ${file ? "rgba(252,76,0,0.40)" : D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", cursor: "pointer", marginBottom: 18, background: file ? "rgba(252,76,0,0.06)" : D.glass, transition: "all 0.2s ease" }}>
                 <input id="fileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!", "danger"); e.target.value = ""; return; } setFile(f || null); }} />
                 {file
                   ? <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.green, textTransform: "uppercase" }}>{file.name}</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginTop: 4, textTransform: "uppercase" }}>{(file.size / 1024).toFixed(0)}KB — TOQUE PARA TROCAR</p></>
