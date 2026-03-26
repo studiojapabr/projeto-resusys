@@ -64,6 +64,40 @@ const Styles = () => <style>{`
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 20px 48px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08); }
   .premium-glass:hover { transform: scale(1.02); border-color: rgba(193,255,22,0.42) !important; box-shadow: 0 20px 52px rgba(0,0,0,0.55), 0 0 32px rgba(193,255,22,0.20), inset 0 1px 0 rgba(255,255,255,0.12); }
   .btn-hover-grad:hover { background: linear-gradient(135deg, #d8ff6a 0%, #c1ff16 55%, #95cc00 100%) !important; transform: scale(1.04); box-shadow: 0 0 26px rgba(193,255,22,0.38), 0 12px 30px rgba(0,0,0,0.45); }
+  :root{
+    --container-x: clamp(12px, 4vw, 20px);
+    --container-max: 520px;
+    --top-pad: clamp(44px, 7vh, 60px);
+    --bottom-pad: clamp(28px, 5vh, 44px);
+    --center-pad: clamp(28px, 6vh, 40px);
+    --dash-bottom: clamp(16px, 3.5vw, 20px);
+    --modal-max: 380px;
+    --btn-width: 100%;
+    --title-size: clamp(26px, 7vw, 35px);
+    --glass-pad-y: clamp(28px, 4.8vw, 36px);
+    --glass-pad-x: clamp(18px, 4.2vw, 30px);
+  }
+  .auth-btn-row{ flex-direction: column; }
+  .withdrawal-pair{ flex-direction: column; }
+  @media (min-width: 768px){
+    :root{
+      --container-x: clamp(16px, 3.5vw, 24px);
+      --container-max: 560px;
+      --dash-bottom: 20px;
+      --modal-max: 420px;
+    }
+    .auth-btn-row{ flex-direction: row; }
+    .withdrawal-pair{ flex-direction: row; }
+  }
+  @media (min-width: 1024px){
+    :root{
+      --container-max: 640px;
+      --btn-width: auto;
+      --modal-max: 520px;
+      --title-size: 35px;
+      --glass-pad-x: 30px;
+    }
+  }
 `}</style>;
 
 const Spotlight = () => {
@@ -71,7 +105,7 @@ const Spotlight = () => {
   const handleMove = (e) => { const el = ref.current; if (!el) return; const rect = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - rect.left) + "px"; el.style.top = (e.clientY - rect.top) + "px"; };
   const handleLeave = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const parent = ref.current?.parentElement; if (!parent) return; parent.addEventListener("mousemove", handleMove); parent.addEventListener("mouseleave", handleLeave); return () => { parent.removeEventListener("mousemove", handleMove); parent.removeEventListener("mouseleave", handleLeave); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(193,255,22,0.20) 0%, rgba(193,255,22,0.10) 30%, rgba(193,255,22,0.04) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(229,33,58,0.18) 0%, rgba(229,33,58,0.10) 30%, rgba(229,33,58,0.04) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.3s", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -94,7 +128,7 @@ const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => 
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
   };
-  return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
+  return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "var(--btn-width, 100%)", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
 const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi = false }) => (
@@ -139,7 +173,7 @@ const IC = {
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3s ease-in-out infinite" }}>
-    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: `drop-shadow(0px 10px 20px rgba(193,255,22,0.45))` }} />
+    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: `drop-shadow(0px 10px 20px rgba(229,33,58,0.5))` }} />
   </div>
 );
 
@@ -149,7 +183,7 @@ const MIcon = () => (
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(193,255,22,0.18)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(229,33,58,0.2)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>
@@ -160,15 +194,15 @@ const Loading = () => (
 // ═══════════════════════════════════════════
 const Landing = ({ go }) => (
   <BG>
-    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
-      <Glass s={{ padding: "36px 30px" }} a="slideUp 0.8s ease-out">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 30px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
+    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 var(--container-x) var(--bottom-pad)", maxWidth: "var(--container-max)", width: "100%", margin: "0 auto" }}>
+      <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }} a="slideUp 0.8s ease-out">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22, flexWrap: "wrap", gap: 10 }}>
+          <span style={{ fontSize: "var(--title-size)", color: D.red, textShadow: `0 0 30px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 14, letterSpacing: -1 }}>CONCLUA TAREFAS E GANHE SUAS RECOMPENSAS.</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 14, letterSpacing: -1 }}>CONCLUA TAREFAS E GANHE SUAS RECOMPENSAS.</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div className="auth-btn-row" style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>SIGN UP</Btn>
           <Btn v="outline" onClick={() => go("login")} s={{ flex: 1 }}>LOGIN</Btn>
         </div>
@@ -197,13 +231,13 @@ const LoginScreen = ({ go }) => {
   return (
     <><ToastC msg={toast} type="danger" />
     <BG>
-      <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 20px 40px", maxWidth: 430, width: "100%" }}>
-        <Glass s={{ padding: "36px 30px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
+      <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "var(--top-pad) var(--container-x) var(--bottom-pad)", maxWidth: "var(--container-max)", width: "100%" }}>
+        <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22, flexWrap: "wrap", gap: 10 }}>
+            <span style={{ fontSize: "var(--title-size)", color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
             <span onClick={() => go("landing")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>BEM-VINDO DE VOLTA.</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>BEM-VINDO DE VOLTA.</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -239,13 +273,13 @@ const RegisterScreen = ({ go }) => {
   return (
     <><ToastC msg={toast} type="danger" />
     <BG>
-      <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 20px 40px", maxWidth: 430, width: "100%" }}>
-        <Glass s={{ padding: "36px 30px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
+      <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "var(--top-pad) var(--container-x) var(--bottom-pad)", maxWidth: "var(--container-max)", width: "100%" }}>
+        <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22, flexWrap: "wrap", gap: 10 }}>
+            <span style={{ fontSize: "var(--title-size)", color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2 }}>RESUSYS</span>
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> RESUSYSTEM</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>CRIE SUA CONTA ABAIXO E ACESSE AS TAREFAS.</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 28, letterSpacing: -1 }}>CRIE SUA CONTA ABAIXO E ACESSE AS TAREFAS.</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -337,9 +371,9 @@ const UserDash = ({ profile, go, onLogout }) => {
   return (
     <>
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
-      <div style={{ padding: "0 16px 20px", maxWidth: 430, width: "100%" }}>
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.5s ease-out">
-          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
+      <div style={{ padding: "0 var(--container-x) 20px", maxWidth: "var(--container-max)", width: "100%" }}>
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px var(--container-x)", marginTop: 16 }} a="fadeUp 0.5s ease-out">
+          <span style={{ fontSize: "var(--title-size)", color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.green : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2s infinite" : "none", boxShadow: `0 4px 15px ${D.redGlow}` }}>{IC.wallet()}</div>
@@ -347,7 +381,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.95, margin: "24px 0 10px 4px", animation: "fadeUp 0.5s ease-out 0.1s both", letterSpacing: -1, color: D.white }}>TAREFAS ABAIXO!</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, textTransform: "uppercase", lineHeight: 0.95, margin: "24px 0 10px 4px", animation: "fadeUp 0.5s ease-out 0.1s both", letterSpacing: -1, color: D.white }}>TAREFAS ABAIXO!</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.5s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
@@ -357,7 +391,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             { href: "https://t.me/SEU_CANAL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
             { href: "https://tiktok.com/@SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
           ].map(({ href, icon }, idx) => (
-            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 44, height: 44, borderRadius: "50%", border: `1.5px solid ${D.red}`, background: "rgba(193,255,22,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: D.red, boxShadow: `0 0 14px ${D.redGlow}`, transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
+            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 44, height: 44, borderRadius: "50%", border: `1.5px solid ${D.red}`, background: `rgba(229,33,58,0.08)`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: D.red, boxShadow: `0 0 14px rgba(229,33,58,0.25)`, transition: "all 0.3s", textDecoration: "none" }}>{icon}</a>
           ))}
         </div>
 
@@ -371,7 +405,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                   const aprovado = done[m.id] === "aprovado";
                   return (
                     <Glass key={m.id} s={{ padding: "28px 24px", background: completed ? (aprovado ? "rgba(34,197,94,0.08)" : "rgba(34,197,94,0.06)") : D.glass, borderColor: completed ? "rgba(34,197,94,0.18)" : D.glassBorder }} a={`slideUp 0.5s ease-out ${0.2 + i * 0.08}s both`}>
-                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,${completed ? "rgba(193,255,22,0.10)" : "rgba(193,255,22,0.06)"},transparent 70%)`, pointerEvents: "none" }} />
+                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,${completed ? "rgba(34,197,94,0.08)" : "rgba(229,33,58,0.06)"},transparent 70%)`, pointerEvents: "none" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1, zIndex: 1 }}>
                           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: completed ? "rgba(34,197,94,0.6)" : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}><span className={completed ? "pulse-dot-green" : "pulse-dot-red"} /> TAREFA {String(i + 1).padStart(2, "0")}</span>
@@ -388,7 +422,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
-                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(193,255,22,0.55) 30%, rgba(193,255,22,0.72) 50%, rgba(133,176,0,0.55) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(35px)", pointerEvents: "none" }} />
+                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(229,33,58,0.7) 30%, rgba(252,58,75,0.8) 50%, rgba(139,0,14,0.7) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(35px)", pointerEvents: "none" }} />
                           <MIcon />
                         </div>
                       </div>
@@ -403,7 +437,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       {/* Info Modal */}
       {info && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.80)", backdropFilter: "blur(12px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.2s" }} onClick={() => setInfo(null)}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.3s ease-out" }}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: "var(--modal-max)", animation: "scaleIn 0.3s ease-out" }}>
             <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 12 }}>{info.titulo}</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 8, textTransform: "uppercase", lineHeight: 1.5 }}>{info.descricao || "Sem descrição disponível."}</p>
@@ -417,7 +451,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       {/* Upload Modal */}
       {modal && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.80)", backdropFilter: "blur(12px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.2s" }} onClick={() => { setModal(null); setFile(null); }}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.3s ease-out" }}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: "var(--modal-max)", animation: "scaleIn 0.3s ease-out" }}>
             <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8, letterSpacing: 0.5 }}>ENVIAR COMPROVANTE</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 22, fontWeight: 500, textTransform: "uppercase" }}>Envie o print para validação.</p>
@@ -473,10 +507,10 @@ const Withdrawal = ({ go, profile }) => {
   };
 
   if (ok) return (
-    <div style={{ padding: "0 20px", maxWidth: 430, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100dvh", paddingTop: 40, paddingBottom: 40 }}>
-      <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.5s ease-out">
+    <div style={{ padding: "0 var(--container-x)", maxWidth: "var(--container-max)", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100dvh", paddingTop: "var(--center-pad)", paddingBottom: "var(--center-pad)" }}>
+      <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.5s ease-out">
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.5s ease-out", boxShadow: `0 4px 15px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -1, lineHeight: 0.95 }}>VALOR SOLICITADO!</h2>
+        <h2 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -1, lineHeight: 0.95 }}>VALOR SOLICITADO!</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <Btn onClick={() => go("dashboard")}>VOLTAR</Btn>
       </Glass>
@@ -485,20 +519,20 @@ const Withdrawal = ({ go, profile }) => {
 
   return (
     <><ToastC msg={toast?.msg} type={toast?.type} />
-    <div style={{ padding: "0 20px", maxWidth: 430, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100dvh", paddingTop: 40, paddingBottom: 40 }}>
-      <Glass s={{ padding: "34px 28px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
+    <div style={{ padding: "0 var(--container-x)", maxWidth: "var(--container-max)", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", minHeight: "100dvh", paddingTop: "var(--center-pad)", paddingBottom: "var(--center-pad)" }}>
+      <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22, flexWrap: "wrap", gap: 10 }}>
+          <span style={{ fontSize: "var(--title-size)", color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1 }}>RESUSYS</span>
           <span onClick={() => go("dashboard")} style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> VOLTAR</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 10, letterSpacing: -1 }}>PARABÉNS PELO SEU SAQUE!</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size)", fontWeight: 800, lineHeight: 0.95, textTransform: "uppercase", marginBottom: 10, letterSpacing: -1 }}>PARABÉNS PELO SEU SAQUE!</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.green, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
         </div>
         <Inp placeholder="NOME COMPLETO:" value={nome} onChange={e => setNome(e.target.value)} />
-        <div style={{ display: "flex", gap: 12 }}>
+        <div className="withdrawal-pair" style={{ display: "flex", gap: 12 }}>
           <Inp placeholder="CPF:" value={cpf} onChange={e => setCpf(e.target.value)} s={{ flex: "0 0 36%" }} />
           <Inp placeholder="CHAVE PIX:" value={pix} onChange={e => setPix(e.target.value)} s={{ flex: 1 }} />
         </div>
