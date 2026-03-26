@@ -15,10 +15,10 @@ const supabase = createClient(
 // ═══════════════════════════════════════════
 const D = {
   bg1: "#0A0A0A", bg2: "#1A1A1A",
-  glass: "#FFFFFF08", glassBorder: "#FFFFFF12", blur: "blur(28px)",
+  glass: "#FFFFFF06", glassBorder: "#FFFFFF0F", blur: "blur(22px)",
   radius: "30px", radiusSm: "24px",
-  red: "#E5213A", redDark: "#8d000e", redGlow: "rgba(229,33,58,0.3)",
-  green: "#22C55E", greenGlow: "rgba(34,197,94,0.25)",
+  red: "#E5213A", redDark: "#8d000e", redGlow: "rgba(229,33,58,0.22)",
+  green: "#22C55E", greenGlow: "rgba(34,197,94,0.18)",
   yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.50)", dim: "rgba(255,255,255,0.28)", faint: "rgba(255,255,255,0.08)",
   btnGrad: "linear-gradient(135deg, #e04543 0%, #fc3a4b 50%, #8d000e 100%)",
@@ -34,44 +34,16 @@ const Styles = () => <style>{`
   ::-webkit-scrollbar { width: 3px; } ::-webkit-scrollbar-thumb { background: rgba(229,33,58,0.25); border-radius: 10px; }
   input::placeholder { color: rgba(255,255,255,0.28); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; }
   input:focus, textarea:focus { outline: none; }
-  @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp    { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-  @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes glowPulse { 0%,100%{opacity:0.25} 50%{opacity:0.55} }
-  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-  @keyframes countUp   { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
-  @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes slideUp   { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes scaleIn   { from{opacity:0;transform:scale(0.97)} to{opacity:1;transform:scale(1)} }
+  @keyframes glowPulse { 0%,100%{opacity:0.15} 50%{opacity:0.35} }
+  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+  @keyframes countUp   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+  @keyframes slideRight{ from{opacity:0;transform:translateX(-14px)} to{opacity:1;transform:translateX(0)} }
   @keyframes spin      { to { transform: rotate(360deg); } }
-  :root{
-    --container-x: clamp(12px, 4vw, 20px);
-    --container-max: 520px;
-    --top-pad: clamp(44px, 7vh, 60px);
-    --bottom-pad: clamp(28px, 5vh, 44px);
-    --dash-bottom: clamp(16px, 3.5vw, 20px);
-    --glass-pad-x: clamp(18px, 4.2vw, 30px);
-    --glass-pad-y: clamp(28px, 4.8vw, 36px);
-    --modal-max: 420px;
-    --title-size: clamp(26px, 7vw, 35px);
-    --btn-width: 100%;
-  }
-  @media (min-width: 768px){
-    :root{
-      --container-x: clamp(16px, 3.5vw, 24px);
-      --container-max: 560px;
-      --dash-bottom: 20px;
-      --modal-max: 440px;
-    }
-  }
-  @media (min-width: 1024px){
-    :root{
-      --container-max: 640px;
-      --btn-width: auto;
-      --modal-max: 520px;
-      --title-size: 35px;
-    }
-  }
 `}</style>;
 
 const Spotlight = () => {
@@ -79,7 +51,7 @@ const Spotlight = () => {
   const hm = (e) => { const el = ref.current; if (!el) return; const r = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - r.left) + "px"; el.style.top = (e.clientY - r.top) + "px"; };
   const hl = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const p = ref.current?.parentElement; if (!p) return; p.addEventListener("mousemove", hm); p.addEventListener("mouseleave", hl); return () => { p.removeEventListener("mousemove", hm); p.removeEventListener("mouseleave", hl); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(229,33,58,0.18) 0%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.3s", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(229,33,58,0.12) 0%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -101,12 +73,12 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: `0 4px 18px ${D.redGlow}`, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: `0 3px 12px ${D.redGlow}`, textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: D.white, border: "none", boxShadow: `0 4px 25px ${D.redGlow}` }, success: { background: "linear-gradient(135deg,#22C55E,#16A34A)", color: D.white, border: "none", boxShadow: `0 4px 20px ${D.greenGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
-  return <button onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "var(--btn-width, 100%)", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
+  const vs = { primary: { background: D.btnGrad, color: D.white, border: "none", boxShadow: `0 3px 18px ${D.redGlow}` }, success: { background: "linear-gradient(135deg,#22C55E,#16A34A)", color: D.white, border: "none", boxShadow: `0 3px 14px ${D.greenGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  return <button onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
 const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi = false }) => (
@@ -119,8 +91,8 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(34,197,94,0.30)" : D.faint, border: `1.5px solid ${active ? "rgba(34,197,94,0.45)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.3s", flexShrink: 0 }}>
-    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.green : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.3s cubic-bezier(0.68,-0.55,0.27,1.55)", boxShadow: active ? `0 0 10px ${D.greenGlow}` : "none" }} />
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(34,197,94,0.30)" : D.faint, border: `1.5px solid ${active ? "rgba(34,197,94,0.45)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.green : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s cubic-bezier(0.68,-0.55,0.27,1.55)", boxShadow: active ? `0 0 6px ${D.greenGlow}` : "none" }} />
   </div>
 );
 
@@ -181,11 +153,11 @@ const LogoutBtn = ({ onClick }) => {
         width: 36, height: 36, borderRadius: "50%",
         background: hov ? D.btnGrad : "rgba(255,255,255,0.08)",
         display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "pointer", transition: "all 0.3s",
-        boxShadow: hov ? `0 4px 15px ${D.redGlow}` : "none",
+        cursor: "pointer", transition: "all 0.2s ease",
+        boxShadow: hov ? `0 3px 10px ${D.redGlow}` : "none",
       }}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.3s" }}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.2s ease" }}>
         <path d="M22.829,9.172,18.95,5.293a1,1,0,0,0-1.414,1.414L21.414,10.5H9a1,1,0,0,0,0,2H21.414l-3.878,3.793a1,1,0,1,0,1.414,1.414l3.879-3.879A3,3,0,0,0,22.829,9.172Z"/>
         <path d="M15,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9a1,1,0,0,0,0-2H5A3,3,0,0,0,2,4V20a3,3,0,0,0,3,3h10a1,1,0,0,0,0-2Z"/>
       </svg>
@@ -198,13 +170,13 @@ const LogoutBtn = ({ onClick }) => {
 // ═══════════════════════════════════════════
 const AOverview = ({ subs, withs, usrs }) => (
   <div>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18, marginBottom: 22 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}>
       <StatC icon={IC.alert(D.yellow)} val={subs.filter(s => s.status === "pendente").length} label="Comprovantes" color={D.yellow} d={0} />
       <StatC icon={IC.wallet(D.red)} val={withs.filter(w => w.status === "pendente").length} label="Saques pend." color={D.red} d={0.05} />
       <StatC icon={IC.users(D.green)} val={usrs.length} label="Usuários" color={D.green} d={0.1} />
       <StatC icon={IC.dollar(D.purple)} val={`R$${withs.reduce((s, w) => s + Number(w.valor), 0).toFixed(0)}`} label="Total saques" color={D.purple} d={0.15} />
     </div>
-    <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }} a="fadeUp 0.5s ease-out 0.2s both">
+    <Glass s={{ padding: "28px 24px" }} a="fadeUp 0.5s ease-out 0.2s both">
       <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 14 }}>ATIVIDADE RECENTE</div>
       {subs.slice(0, 4).map((s, i) => (
         <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "20px 18px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 12, animation: `slideRight 0.3s ease-out ${0.25 + i * 0.04}s both` }}>
@@ -260,15 +232,15 @@ const ASubs = ({ subs, setSubs }) => {
   return (
     <div>
       <ToastC msg={toast?.m} type={toast?.t} />
-      <div style={{ display: "flex", gap: 6, marginBottom: 18, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 4px 25px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {f.map((s, i) => (
-          <Glass key={s.id} s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
+          <Glass key={s.id} s={{ padding: "28px 24px" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Av ini={s.user_initials} sz={38} />
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -294,7 +266,7 @@ const ASubs = ({ subs, setSubs }) => {
       </div>
       {sel && (
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.2s" }} onClick={() => setSel(null)}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: "var(--modal-max, 400px)", animation: "scaleIn 0.3s ease-out" }}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 400, animation: "scaleIn 0.3s ease-out" }}>
             <Glass s={{ padding: "24px 20px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -364,7 +336,7 @@ const AWiths = ({ withs, setWiths }) => {
       {withs.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, textTransform: "uppercase" }}>Nenhum saque.</div>}
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {withs.map((w, i) => (
-          <Glass key={w.id} s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }} a={`slideUp 0.4s ease-out ${i * 0.06}s both`}>
+          <Glass key={w.id} s={{ padding: "28px 24px" }} a={`slideUp 0.4s ease-out ${i * 0.06}s both`}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
               <div>
                 <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>{w.user_name}</div>
@@ -419,7 +391,7 @@ const AUsers = ({ usrs, setUsrs }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         {f.map((u, i) => (
-          <Glass key={u.id} s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
+          <Glass key={u.id} s={{ padding: "28px 24px" }} a={`slideUp 0.3s ease-out ${i * 0.04}s both`}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <Av ini={(u.name || "U").split(" ").map(w => w[0]).join("").slice(0, 2)} sz={38} />
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -538,7 +510,7 @@ const AMissions = ({ missions, setMissions }) => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {missions.map((m, i) => (
-          <Glass key={m.id} s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)", opacity: m.ativa ? 1 : 0.45, transition: "opacity 0.3s" }} a={`slideUp 0.35s ease-out ${i * 0.05}s both`}>
+          <Glass key={m.id} s={{ padding: "28px 24px", opacity: m.ativa ? 1 : 0.45, transition: "opacity 0.3s" }} a={`slideUp 0.35s ease-out ${i * 0.05}s both`}>
             <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, paddingTop: 2 }}>
                 {IC.grip("rgba(255,255,255,0.10)")}
@@ -573,9 +545,9 @@ const AMissions = ({ missions, setMissions }) => {
       </div>
       {del && (
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.85)", backdropFilter: "blur(14px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.2s" }} onClick={() => setDel(null)}>
-          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: "var(--modal-max, 370px)", animation: "scaleIn 0.3s" }}>
-            <Glass s={{ padding: "var(--glass-pad-y) var(--glass-pad-x)", textAlign: "center" }}>
-              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444", 24)}</div>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.3s" }}>
+            <Glass s={{ padding: "28px 24px", textAlign: "center" }}>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.25s ease-out" }}>{IC.trash("#EF4444", 24)}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>DELETAR?</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>"{del.titulo}"</p>
               <div style={{ display: "flex", gap: 10 }}>
@@ -656,14 +628,14 @@ export default function AdminApp() {
   const handleLogout = async () => { await supabase.auth.signOut(); setProfile(null); setSession(null); };
 
   // Loading inicial
-  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(229,33,58,0.2)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} /></div></>;
+  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(229,33,58,0.14)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} /></div></>;
 
   // Não autenticado ou sem permissão
   if (!session || profile?.role !== "admin") {
     return (
       <><Styles /><BG>
         <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-          <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: "var(--modal-max, 360px)" }}>
+          <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
             <span style={{ fontSize: 35, color: D.red, fontFamily: "'Bastrad', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>RESUSYS</span>
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
             <Btn onClick={() => window.location.href = "/"}>IR PARA O LOGIN</Btn>
@@ -677,10 +649,10 @@ export default function AdminApp() {
 
   return (
     <><Styles /><BG>
-      <div style={{ maxWidth: "var(--container-max, 460px)", width: "100%", padding: "0 var(--container-x, 16px)", paddingBottom: "var(--dash-bottom, 20px)", boxSizing: "border-box", margin: "0 auto" }}>
+      <div style={{ maxWidth: 460, width: "100%", padding: "0 16px", paddingBottom: 20, boxSizing: "border-box" }}>
         {/* Top Nav */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px var(--container-x, 20px)", marginTop: 16, marginBottom: 0 }} a="fadeUp 0.5s ease-out">
-          <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "space-between", flexWrap: "wrap" }}>
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, marginBottom: 0 }} a="fadeUp 0.5s ease-out">
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "space-between" }}>
           {[
             { k: "overview", icon: IC.grid },
             { k: "submissions", icon: IC.inbox },
@@ -691,7 +663,7 @@ export default function AdminApp() {
             const active = adminTab === t.k;
             const pendingCount = t.k === "submissions" ? subs.filter(s => s.status === "pendente").length : t.k === "withdrawals" ? withs.filter(w => w.status === "pendente").length : 0;
             return (
-              <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 4px 15px ${D.redGlow}` : "none", position: "relative", transition: "all 0.3s" }}>
+              <div key={t.k} onClick={() => { setAdminTab(t.k); window.scrollTo(0, 0); }} style={{ width: 36, height: 36, borderRadius: "50%", background: active ? D.btnGrad : "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: active ? `0 3px 10px ${D.redGlow}` : "none", position: "relative", transition: "all 0.2s ease" }}>
                 {t.icon(active ? "white" : "rgba(255,255,255,0.4)")}
                 {pendingCount > 0 && !active && (
                   <div style={{ position: "absolute", top: -3, right: -3, width: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{pendingCount}</div>
@@ -704,8 +676,8 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "24px 0 18px 4px" }}>
-          <span style={{ fontSize: "var(--title-size, 35px)", color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
-          <h1 style={{ fontFamily: D.sora, fontSize: "var(--title-size, 35px)", fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
+          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 20px ${D.redGlow}`, fontFamily: "'Bastrad', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
