@@ -7,7 +7,6 @@ import AdminApp from './resusys-painel-admin';
 // Importando as suas imagens da pasta assets
 import imgBackground from './assets/bg.png';
 import imgIconePrincipal from './assets/icone-task.png';
-import imgLogo from './assets/logotasky.svg';
 
 // ═══════════════════════════════════════════
 // SUPABASE CLIENT
@@ -194,10 +193,10 @@ const Landing = ({ go }) => (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.9s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain" }} />
+          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>TAREFAS<br/>DIÁRIAS<br/>PARA LUCRAR</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA{" "}E{" "}GANHE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -231,7 +230,7 @@ const LoginScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain" }} />
+            <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
           <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEM-VINDO</h1>
@@ -273,7 +272,7 @@ const RegisterScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain" }} />
+            <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
           <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA<br/>CONTA</h1>
@@ -370,7 +369,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain" }} />
+          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.wallet()}</div>
@@ -519,7 +518,7 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain" }} />
+          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
         <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE<br/>SEU PIX<br/>E AGUARDE</h1>
