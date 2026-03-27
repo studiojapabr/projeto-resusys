@@ -312,11 +312,11 @@ const RaffleBtnUser = ({ go, profile }) => {
   return (
     <div
       onClick={() => go("raffle")}
-      style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(239,35,57,0.45)", background: "rgba(239,35,57,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite" }}
+      style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite", boxShadow: `0 3px 10px ${D.redGlow}` }}
     >
-      {IC.trophy("rgba(239,35,57,0.95)", 18)}
+      {IC.ticket("white", 18)}
       {myTickets > 0 && (
-        <div style={{ position: "absolute", top: -4, right: -4, width: 16, height: 16, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{myTickets}</div>
+        <div style={{ position: "absolute", top: -4, right: -4, width: 16, height: 16, borderRadius: "50%", background: "#050505", border: `1.5px solid ${D.orange}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: D.orange }}>{myTickets}</div>
       )}
     </div>
   );
@@ -332,6 +332,7 @@ const RaffleScreen = ({ go, profile }) => {
   const [myPending, setMyPending] = useState(false);
   const [prizeUrl, setPrizeUrl] = useState(null);
   const [modal, setModal] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
   const [file, setFile] = useState(null);
   const [valor, setValor] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -382,66 +383,111 @@ const RaffleScreen = ({ go, profile }) => {
     load();
   };
 
+  // ─── SVG de link ───
+  const LinkIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)">
+      <path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/>
+    </svg>
+  );
+
+  const iconBtn = (content, onClick) => (
+    <div onClick={onClick} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s", flexShrink: 0 }}>
+      {content}
+    </div>
+  );
+
   return (
     <>
       {toast && <ToastC msg={toast} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }}>
+
+        {/* ── Header igual ao dashboard ── */}
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, margin: "24px 0 10px 4px" }}>SORTEIO<br/>ESPECIAL</h1>
+        {/* ── Título principal ── */}
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO<br/>ESPECIAL</h1>
 
+        {/* ── Sorteio ativo label ── */}
+        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
+          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>
+            SORTEIO ATIVO — <span style={{ color: D.orange }}>R$20 = 1 TICKET</span>
+          </span>
+        </div>
+
+        {/* ── Linha: botão ticket + qtd de tickets ── */}
+        <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, alignItems: "center", animation: "fadeUp 0.6s ease-out 0.2s both" }}>
+          <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }} s={{ width: "auto", flex: "0 0 auto", paddingLeft: 22, paddingRight: 22 }}>
+            {IC.ticket("white", 15)} TICKET
+          </Btn>
+          {myPending ? (
+            <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "8px 16px", borderRadius: D.radius, background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)" }}>
+              {IC.clock(D.yellow)}
+              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.yellow, textTransform: "uppercase" }}>EM ANÁLISE</span>
+            </div>
+          ) : (
+            <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "8px 16px", borderRadius: D.radius, background: myTickets > 0 ? "rgba(255,103,9,0.10)" : D.glass, border: `1px solid ${myTickets > 0 ? "rgba(255,103,9,0.30)" : D.glassBorder}` }}>
+              <span style={{ fontFamily: D.sora, fontSize: 22, fontWeight: 800, color: myTickets > 0 ? D.orange : D.dim, lineHeight: 1 }}>{myTickets}</span>
+              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TICKET{myTickets !== 1 ? "S" : ""}</span>
+            </div>
+          )}
+        </div>
+
+        {/* ── Conteúdo ── */}
         {loading ? (
           <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>
         ) : !raffle ? (
           <Glass s={{ padding: "36px 28px", textAlign: "center" }}>
-            <div style={{ fontSize: 40, marginBottom: 16 }}>🏆</div>
             <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>NENHUM SORTEIO ATIVO NO MOMENTO.</p>
           </Glass>
         ) : (
-          <>
-            <Glass s={{ padding: "28px 24px", marginBottom: 18 }} a="slideUp 0.6s ease-out">
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-                {IC.trophy(D.orange, 16)}
-                <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, textTransform: "uppercase" }}>SORTEIO ATIVO</span>
-              </div>
-              <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 12, color: D.white }}>{raffle.titulo}</h2>
+          /* ── Card do prêmio — mesmo estilo das missões ── */
+          <Glass s={{ padding: "28px 24px", background: D.glass, borderColor: "rgba(255,103,9,0.20)" }} a="slideUp 0.6s ease-out 0.25s both">
+            {/* Glow decorativo */}
+            <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: "radial-gradient(ellipse at 100% 50%, rgba(255,103,9,0.08), transparent 70%)", pointerEvents: "none" }} />
+
+            <div style={{ zIndex: 1, position: "relative" }}>
+              {/* Badge status */}
+              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                <span className="pulse-dot-green" /> SORTEIO ATIVO
+              </span>
+
+              {/* Título do prêmio */}
+              <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "0 0 12px", color: D.white, letterSpacing: 0.5 }}>{raffle.titulo}</h2>
+
+              {/* Imagem do prêmio */}
               {prizeUrl && (
-                <div style={{ width: "100%", borderRadius: D.radiusSm, overflow: "hidden", marginBottom: 16, background: D.glass }}>
+                <div style={{ width: "100%", borderRadius: D.radiusSm, overflow: "hidden", marginBottom: 14, background: D.glass }}>
                   <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", height: "auto", display: "block", maxHeight: 220, objectFit: "cover" }} />
                 </div>
               )}
-              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 16, textTransform: "uppercase" }}>{raffle.premio}</p>
-              <div style={{ display: "flex", gap: 10, marginBottom: 18 }}>
-                <div style={{ flex: 1, padding: "14px 18px", background: "rgba(239,35,57,0.10)", border: "1px solid rgba(239,35,57,0.25)", borderRadius: D.radiusSm, textAlign: "center" }}>
-                  <div style={{ fontFamily: D.sora, fontSize: 22, fontWeight: 800, color: D.red }}>{myTickets}</div>
-                  <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginTop: 2 }}>SEUS TICKETS</div>
-                </div>
-                <div style={{ flex: 1, padding: "14px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, textAlign: "center" }}>
-                  <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>R$20 = 1</div>
-                  <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginTop: 2 }}>TICKET</div>
-                </div>
+
+              {/* Descrição do prêmio */}
+              <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 18 }}>{raffle.premio}</p>
+
+              {/* ── Linha de ações — igual missões ── */}
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }} s={{ width: "auto", maxWidth: 200 }}>
+                  COMPROVANTE
+                </Btn>
+                {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
+                {raffle.link2
+                  ? iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))
+                  : raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))
+                }
+                {iconBtn(
+                  <span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span>,
+                  () => setInfoModal(true)
+                )}
               </div>
-              {myPending && (
-                <div style={{ padding: "10px 16px", borderRadius: D.radius, background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", marginBottom: 14, display: "flex", alignItems: "center", gap: 8 }}>
-                  {IC.clock(D.yellow)}<span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.yellow, textTransform: "uppercase" }}>COMPROVANTE EM ANÁLISE</span>
-                </div>
-              )}
-              <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }}>
-                {IC.ticket("white", 16)} ENVIAR DEPÓSITO
-              </Btn>
-            </Glass>
-            <Glass s={{ padding: "18px 20px" }}>
-              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", lineHeight: 1.6, textAlign: "center" }}>
-                DEPOSITE E ENVIE O COMPROVANTE. CADA R$20 DEPOSITADO = 1 TICKET. QUANTO MAIS TICKETS, MAIORES SUAS CHANCES!
-              </p>
-            </Glass>
-          </>
+            </div>
+          </Glass>
         )}
       </div>
 
+      {/* ── Modal: Upload comprovante ── */}
       {modal && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.24s" }} onClick={() => setModal(false)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
@@ -450,7 +496,7 @@ const RaffleScreen = ({ go, profile }) => {
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>Informe o valor depositado e envie o print.</p>
               <Inp placeholder="VALOR DEPOSITADO (R$):" type="number" value={valor} onChange={e => setValor(e.target.value)} />
               {valor && Number(valor) >= 20 && (
-                <div style={{ padding: "8px 16px", borderRadius: D.radius, background: "rgba(239,35,57,0.10)", border: "1px solid rgba(239,35,57,0.25)", marginBottom: 14, fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>
+                <div style={{ padding: "8px 16px", borderRadius: D.radius, background: "rgba(255,103,9,0.10)", border: "1px solid rgba(255,103,9,0.25)", marginBottom: 14, fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>
                   = {Math.floor(Number(valor) / 20)} TICKET(S)
                 </div>
               )}
@@ -464,6 +510,20 @@ const RaffleScreen = ({ go, profile }) => {
                 <Btn onClick={handleSend} disabled={uploading || !file || !valor || Number(valor) < 20} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR"}</Btn>
                 <div onClick={() => setModal(false)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
               </div>
+            </Glass>
+          </div>
+        </div>
+      )}
+
+      {/* ── Modal: Info do sorteio ── */}
+      {infoModal && raffle && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.24s" }} onClick={() => setInfoModal(false)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
+            <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
+              <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 12 }}>{raffle.titulo}</h3>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 10, textTransform: "uppercase", lineHeight: 1.6 }}>{raffle.descricao || "Sem descrição disponível."}</p>
+              <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, marginBottom: 20, textTransform: "uppercase" }}>R$20 = 1 TICKET — SEUS TICKETS: {myTickets}</p>
+              <Btn onClick={() => setInfoModal(false)}>ENTENDI</Btn>
             </Glass>
           </div>
         </div>
