@@ -110,7 +110,34 @@ const Tog = ({ active, onToggle }) => (
 );
 
 const ToastC = ({ msg, type }) => msg ? (
-  <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s ease-out", padding: "10px 22px", borderRadius: D.radiusSm, background: type === "success" ? "linear-gradient(135deg,rgba(239,35,57,0.92),rgba(255,103,9,0.92))" : "rgba(239,68,68,0.88)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: "white", boxShadow: `0 8px 28px ${type === "success" ? D.orangeGlow : "rgba(239,68,68,0.28)"}`, backdropFilter: "blur(10px)" }}>{msg}</div>
+  <div style={{
+    position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)",
+    zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)",
+    maxWidth: 340, width: "calc(100% - 40px)",
+    background: "rgba(12,12,12,0.72)",
+    backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+    border: `1px solid ${type === "success" ? "rgba(255,103,9,0.30)" : "rgba(239,68,68,0.28)"}`,
+    borderRadius: D.radiusSm,
+    boxShadow: `0 12px 36px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.07)`,
+    overflow: "hidden",
+    display: "flex", alignItems: "center", gap: 0,
+  }}>
+    <div style={{
+      width: 44, minHeight: "100%", alignSelf: "stretch",
+      background: type === "success"
+        ? "linear-gradient(180deg, #ef2339 0%, #ff6709 100%)"
+        : "linear-gradient(180deg, #EF4444 0%, #b91c1c 100%)",
+      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+    }}>
+      {IC.back("white", 18)}
+    </div>
+    <div style={{
+      padding: "12px 16px",
+      fontFamily: D.sora, fontSize: 11, fontWeight: 700,
+      letterSpacing: 0.5, textTransform: "uppercase",
+      color: "rgba(255,255,255,0.92)", lineHeight: 1.4,
+    }}>{msg}</div>
+  </div>
 ) : null;
 
 const BG_IMG = imgBackground;
@@ -691,7 +718,7 @@ export default function AdminApp() {
 
         <div style={{ margin: "24px 0 18px 4px" }}>
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>TASKY</span>
-          <h1 style={{ fontFamily: D.maver, fontSize: 60, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.86, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
