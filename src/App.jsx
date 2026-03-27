@@ -161,6 +161,8 @@ const IC = {
   upload: (c = "white") => <svg width="24" height="24" viewBox="0 0 24 24" fill={c}><path d="M18.385,7.373a1.128,1.128,0,0,1-.751-.748h0a8,8,0,1,0-15.1,5.237A1.046,1.046,0,0,1,2.223,13.1,5.5,5.5,0,0,0,.057,18.3,5.622,5.622,0,0,0,5.683,23H14V15.414l-1.293,1.293a1,1,0,0,1-1.414-1.414l1.586-1.586a3,3,0,0,1,4.242,0l1.586,1.586a1,1,0,1,1-1.414,1.414L16,15.414v7.573a8.181,8.181,0,0,0,7.971-7.309A7.964,7.964,0,0,0,18.385,7.373Z"/></svg>,
   logout: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c} style={{ transform: "scaleX(-1)" }}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
   back: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
+  trophy: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M21,3H18V1a1,1,0,0,0-1-1H7A1,1,0,0,0,6,1V3H3A1,1,0,0,0,2,4V7a5.006,5.006,0,0,0,4.424,4.952A7.011,7.011,0,0,0,11,15.92V18H9a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1h10a1,1,0,0,0,1-1V21a3,3,0,0,0-3-3H13V15.92a7.011,7.011,0,0,0,4.576-3.968A5.006,5.006,0,0,0,22,7V4A1,1,0,0,0,21,3ZM4,7V5H6v4.9A3,3,0,0,1,4,7Zm16,0a3,3,0,0,1-2,2.9V5h2Z"/></svg>,
+  ticket: (c = "white", s = 18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M22.536,5.172l-3.708-3.708A1.528,1.528,0,0,0,17.75,1a1.528,1.528,0,0,0-1.078.464L15.2,2.936A3.5,3.5,0,0,1,10.8,2.936L9.328,1.464A1.528,1.528,0,0,0,8.25,1,1.528,1.528,0,0,0,7.172,1.464L1.464,7.172A1.528,1.528,0,0,0,1,8.25a1.528,1.528,0,0,0,.464,1.078L2.936,10.8a3.5,3.5,0,0,1,0,4.4L1.464,16.672A1.528,1.528,0,0,0,1,17.75a1.528,1.528,0,0,0,.464,1.078l3.708,3.708A1.528,1.528,0,0,0,6.25,23a1.528,1.528,0,0,0,1.078-.464L8.8,21.064a3.5,3.5,0,0,1,4.4,0l1.472,1.472A1.528,1.528,0,0,0,15.75,23a1.528,1.528,0,0,0,1.078-.464l5.708-5.708A1.528,1.528,0,0,0,23,15.75a1.528,1.528,0,0,0-.464-1.078L21.064,13.2a3.5,3.5,0,0,1,0-4.4l1.472-1.472A1.528,1.528,0,0,0,23,6.25,1.528,1.528,0,0,0,22.536,5.172ZM9,8A1,1,0,1,1,8,9,1,1,0,0,1,9,8Zm6,8a1,1,0,1,1,1-1A1,1,0,0,1,15,16Zm.707-7.293-7,7a1,1,0,0,1-1.414-1.414l7-7a1,1,0,0,1,1.414,1.414Z"/></svg>,
 };
 
 const MIcon = () => (
@@ -286,6 +288,191 @@ const RegisterScreen = ({ go }) => {
 };
 
 // ═══════════════════════════════════════════
+// BOTÃO SORTEIO (MINI) — usado no UserDash
+// ═══════════════════════════════════════════
+const RaffleBtnUser = ({ go, profile }) => {
+  const [raffle, setRaffle] = useState(null);
+  const [myTickets, setMyTickets] = useState(0);
+
+  useEffect(() => {
+    const load = async () => {
+      const { data } = await supabase.from("raffles").select("*").eq("status", "ativo").maybeSingle();
+      if (data) {
+        setRaffle(data);
+        const { data: tks } = await supabase.from("raffle_tickets")
+          .select("quantidade").eq("raffle_id", data.id).eq("user_id", profile.id).eq("status", "aprovado");
+        if (tks) setMyTickets(tks.reduce((s, t) => s + t.quantidade, 0));
+      }
+    };
+    load();
+  }, [profile.id]);
+
+  if (!raffle) return null;
+
+  return (
+    <div
+      onClick={() => go("raffle")}
+      style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(239,35,57,0.45)", background: "rgba(239,35,57,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite" }}
+    >
+      {IC.trophy("rgba(239,35,57,0.95)", 18)}
+      {myTickets > 0 && (
+        <div style={{ position: "absolute", top: -4, right: -4, width: 16, height: 16, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: "white" }}>{myTickets}</div>
+      )}
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════
+// TELA: SORTEIO (USUÁRIO)
+// ═══════════════════════════════════════════
+const RaffleScreen = ({ go, profile }) => {
+  const [raffle, setRaffle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [myTickets, setMyTickets] = useState(0);
+  const [myPending, setMyPending] = useState(false);
+  const [prizeUrl, setPrizeUrl] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [file, setFile] = useState(null);
+  const [valor, setValor] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(null), 2500); };
+
+  const load = async () => {
+    setLoading(true);
+    const { data } = await supabase.from("raffles").select("*").eq("status", "ativo").maybeSingle();
+    if (data) {
+      setRaffle(data);
+      if (data.imagem_url) {
+        const { data: signed } = await supabase.storage.from("raffle-prizes").createSignedUrl(data.imagem_url, 300);
+        if (signed?.signedUrl) setPrizeUrl(signed.signedUrl);
+      }
+      const { data: tks } = await supabase.from("raffle_tickets")
+        .select("quantidade, status").eq("raffle_id", data.id).eq("user_id", profile.id);
+      if (tks) {
+        setMyTickets(tks.filter(t => t.status === "aprovado").reduce((s, t) => s + t.quantidade, 0));
+        setMyPending(tks.some(t => t.status === "pendente"));
+      }
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, [profile.id]);
+
+  const handleSend = async () => {
+    if (!file || !valor || Number(valor) < 20) { showToast("VALOR MÍNIMO: R$20"); return; }
+    setUploading(true);
+    const filePath = `${profile.id}/${raffle.id}/${Date.now()}_${file.name}`;
+    const { error: upErr } = await supabase.storage.from("raffle-comprovantes").upload(filePath, file);
+    if (upErr) { showToast("ERRO NO UPLOAD"); setUploading(false); return; }
+    const { error: insErr } = await supabase.from("raffle_tickets").insert({
+      raffle_id: raffle.id,
+      user_id: profile.id,
+      user_name: profile.name,
+      quantidade: Math.floor(Number(valor) / 20),
+      valor_depositado: Number(valor),
+      file_name: filePath,
+      status: "pendente",
+    });
+    setUploading(false);
+    if (insErr) { showToast("ERRO: " + insErr.message); return; }
+    setModal(false); setFile(null); setValor("");
+    showToast("COMPROVANTE ENVIADO!");
+    load();
+  };
+
+  return (
+    <>
+      {toast && <ToastC msg={toast} />}
+      <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }}>
+          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
+          <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+        </Glass>
+
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, margin: "24px 0 10px 4px" }}>SORTEIO<br/>ESPECIAL</h1>
+
+        {loading ? (
+          <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>
+        ) : !raffle ? (
+          <Glass s={{ padding: "36px 28px", textAlign: "center" }}>
+            <div style={{ fontSize: 40, marginBottom: 16 }}>🏆</div>
+            <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>NENHUM SORTEIO ATIVO NO MOMENTO.</p>
+          </Glass>
+        ) : (
+          <>
+            <Glass s={{ padding: "28px 24px", marginBottom: 18 }} a="slideUp 0.6s ease-out">
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
+                {IC.trophy(D.orange, 16)}
+                <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, textTransform: "uppercase" }}>SORTEIO ATIVO</span>
+              </div>
+              <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 12, color: D.white }}>{raffle.titulo}</h2>
+              {prizeUrl && (
+                <div style={{ width: "100%", borderRadius: D.radiusSm, overflow: "hidden", marginBottom: 16, background: D.glass }}>
+                  <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", height: "auto", display: "block", maxHeight: 220, objectFit: "cover" }} />
+                </div>
+              )}
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 16, textTransform: "uppercase" }}>{raffle.premio}</p>
+              <div style={{ display: "flex", gap: 10, marginBottom: 18 }}>
+                <div style={{ flex: 1, padding: "14px 18px", background: "rgba(239,35,57,0.10)", border: "1px solid rgba(239,35,57,0.25)", borderRadius: D.radiusSm, textAlign: "center" }}>
+                  <div style={{ fontFamily: D.sora, fontSize: 22, fontWeight: 800, color: D.red }}>{myTickets}</div>
+                  <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginTop: 2 }}>SEUS TICKETS</div>
+                </div>
+                <div style={{ flex: 1, padding: "14px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, textAlign: "center" }}>
+                  <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>R$20 = 1</div>
+                  <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginTop: 2 }}>TICKET</div>
+                </div>
+              </div>
+              {myPending && (
+                <div style={{ padding: "10px 16px", borderRadius: D.radius, background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", marginBottom: 14, display: "flex", alignItems: "center", gap: 8 }}>
+                  {IC.clock(D.yellow)}<span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.yellow, textTransform: "uppercase" }}>COMPROVANTE EM ANÁLISE</span>
+                </div>
+              )}
+              <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }}>
+                {IC.ticket("white", 16)} ENVIAR DEPÓSITO
+              </Btn>
+            </Glass>
+            <Glass s={{ padding: "18px 20px" }}>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", lineHeight: 1.6, textAlign: "center" }}>
+                DEPOSITE E ENVIE O COMPROVANTE. CADA R$20 DEPOSITADO = 1 TICKET. QUANTO MAIS TICKETS, MAIORES SUAS CHANCES!
+              </p>
+            </Glass>
+          </>
+        )}
+      </div>
+
+      {modal && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.24s" }} onClick={() => setModal(false)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
+            <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
+              <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>ENVIAR COMPROVANTE</h3>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>Informe o valor depositado e envie o print.</p>
+              <Inp placeholder="VALOR DEPOSITADO (R$):" type="number" value={valor} onChange={e => setValor(e.target.value)} />
+              {valor && Number(valor) >= 20 && (
+                <div style={{ padding: "8px 16px", borderRadius: D.radius, background: "rgba(239,35,57,0.10)", border: "1px solid rgba(239,35,57,0.25)", marginBottom: 14, fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>
+                  = {Math.floor(Number(valor) / 20)} TICKET(S)
+                </div>
+              )}
+              <div onClick={() => document.getElementById("raffleFileInput").click()} style={{ border: `1px solid ${file ? "rgba(255,103,9,0.45)" : D.glassBorder}`, borderRadius: D.radius, padding: "24px 16px", cursor: "pointer", marginBottom: 18, background: file ? "rgba(255,103,9,0.07)" : D.glass }}>
+                <input id="raffleFileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!"); return; } setFile(f || null); }} />
+                {file
+                  ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p>
+                  : <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TOQUE PARA ENVIAR</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginTop: 4, textTransform: "uppercase" }}>PNG, JPG — MÁX 5MB</p></>}
+              </div>
+              <div style={{ display: "flex", gap: 12 }}>
+                <Btn onClick={handleSend} disabled={uploading || !file || !valor || Number(valor) < 20} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR"}</Btn>
+                <div onClick={() => setModal(false)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+              </div>
+            </Glass>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+// ═══════════════════════════════════════════
 // TELA: DASHBOARD DO USUÁRIO
 // ═══════════════════════════════════════════
 const UserDash = ({ profile, go, onLogout }) => {
@@ -385,6 +572,8 @@ const UserDash = ({ profile, go, onLogout }) => {
           ].map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
+          {/* Botão Sorteio */}
+          <RaffleBtnUser go={go} profile={profile} />
         </div>
 
         {loadingMissions
@@ -592,6 +781,7 @@ export default function App() {
   // Usuário autenticado como user
   if (session && profile) {
     if (page === "withdrawal") return <><Styles /><BG><div style={{ opacity: trans ? 0 : 1, transition: "opacity 0.18s" }}><Withdrawal go={go} profile={profile} /></div></BG></>;
+    if (page === "raffle") return <><Styles /><BG><div style={{ opacity: trans ? 0 : 1, transition: "opacity 0.18s" }}><RaffleScreen go={go} profile={profile} /></div></BG></>;
     return <><Styles /><BG><div style={{ opacity: trans ? 0 : 1, transition: "opacity 0.18s" }}><UserDash profile={profile} go={go} onLogout={handleLogout} /></div></BG></>;
   }
 

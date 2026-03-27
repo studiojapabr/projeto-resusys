@@ -179,6 +179,7 @@ const IC = {
   grip: (c="white") => <svg width="12" height="12" viewBox="0 0 512 512" fill={c}><circle cx="256" cy="42.667" r="42.667"/><circle cx="256" cy="256" r="42.667"/><circle cx="256" cy="469.333" r="42.667"/></svg>,
   link: (c="white") => <svg width="12" height="12" viewBox="0 0 24 24" fill={c}><path d="M7.835,16.17c-.23-.23-.446-.482-.641-.748-.325-.446-.227-1.072,.22-1.397,.446-.325,1.071-.227,1.397,.219,.129,.178,.274,.349,.437,.511,.803,.803,1.87,1.245,3.005,1.245s2.203-.442,3.005-1.245l5.5-5.5c1.657-1.657,1.657-4.354,0-6.011s-4.354-1.657-6.011,0l-1.058,1.058c-.391,.391-1.023,.391-1.414,0s-.391-1.023,0-1.414l1.058-1.058c2.437-2.438,6.402-2.438,8.839,0,2.437,2.437,2.437,6.402,0,8.839l-5.5,5.5c-1.18,1.181-2.75,1.831-4.419,1.831s-3.239-.65-4.418-1.83Zm-1.582,7.83c1.67,0,3.239-.65,4.419-1.831l1.058-1.058c.391-.39,.391-1.023,0-1.414-.39-.391-1.023-.39-1.414,0l-1.059,1.058c-.803,.803-1.87,1.245-3.005,1.245s-2.202-.442-3.005-1.245-1.245-1.87-1.245-3.005,.442-2.203,1.245-3.005l5.5-5.5c.803-.803,1.87-1.245,3.005-1.245s2.203,.442,3.005,1.245c.16,.161,.306,.332,.436,.51,.324,.447,.949,.547,1.397,.221,.447-.325,.546-.95,.221-1.397-.19-.262-.405-.513-.639-.747-1.181-1.182-2.751-1.832-4.42-1.832s-3.239,.65-4.419,1.831L1.834,13.331C.653,14.511,.003,16.081,.003,17.75c0,1.669,.65,3.239,1.831,4.419,1.18,1.181,2.749,1.831,4.419,1.831Z"/></svg>,
   back: (c="white", s=20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
+  trophy: (c="white", s=18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M21,3H18V1a1,1,0,0,0-1-1H7A1,1,0,0,0,6,1V3H3A1,1,0,0,0,2,4V7a5.006,5.006,0,0,0,4.424,4.952A7.011,7.011,0,0,0,11,15.92V18H9a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1h10a1,1,0,0,0,1-1V21a3,3,0,0,0-3-3H13V15.92a7.011,7.011,0,0,0,4.576-3.968A5.006,5.006,0,0,0,22,7V4A1,1,0,0,0,21,3ZM4,7V5H6v4.9A3,3,0,0,1,4,7Zm16,0a3,3,0,0,1-2,2.9V5h2Z"/></svg>,
 };
 
 const LogoutBtn = ({ onClick }) => {
@@ -602,6 +603,251 @@ const AMissions = ({ missions, setMissions }) => {
 };
 
 // ═══════════════════════════════════════════
+// ABA: SORTEIO
+// ═══════════════════════════════════════════
+const ARaffle = () => {
+  const [raffle, setRaffle] = useState(null);
+  const [tickets, setTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [view, setView] = useState("main"); // main | create | tickets
+  const [filtro, setFiltro] = useState("pendente");
+  const [toast, setToast] = useState(null);
+  const [winner, setWinner] = useState(null);
+  const [drawModal, setDrawModal] = useState(false);
+  const [resetModal, setResetModal] = useState(false);
+  const [prizeUrl, setPrizeUrl] = useState(null);
+  const [imgFile, setImgFile] = useState(null);
+  const [form, setForm] = useState({ titulo: "", premio: "" });
+  const show = (m, t = "success") => { setToast({ m, t }); setTimeout(() => setToast(null), 2500); };
+
+  const loadAll = async () => {
+    setLoading(true);
+    const { data: r } = await supabase.from("raffles").select("*").eq("status", "ativo").maybeSingle();
+    if (r) {
+      setRaffle(r);
+      if (r.imagem_url) {
+        const { data: signed } = await supabase.storage.from("raffle-prizes").createSignedUrl(r.imagem_url, 300);
+        if (signed?.signedUrl) setPrizeUrl(signed.signedUrl);
+      }
+      const { data: tks } = await supabase.from("raffle_tickets").select("*").eq("raffle_id", r.id).order("created_at", { ascending: false });
+      setTickets(tks || []);
+    } else {
+      setRaffle(null); setTickets([]); setPrizeUrl(null);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => { loadAll(); }, []);
+
+  const createRaffle = async () => {
+    if (!form.titulo || !form.premio) return;
+    let imagem_url = null;
+    if (imgFile) {
+      const path = `prizes/${Date.now()}_${imgFile.name}`;
+      const { error: upErr } = await supabase.storage.from("raffle-prizes").upload(path, imgFile);
+      if (upErr) { show("ERRO AO SUBIR IMAGEM: " + upErr.message, "danger"); return; }
+      imagem_url = path;
+    }
+    const { error } = await supabase.from("raffles").insert({ titulo: form.titulo, premio: form.premio, imagem_url, status: "ativo" });
+    if (error) { show("ERRO: " + error.message, "danger"); return; }
+    show("SORTEIO CRIADO!");
+    setView("main"); setForm({ titulo: "", premio: "" }); setImgFile(null);
+    loadAll();
+  };
+
+  const approveTicket = async (id, user_id, quantidade) => {
+    const { error } = await supabase.from("raffle_tickets").update({ status: "aprovado" }).eq("id", id);
+    if (error) { show("ERRO: " + error.message, "danger"); return; }
+    setTickets(p => p.map(t => t.id === id ? { ...t, status: "aprovado" } : t));
+    show(`APROVADO! +${quantidade} TICKET(S)`);
+  };
+
+  const rejectTicket = async (id) => {
+    const { error } = await supabase.from("raffle_tickets").update({ status: "rejeitado" }).eq("id", id);
+    if (error) { show("ERRO: " + error.message, "danger"); return; }
+    setTickets(p => p.map(t => t.id === id ? { ...t, status: "rejeitado" } : t));
+    show("RECUSADO.", "danger");
+  };
+
+  const doDrawing = async () => {
+    const approved = tickets.filter(t => t.status === "aprovado");
+    if (approved.length === 0) { show("NENHUM TICKET APROVADO!", "danger"); return; }
+    // Montar pool ponderado
+    const pool = [];
+    approved.forEach(t => { for (let i = 0; i < t.quantidade; i++) pool.push({ user_id: t.user_id, user_name: t.user_name }); });
+    const picked = pool[Math.floor(Math.random() * pool.length)];
+    const { error } = await supabase.from("raffles").update({ status: "encerrado", vencedor_id: picked.user_id, vencedor_name: picked.user_name }).eq("id", raffle.id);
+    if (error) { show("ERRO: " + error.message, "danger"); return; }
+    setWinner(picked.user_name);
+    setDrawModal(false);
+    show("SORTEIO REALIZADO!");
+    loadAll();
+  };
+
+  const resetRaffle = async () => {
+    // Deletar todos os tickets do sorteio atual
+    await supabase.from("raffle_tickets").delete().eq("raffle_id", raffle.id);
+    // Encerrar sorteio (já deve estar encerrado mas por segurança)
+    await supabase.from("raffles").update({ status: "encerrado" }).eq("id", raffle.id);
+    setResetModal(false); setWinner(null); setRaffle(null); setTickets([]);
+    show("SORTEIO ENCERRADO E TICKETS DELETADOS!");
+    loadAll();
+  };
+
+  const totalApproved = tickets.filter(t => t.status === "aprovado").reduce((s, t) => s + t.quantidade, 0);
+  const totalPending = tickets.filter(t => t.status === "pendente").length;
+
+  if (loading) return <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>;
+
+  // FORMULÁRIO CRIAR SORTEIO
+  if (view === "create") return (
+    <div style={{ animation: "fadeUp 0.45s ease-out" }}>
+      <ToastC msg={toast?.m} type={toast?.t} />
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+        <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>NOVO SORTEIO</h2>
+        <div onClick={() => setView("main")} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
+      </div>
+      <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
+        <Inp label="TÍTULO DO SORTEIO" placeholder="Ex: Grande Sorteio de Janeiro" value={form.titulo} onChange={e => setForm(p => ({ ...p, titulo: e.target.value }))} />
+        <Inp label="DESCRIÇÃO DO PRÊMIO" placeholder="Ex: iPhone 15 Pro Max 256GB" value={form.premio} onChange={e => setForm(p => ({ ...p, premio: e.target.value }))} multi />
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: "block", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.dim, marginBottom: 8, paddingLeft: 20 }}>IMAGEM DO PRÊMIO (OPCIONAL)</label>
+          <div onClick={() => document.getElementById("prizeImgInput").click()} style={{ border: `1px solid ${imgFile ? "rgba(255,103,9,0.45)" : D.glassBorder}`, borderRadius: D.radiusSm, padding: "20px 16px", cursor: "pointer", textAlign: "center", background: imgFile ? "rgba(255,103,9,0.07)" : D.glass }}>
+            <input id="prizeImgInput" type="file" accept="image/png,image/jpeg,image/webp" style={{ display: "none" }} onChange={e => setImgFile(e.target.files[0] || null)} />
+            {imgFile ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{imgFile.name}</p> : <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TOQUE PARA SELECIONAR</p>}
+          </div>
+        </div>
+      </Glass>
+      <div style={{ display: "flex", gap: 12 }}>
+        <Btn v="outline" onClick={() => setView("main")} s={{ flex: 1 }}>CANCELAR</Btn>
+        <Btn onClick={createRaffle} disabled={!form.titulo || !form.premio} s={{ flex: 1 }}>CRIAR SORTEIO</Btn>
+      </div>
+    </div>
+  );
+
+  // SEM SORTEIO ATIVO
+  if (!raffle) return (
+    <div>
+      <ToastC msg={toast?.m} type={toast?.t} />
+      {winner && (
+        <Glass s={{ padding: "28px 24px", marginBottom: 22, textAlign: "center", background: "rgba(239,35,57,0.10)", borderColor: "rgba(239,35,57,0.35)" }}>
+          <div style={{ fontSize: 32, marginBottom: 10 }}>🏆</div>
+          <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textTransform: "uppercase", marginBottom: 4 }}>VENCEDOR DO ÚLTIMO SORTEIO:</p>
+          <p style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.white, textTransform: "uppercase" }}>{winner}</p>
+        </Glass>
+      )}
+      <Glass s={{ padding: "40px 28px", textAlign: "center" }}>
+        {IC.trophy(D.muted, 36)}
+        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", marginTop: 16, marginBottom: 24 }}>NENHUM SORTEIO ATIVO. CRIE UM NOVO!</p>
+        <Btn onClick={() => setView("create")} s={{ maxWidth: 220, margin: "0 auto" }}>{IC.trophy("white", 14)} CRIAR SORTEIO</Btn>
+      </Glass>
+    </div>
+  );
+
+  // SORTEIO ATIVO
+  const filtrados = tickets.filter(t => t.status === filtro);
+
+  return (
+    <div>
+      <ToastC msg={toast?.m} type={toast?.t} />
+
+      {/* Info Card */}
+      <Glass s={{ padding: "24px 20px", marginBottom: 18, background: "rgba(239,35,57,0.08)", borderColor: "rgba(239,35,57,0.25)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+          {IC.trophy(D.orange, 16)}
+          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textTransform: "uppercase", letterSpacing: 0.5 }}>SORTEIO ATIVO</span>
+        </div>
+        <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", color: D.white, marginBottom: 6 }}>{raffle.titulo}</h3>
+        <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 14 }}>{raffle.premio}</p>
+        {prizeUrl && <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", borderRadius: D.radiusSm, maxHeight: 160, objectFit: "cover", marginBottom: 14 }} />}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
+          <div style={{ padding: "12px", background: D.glass, borderRadius: D.radiusSm, textAlign: "center" }}>
+            <div style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.red }}>{totalPending}</div>
+            <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>PENDENTES</div>
+          </div>
+          <div style={{ padding: "12px", background: D.glass, borderRadius: D.radiusSm, textAlign: "center" }}>
+            <div style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.orange }}>{totalApproved}</div>
+            <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>TICKETS</div>
+          </div>
+        </div>
+        <Btn onClick={() => setDrawModal(true)} disabled={totalApproved === 0}>{IC.trophy("white", 14)} REALIZAR SORTEIO</Btn>
+      </Glass>
+
+      {/* Filtro Tickets */}
+      <div style={{ display: "flex", gap: 6, marginBottom: 16 }}>
+        {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "rejeitado", l: "Rejeitados" }].map(x => (
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, flex: 1, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+        ))}
+      </div>
+
+      {filtrados.length === 0 && <div style={{ textAlign: "center", padding: "30px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Sem tickets aqui.</div>}
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
+        {filtrados.map((t, i) => (
+          <Glass key={t.id} s={{ padding: "20px 18px" }} a={`slideUp 0.35s ease-out ${i * 0.04}s both`}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 3, flexWrap: "wrap" }}>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>{t.user_name}</span>
+                  <SB status={t.status} />
+                </div>
+                <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>
+                  R$ {t.valor_depositado} → <span style={{ color: D.orange, fontWeight: 800 }}>{t.quantidade} ticket(s)</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 3 }}>{IC.clock(D.dim)}<span style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase" }}>{new Date(t.created_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span></div>
+              </div>
+              {t.status === "pendente" && (
+                <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                  <div onClick={() => approveTicket(t.id, t.user_id, t.quantidade)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,103,9,0.08)", border: "1px solid rgba(255,103,9,0.22)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.orange, 13)}</div>
+                  <div onClick={() => rejectTicket(t.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x("#EF4444", 13)}</div>
+                </div>
+              )}
+            </div>
+          </Glass>
+        ))}
+      </div>
+
+      {/* Botão encerrar */}
+      <Btn v="danger" onClick={() => setResetModal(true)} s={{ background: "rgba(239,68,68,0.08)" }}>ENCERRAR E LIMPAR SORTEIO</Btn>
+
+      {/* Modal Sorteio */}
+      {drawModal && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.75)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDrawModal(false)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
+            <Glass s={{ padding: "32px 24px", textAlign: "center" }}>
+              <div style={{ fontSize: 40, marginBottom: 14 }}>🎯</div>
+              <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>REALIZAR SORTEIO?</h3>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 6 }}>{totalApproved} tickets no pool.</p>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase", marginBottom: 24 }}>Esta ação é irreversível.</p>
+              <div style={{ display: "flex", gap: 12 }}>
+                <Btn v="outline" onClick={() => setDrawModal(false)} s={{ flex: 1 }}>CANCELAR</Btn>
+                <Btn onClick={doDrawing} s={{ flex: 1 }}>SORTEAR!</Btn>
+              </div>
+            </Glass>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Reset */}
+      {resetModal && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.75)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setResetModal(false)}>
+          <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
+            <Glass s={{ padding: "32px 24px", textAlign: "center" }}>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.trash("#EF4444", 24)}</div>
+              <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>ENCERRAR SORTEIO?</h3>
+              <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24, lineHeight: 1.6 }}>TODOS OS TICKETS SERÃO DELETADOS E O SORTEIO ENCERRADO. UM NOVO PODERÁ SER CRIADO.</p>
+              <div style={{ display: "flex", gap: 12 }}>
+                <Btn v="outline" onClick={() => setResetModal(false)} s={{ flex: 1 }}>CANCELAR</Btn>
+                <Btn v="danger" onClick={resetRaffle} s={{ flex: 1, background: "rgba(239,68,68,0.08)" }}>ENCERRAR</Btn>
+              </div>
+            </Glass>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════
 // APP ADMIN PRINCIPAL
 // ═══════════════════════════════════════════
 export default function AdminApp() {
@@ -684,7 +930,7 @@ export default function AdminApp() {
     );
   }
 
-  const TAB_LABELS = { overview: "PAINEL DA BANCA", submissions: "COMPROVANTES", withdrawals: "FILA DE SAQUES", users: "USUÁRIOS", missions: "GERENCIAR TAREFAS" };
+  const TAB_LABELS = { overview: "PAINEL DA BANCA", submissions: "COMPROVANTES", withdrawals: "FILA DE SAQUES", users: "USUÁRIOS", missions: "GERENCIAR TAREFAS", raffle: "SORTEIO" };
 
   return (
     <><Styles /><BG>
@@ -698,6 +944,7 @@ export default function AdminApp() {
             { k: "withdrawals", icon: IC.wallet },
             { k: "users", icon: IC.users },
             { k: "missions", icon: IC.zap },
+            { k: "raffle", icon: IC.trophy },
           ].map(t => {
             const active = adminTab === t.k;
             const pendingCount = t.k === "submissions" ? subs.filter(s => s.status === "pendente").length : t.k === "withdrawals" ? withs.filter(w => w.status === "pendente").length : 0;
@@ -728,6 +975,7 @@ export default function AdminApp() {
               {adminTab === "withdrawals" && <AWiths withs={withs} setWiths={setWiths} />}
               {adminTab === "users" && <AUsers usrs={usrs} setUsrs={setUsrs} />}
               {adminTab === "missions" && <AMissions missions={missions} setMissions={setMissions} />}
+              {adminTab === "raffle" && <ARaffle />}
             </div>
           )
         }
