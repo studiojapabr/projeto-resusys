@@ -650,7 +650,7 @@ export default function AdminApp() {
       <><Styles /><BG>
         <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 20px 44px" }}>
           <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
-            <span style={{ fontSize: 35, color: D.red, fontFamily: "'Maver', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>RESUSYS</span>
+            <span style={{ fontSize: 35, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>RESU</span>
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
             <Btn onClick={() => window.location.href = "/"}>IR PARA O LOGIN</Btn>
           </Glass>
@@ -690,7 +690,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "24px 0 18px 4px" }}>
-          <span style={{ fontSize: 35, color: D.red, textShadow: `0 0 16px ${D.redGlow}`, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESUSYS</span>
+          <span style={{ fontSize: 35, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>RESU</span>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 1, letterSpacing: -1 }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
