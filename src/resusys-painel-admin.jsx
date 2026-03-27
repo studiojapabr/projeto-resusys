@@ -114,29 +114,27 @@ const ToastC = ({ msg, type }) => msg ? (
     position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)",
     zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)",
     maxWidth: 340, width: "calc(100% - 40px)",
-    background: "rgba(12,12,12,0.72)",
-    backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
-    border: `1px solid ${type === "success" ? "rgba(255,103,9,0.30)" : "rgba(239,68,68,0.28)"}`,
+    background: D.glass,
+    backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
+    border: `1px solid ${D.glassBorder}`,
     borderRadius: D.radiusSm,
-    boxShadow: `0 12px 36px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.07)`,
-    overflow: "hidden",
-    display: "flex", alignItems: "center", gap: 0,
+    boxShadow: `0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)`,
+    display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+    padding: "14px 20px",
   }}>
     <div style={{
-      width: 44, minHeight: "100%", alignSelf: "stretch",
-      background: type === "success"
-        ? "linear-gradient(180deg, #ef2339 0%, #ff6709 100%)"
-        : "linear-gradient(180deg, #EF4444 0%, #b91c1c 100%)",
+      background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)",
+      borderRadius: "50%",
+      width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
     }}>
-      {IC.back("white", 18)}
+      {IC.back("white", 14)}
     </div>
-    <div style={{
-      padding: "12px 16px",
+    <span style={{
       fontFamily: D.sora, fontSize: 11, fontWeight: 700,
       letterSpacing: 0.5, textTransform: "uppercase",
-      color: "rgba(255,255,255,0.92)", lineHeight: 1.4,
-    }}>{msg}</div>
+      color: "rgba(255,255,255,0.92)", lineHeight: 1.4, textAlign: "center",
+    }}>{msg}</span>
   </div>
 ) : null;
 
