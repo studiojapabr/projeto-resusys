@@ -690,26 +690,29 @@ const ARaffle = () => {
     if (error) { show("ERRO: " + error.message, "danger"); return; }
     setWinner(picked.user_name);
     setDrawModal(false);
+    setRaffle(null);
+    setTickets([]);
     show("SORTEIO REALIZADO!");
-    loadAll();
   };
 
-  // ─── BUG FIX: tratamento de erros + ordem correta das operações ───
   const resetRaffle = async () => {
     const raffleId = raffle?.id;
-    if (!raffleId) { show("ERRO: ID do sorteio não encontrado", "danger"); return; }
+    if (!raffleId) { show("ERRO: ID não encontrado", "danger"); return; }
+
+    // Deleta tickets primeiro, depois encerra
+    const { error: ticketsErr } = await supabase.from("raffle_tickets").delete().eq("raffle_id", raffleId);
+    if (ticketsErr) { show("ERRO AO DELETAR TICKETS: " + ticketsErr.message, "danger"); return; }
 
     const { error: raffleErr } = await supabase.from("raffles").update({ status: "encerrado" }).eq("id", raffleId);
     if (raffleErr) { show("ERRO AO ENCERRAR: " + raffleErr.message, "danger"); return; }
 
-    const { error: ticketsErr } = await supabase.from("raffle_tickets").delete().eq("raffle_id", raffleId);
-    if (ticketsErr) { show("ERRO AO DELETAR TICKETS: " + ticketsErr.message, "danger"); return; }
-
+    // Gerenciar estado LOCAL - sem loadAll() para evitar race condition
     setResetModal(false);
+    setWinner(null);
     setRaffle(null);
     setTickets([]);
+    setFiltro("pendente");
     show("SORTEIO ENCERRADO!");
-    loadAll();
   };
 
   const totalApproved = tickets.filter(t => t.status === "aprovado").reduce((s, t) => s + t.quantidade, 0);
