@@ -364,12 +364,18 @@ const RaffleScreen = ({ go, profile }) => {
   const handleSend = async () => {
     if (!file || !valor || Number(valor) < 20) { showToast("VALOR MÍNIMO: R$20"); return; }
     setUploading(true);
-    const filePath = `${profile.id}/${raffle.id}/${Date.now()}_${file.name}`;
+
+    // Garante que o user_id seja o do usuário autenticado na sessão atual
+    const { data: { session } } = await supabase.auth.getSession();
+    const authUserId = session?.user?.id;
+    if (!authUserId) { showToast("SESSÃO EXPIRADA. FAÇA LOGIN NOVAMENTE."); setUploading(false); return; }
+
+    const filePath = `${authUserId}/${raffle.id}/${Date.now()}_${file.name}`;
     const { error: upErr } = await supabase.storage.from("raffle-comprovantes").upload(filePath, file);
-    if (upErr) { showToast("ERRO NO UPLOAD"); setUploading(false); return; }
+    if (upErr) { showToast("ERRO NO UPLOAD: " + upErr.message); setUploading(false); return; }
     const { error: insErr } = await supabase.from("raffle_tickets").insert({
       raffle_id: raffle.id,
-      user_id: profile.id,
+      user_id: authUserId,
       user_name: profile.name,
       quantidade: Math.floor(Number(valor) / 20),
       valor_depositado: Number(valor),
@@ -391,7 +397,7 @@ const RaffleScreen = ({ go, profile }) => {
   );
 
   const iconBtn = (content, onClick) => (
-    <div onClick={onClick} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s", flexShrink: 0 }}>
+    <div onClick={onClick} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s", flexShrink: 0 }}>
       {content}
     </div>
   );
@@ -406,7 +412,7 @@ const RaffleScreen = ({ go, profile }) => {
   return (
     <>
       {toast && <ToastC msg={toast} />}
-      <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
+      <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
 
         {/* ── Header — idêntico ao UserDash ── */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
@@ -434,7 +440,6 @@ const RaffleScreen = ({ go, profile }) => {
           {socialLinks.map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
-          {/* Botão ticket — laranja, indica que estamos na tela de sorteio */}
           <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: `0 3px 10px ${D.redGlow}`, animation: "pulse 2.4s infinite" }}>
             {IC.ticket("white", 18)}
           </div>
@@ -448,46 +453,54 @@ const RaffleScreen = ({ go, profile }) => {
             <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>NENHUM SORTEIO ATIVO NO MOMENTO.</p>
           </Glass>
         ) : (
-          <>
-            {/* ── Imagem do prêmio — SEPARADA e acima do card info ── */}
-            {prizeUrl && (
-              <Glass s={{ overflow: "hidden", marginBottom: 18, padding: 0 }} a="fadeUp 0.6s ease-out 0.22s both">
-                <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", height: "auto", display: "block", maxHeight: 260, objectFit: "cover" }} />
-              </Glass>
-            )}
+          /* ── Card do prêmio — gradiente laranja/vermelho sem glassmorphism ── */
+          <div style={{
+            borderRadius: D.radiusSm,
+            background: "linear-gradient(145deg, #c01a2e 0%, #ef2339 30%, #d4400a 65%, #ff6709 100%)",
+            padding: "28px 24px",
+            position: "relative",
+            overflow: "hidden",
+            animation: "slideUp 0.6s ease-out 0.25s both",
+            boxShadow: "0 16px 40px rgba(239,35,57,0.35), 0 4px 12px rgba(0,0,0,0.30)",
+          }}>
+            {/* Brilho decorativo no topo */}
+            <div style={{ position: "absolute", top: -40, right: -40, width: 180, height: 180, background: "radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
+            {/* Vinheta escura no fundo */}
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(to top, rgba(0,0,0,0.28), transparent)", pointerEvents: "none" }} />
 
-            {/* ── Card do prêmio — mesmo estilo das missões ── */}
-            <Glass s={{ padding: "28px 24px" }} a="fadeUp 0.6s ease-out 0.28s both">
-              {/* Glow decorativo */}
-              <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: "radial-gradient(ellipse at 100% 50%, rgba(255,103,9,0.08), transparent 70%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              {/* Identificador */}
+              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: "rgba(255,255,255,0.80)", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                <span style={{ width: 7, height: 7, borderRadius: "50%", background: "rgba(255,255,255,0.90)", flexShrink: 0 }} /> SORTEIO ESPECIAL
+              </span>
 
-              <div style={{ zIndex: 1, position: "relative" }}>
-                {/* Identificador — mesmo padrão das tarefas */}
-                <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                  <span className="pulse-dot-red" /> SORTEIO ESPECIAL
-                </span>
+              {/* Título do prêmio */}
+              <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "0 0 10px", color: "#ffffff", letterSpacing: 0.5 }}>{raffle.titulo}</h2>
 
-                {/* Título do prêmio */}
-                <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "0 0 10px", color: D.white, letterSpacing: 0.5 }}>{raffle.titulo}</h2>
-
-                {/* Descrição / prêmio */}
-                <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>{raffle.premio}</p>
-
-                {/* ── Linha de ações — idêntica às missões ── */}
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                  <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }} s={{ width: "auto", maxWidth: 200 }}>
-                    COMPROVANTE
-                  </Btn>
-                  {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
-                  {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
-                  {iconBtn(
-                    <span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span>,
-                    () => setInfoModal(true)
-                  )}
+              {/* Imagem do prêmio — dentro do card, sem glassmorphism */}
+              {prizeUrl && (
+                <div style={{ width: "100%", borderRadius: 14, overflow: "hidden", marginBottom: 14, background: "rgba(0,0,0,0.20)" }}>
+                  <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", height: "auto", display: "block", maxHeight: 220, objectFit: "cover" }} />
                 </div>
+              )}
+
+              {/* Descrição / prêmio */}
+              <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: "rgba(255,255,255,0.75)", letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 18 }}>{raffle.premio}</p>
+
+              {/* ── Linha de ações ── */}
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }} s={{ width: "auto", maxWidth: 200, background: "rgba(0,0,0,0.30)", border: "1.5px solid rgba(255,255,255,0.30)", boxShadow: "none", backdropFilter: "none" }}>
+                  COMPROVANTE
+                </Btn>
+                {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
+                {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
+                {iconBtn(
+                  <span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.80)", fontFamily: D.sora }}>i</span>,
+                  () => setInfoModal(true)
+                )}
               </div>
-            </Glass>
-          </>
+            </div>
+          </div>
         )}
       </div>
 
