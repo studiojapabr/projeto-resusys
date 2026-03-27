@@ -196,7 +196,7 @@ const Landing = ({ go }) => (
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA{" "}E{" "}GANHE</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA{" "}E{" "}GANHE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -233,7 +233,7 @@ const LoginScreen = ({ go }) => {
             <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEM-VINDO</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEM-VINDO</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -275,7 +275,7 @@ const RegisterScreen = ({ go }) => {
             <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA<br/>CONTA</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA<br/>CONTA</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -377,7 +377,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS<br/>TAREFAS</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS<br/>TAREFAS</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
@@ -521,7 +521,7 @@ const Withdrawal = ({ go, profile }) => {
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, lineHeight: 0.86, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE<br/>SEU PIX<br/>E AGUARDE</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE<br/>SEU PIX<br/>E AGUARDE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>
