@@ -6,7 +6,7 @@ import AdminApp from './resusys-painel-admin';
 
 // Importando as suas imagens da pasta assets
 import imgBackground from './assets/bg.png';
-import imgIconePrincipal from './assets/@icone-principal.jpg';
+import imgIconePrincipal from './assets/icone-task.png';
 
 // ═══════════════════════════════════════════
 // SUPABASE CLIENT
@@ -135,6 +135,7 @@ const IC = {
   wallet: (c = "white") => <svg width="18" height="18" viewBox="0 0 24 24" fill={c}><path d="M21,6H5c-.859,0-1.672-.372-2.235-.999,.55-.614,1.349-1.001,2.235-1.001H23c1.308-.006,1.307-1.995,0-2H5C2.239,2,0,4.239,0,7v10c0,2.761,2.239,5,5,5H21c1.657,0,3-1.343,3-3V9c0-1.657-1.343-3-3-3Zm-1,9c-1.308-.006-1.308-1.994,0-2,1.308,.006,1.308,1.994,0,2Z"/></svg>,
   upload: (c = "white") => <svg width="24" height="24" viewBox="0 0 24 24" fill={c}><path d="M18.385,7.373a1.128,1.128,0,0,1-.751-.748h0a8,8,0,1,0-15.1,5.237A1.046,1.046,0,0,1,2.223,13.1,5.5,5.5,0,0,0,.057,18.3,5.622,5.622,0,0,0,5.683,23H14V15.414l-1.293,1.293a1,1,0,0,1-1.414-1.414l1.586-1.586a3,3,0,0,1,4.242,0l1.586,1.586a1,1,0,1,1-1.414,1.414L16,15.414v7.573a8.181,8.181,0,0,0,7.971-7.309A7.964,7.964,0,0,0,18.385,7.373Z"/></svg>,
   logout: (c = "white") => <svg width="16" height="16" viewBox="0 0 24 24" fill={c}><path d="M22.829,9.172,18.95,5.293a1,1,0,0,0-1.414,1.414L21.414,10.5H9a1,1,0,0,0,0,2H21.414l-3.878,3.793a1,1,0,1,0,1.414,1.414l3.879-3.879A3,3,0,0,0,22.829,9.172Z"/><path d="M15,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9a1,1,0,0,0,0-2H5A3,3,0,0,0,2,4V20a3,3,0,0,0,3,3h10a1,1,0,0,0,0-2Z"/></svg>,
+  back: (c = "white") => <svg width="18" height="18" viewBox="0 0 24 24" fill={c}><path d="M17.121,2.878a1,1,0,0,0-1.414,0L6.293,12.293a1,1,0,0,0,0,1.414l9.414,9.415a1,1,0,0,0,1.414-1.415L8.414,13l8.707-8.707A1,1,0,0,0,17.121,2.878Z"/></svg>,
 };
 
 const MIcon = () => (
@@ -201,7 +202,7 @@ const LoginScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
-            <div onClick={() => go("landing")} style={{ padding: "8px 18px", borderRadius: D.radius, background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.15)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 8, minHeight: 40 }}>{IC.logout("rgba(255,255,255,0.5)")} VOLTAR</div>
+            <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
           <h1 style={{ fontFamily: D.maver, fontSize: 60, fontWeight: 400, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>BEM-<br/>VINDO</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -478,7 +479,7 @@ const Withdrawal = ({ go, profile }) => {
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
         <h2 style={{ fontFamily: D.maver, fontSize: 60, fontWeight: 400, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88 }}>VALOR<br/>SOLICITADO!</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
-        <Btn onClick={() => go("dashboard")}>VOLTAR</Btn>
+        <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
     </div>
   );
@@ -489,7 +490,7 @@ const Withdrawal = ({ go, profile }) => {
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
-          <div onClick={() => go("dashboard")} style={{ padding: "8px 18px", borderRadius: D.radius, background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.15)", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", cursor: "pointer", display: "flex", alignItems: "center", gap: 8, minHeight: 40 }}>{IC.logout("rgba(255,255,255,0.5)")} VOLTAR</div>
+          <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
         <h1 style={{ fontFamily: D.maver, fontSize: 60, fontWeight: 400, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE<br/>E AGUARDE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
