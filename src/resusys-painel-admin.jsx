@@ -153,6 +153,7 @@ const IC = {
   arrowDn: (c="white") => <svg width="11" height="11" viewBox="0 0 24 24" fill={c}><path d="M1.51,6.079a1.492,1.492,0,0,1,1.06.44l7.673,7.672a2.5,2.5,0,0,0,3.536,0L21.44,6.529A1.5,1.5,0,1,1,23.561,8.65L15.9,16.312a5.505,5.505,0,0,1-7.778,0L.449,8.64A1.5,1.5,0,0,1,1.51,6.079Z"/></svg>,
   grip: (c="white") => <svg width="12" height="12" viewBox="0 0 512 512" fill={c}><circle cx="256" cy="42.667" r="42.667"/><circle cx="256" cy="256" r="42.667"/><circle cx="256" cy="469.333" r="42.667"/></svg>,
   link: (c="white") => <svg width="12" height="12" viewBox="0 0 24 24" fill={c}><path d="M7.835,16.17c-.23-.23-.446-.482-.641-.748-.325-.446-.227-1.072,.22-1.397,.446-.325,1.071-.227,1.397,.219,.129,.178,.274,.349,.437,.511,.803,.803,1.87,1.245,3.005,1.245s2.203-.442,3.005-1.245l5.5-5.5c1.657-1.657,1.657-4.354,0-6.011s-4.354-1.657-6.011,0l-1.058,1.058c-.391,.391-1.023,.391-1.414,0s-.391-1.023,0-1.414l1.058-1.058c2.437-2.438,6.402-2.438,8.839,0,2.437,2.437,2.437,6.402,0,8.839l-5.5,5.5c-1.18,1.181-2.75,1.831-4.419,1.831s-3.239-.65-4.418-1.83Zm-1.582,7.83c1.67,0,3.239-.65,4.419-1.831l1.058-1.058c.391-.39,.391-1.023,0-1.414-.39-.391-1.023-.39-1.414,0l-1.059,1.058c-.803,.803-1.87,1.245-3.005,1.245s-2.202-.442-3.005-1.245-1.245-1.87-1.245-3.005,.442-2.203,1.245-3.005l5.5-5.5c.803-.803,1.87-1.245,3.005-1.245s2.203,.442,3.005,1.245c.16,.161,.306,.332,.436,.51,.324,.447,.949,.547,1.397,.221,.447-.325,.546-.95,.221-1.397-.19-.262-.405-.513-.639-.747-1.181-1.182-2.751-1.832-4.42-1.832s-3.239,.65-4.419,1.831L1.834,13.331C.653,14.511,.003,16.081,.003,17.75c0,1.669,.65,3.239,1.831,4.419,1.18,1.181,2.749,1.831,4.419,1.831Z"/></svg>,
+  back: (c="white", s=20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
 };
 
 const LogoutBtn = ({ onClick }) => {
@@ -289,7 +290,7 @@ const ASubs = ({ subs, setSubs }) => {
                     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{sel.mission_title}</div>
                   </div>
                 </div>
-                <div onClick={() => setSel(null)} style={{ cursor: "pointer" }}>{IC.x(D.dim, 18)}</div>
+                <div onClick={() => setSel(null)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={D.orange} /></div>
               <div style={{ width: "100%", borderRadius: D.radiusSm, background: D.glass, border: `1px solid ${D.glassBorder}`, overflow: "hidden", marginBottom: 14, minHeight: 120 }}>
@@ -484,7 +485,7 @@ const AMissions = ({ missions, setMissions }) => {
       <div style={{ animation: "fadeUp 0.45s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
-          <div onClick={() => { setView("list"); setEditing(null); }} style={{ cursor: "pointer" }}>{IC.x(D.dim, 18)}</div>
+          <div onClick={() => { setView("list"); setEditing(null); }} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
         </div>
         <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
           <Inp label="TÍTULO" placeholder="Ex: Deposite R$50" value={f.titulo} onChange={e => set("titulo", e.target.value)} />
