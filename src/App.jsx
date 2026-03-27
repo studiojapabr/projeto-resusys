@@ -401,38 +401,25 @@ const RaffleScreen = ({ go, profile }) => {
       {toast && <ToastC msg={toast} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
 
-        {/* ── Header igual ao dashboard ── */}
+        {/* ── Header igual ao UserDash ── */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
-          <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: myPending ? D.yellow : myTickets > 0 ? D.orange : D.muted, textTransform: "uppercase" }}>
+            {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
+          </span>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+          </div>
         </Glass>
 
         {/* ── Título principal ── */}
         <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO<br/>ESPECIAL</h1>
 
-        {/* ── Sorteio ativo label ── */}
-        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
+        {/* ── Subtitle label ── */}
+        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>
-            SORTEIO ATIVO — <span style={{ color: D.orange }}>R$20 = 1 TICKET</span>
+            R$20 = 1 <span style={{ color: D.orange }}>TICKET</span>
           </span>
-        </div>
-
-        {/* ── Linha: botão ticket + qtd de tickets ── */}
-        <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, alignItems: "center", animation: "fadeUp 0.6s ease-out 0.2s both" }}>
-          <Btn onClick={() => { setFile(null); setValor(""); setModal(true); }} s={{ width: "auto", flex: "0 0 auto", paddingLeft: 22, paddingRight: 22 }}>
-            {IC.ticket("white", 15)} TICKET
-          </Btn>
-          {myPending ? (
-            <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "8px 16px", borderRadius: D.radius, background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)" }}>
-              {IC.clock(D.yellow)}
-              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.yellow, textTransform: "uppercase" }}>EM ANÁLISE</span>
-            </div>
-          ) : (
-            <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "8px 16px", borderRadius: D.radius, background: myTickets > 0 ? "rgba(255,103,9,0.10)" : D.glass, border: `1px solid ${myTickets > 0 ? "rgba(255,103,9,0.30)" : D.glassBorder}` }}>
-              <span style={{ fontFamily: D.sora, fontSize: 22, fontWeight: 800, color: myTickets > 0 ? D.orange : D.dim, lineHeight: 1 }}>{myTickets}</span>
-              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TICKET{myTickets !== 1 ? "S" : ""}</span>
-            </div>
-          )}
         </div>
 
         {/* ── Conteúdo ── */}
@@ -444,16 +431,11 @@ const RaffleScreen = ({ go, profile }) => {
           </Glass>
         ) : (
           /* ── Card do prêmio — mesmo estilo das missões ── */
-          <Glass s={{ padding: "28px 24px", background: D.glass, borderColor: "rgba(255,103,9,0.20)" }} a="slideUp 0.6s ease-out 0.25s both">
+          <Glass s={{ padding: "28px 24px", background: D.glass }} a="slideUp 0.6s ease-out 0.25s both">
             {/* Glow decorativo */}
             <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: "radial-gradient(ellipse at 100% 50%, rgba(255,103,9,0.08), transparent 70%)", pointerEvents: "none" }} />
 
             <div style={{ zIndex: 1, position: "relative" }}>
-              {/* Badge status */}
-              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                <span className="pulse-dot-green" /> SORTEIO ATIVO
-              </span>
-
               {/* Título do prêmio */}
               <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "0 0 12px", color: D.white, letterSpacing: 0.5 }}>{raffle.titulo}</h2>
 
