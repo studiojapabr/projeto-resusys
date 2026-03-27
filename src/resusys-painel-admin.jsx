@@ -718,7 +718,7 @@ export default function AdminApp() {
 
         <div style={{ margin: "24px 0 18px 4px" }}>
           <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>TASKY</span>
-          <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.86, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.86, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
