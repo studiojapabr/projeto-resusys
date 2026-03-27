@@ -233,7 +233,7 @@ const LoginScreen = ({ go }) => {
             <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1 }}>TASKY</span>
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEM-VINDO</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 65, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEMVINDO</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
