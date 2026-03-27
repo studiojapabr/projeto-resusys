@@ -609,13 +609,12 @@ const ARaffle = () => {
   const [raffle, setRaffle] = useState(null);
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [view, setView] = useState("main"); // main | create | tickets
+  const [view, setView] = useState("main"); // main | create | edit
   const [filtro, setFiltro] = useState("pendente");
   const [toast, setToast] = useState(null);
   const [winner, setWinner] = useState(null);
   const [drawModal, setDrawModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
-  const [prizeUrl, setPrizeUrl] = useState(null);
   const [imgFile, setImgFile] = useState(null);
   const [form, setForm] = useState({ titulo: "", premio: "" });
   const show = (m, t = "success") => { setToast({ m, t }); setTimeout(() => setToast(null), 2500); };
@@ -625,14 +624,10 @@ const ARaffle = () => {
     const { data: r } = await supabase.from("raffles").select("*").eq("status", "ativo").maybeSingle();
     if (r) {
       setRaffle(r);
-      if (r.imagem_url) {
-        const { data: signed } = await supabase.storage.from("raffle-prizes").createSignedUrl(r.imagem_url, 300);
-        if (signed?.signedUrl) setPrizeUrl(signed.signedUrl);
-      }
       const { data: tks } = await supabase.from("raffle_tickets").select("*").eq("raffle_id", r.id).order("created_at", { ascending: false });
       setTickets(tks || []);
     } else {
-      setRaffle(null); setTickets([]); setPrizeUrl(null);
+      setRaffle(null); setTickets([]);
     }
     setLoading(false);
   };
@@ -655,7 +650,23 @@ const ARaffle = () => {
     loadAll();
   };
 
-  const approveTicket = async (id, user_id, quantidade) => {
+  const editRaffle = async () => {
+    if (!form.titulo || !form.premio) return;
+    let imagem_url = raffle.imagem_url;
+    if (imgFile) {
+      const path = `prizes/${Date.now()}_${imgFile.name}`;
+      const { error: upErr } = await supabase.storage.from("raffle-prizes").upload(path, imgFile);
+      if (upErr) { show("ERRO AO SUBIR IMAGEM: " + upErr.message, "danger"); return; }
+      imagem_url = path;
+    }
+    const { error } = await supabase.from("raffles").update({ titulo: form.titulo, premio: form.premio, imagem_url }).eq("id", raffle.id);
+    if (error) { show("ERRO: " + error.message, "danger"); return; }
+    show("SORTEIO ATUALIZADO!");
+    setView("main"); setImgFile(null);
+    loadAll();
+  };
+
+  const approveTicket = async (id, quantidade) => {
     const { error } = await supabase.from("raffle_tickets").update({ status: "aprovado" }).eq("id", id);
     if (error) { show("ERRO: " + error.message, "danger"); return; }
     setTickets(p => p.map(t => t.id === id ? { ...t, status: "aprovado" } : t));
@@ -672,7 +683,6 @@ const ARaffle = () => {
   const doDrawing = async () => {
     const approved = tickets.filter(t => t.status === "aprovado");
     if (approved.length === 0) { show("NENHUM TICKET APROVADO!", "danger"); return; }
-    // Montar pool ponderado
     const pool = [];
     approved.forEach(t => { for (let i = 0; i < t.quantidade; i++) pool.push({ user_id: t.user_id, user_name: t.user_name }); });
     const picked = pool[Math.floor(Math.random() * pool.length)];
@@ -684,13 +694,21 @@ const ARaffle = () => {
     loadAll();
   };
 
+  // ─── BUG FIX: tratamento de erros + ordem correta das operações ───
   const resetRaffle = async () => {
-    // Deletar todos os tickets do sorteio atual
-    await supabase.from("raffle_tickets").delete().eq("raffle_id", raffle.id);
-    // Encerrar sorteio (já deve estar encerrado mas por segurança)
-    await supabase.from("raffles").update({ status: "encerrado" }).eq("id", raffle.id);
-    setResetModal(false); setWinner(null); setRaffle(null); setTickets([]);
-    show("SORTEIO ENCERRADO E TICKETS DELETADOS!");
+    const raffleId = raffle?.id;
+    if (!raffleId) { show("ERRO: ID do sorteio não encontrado", "danger"); return; }
+
+    const { error: raffleErr } = await supabase.from("raffles").update({ status: "encerrado" }).eq("id", raffleId);
+    if (raffleErr) { show("ERRO AO ENCERRAR: " + raffleErr.message, "danger"); return; }
+
+    const { error: ticketsErr } = await supabase.from("raffle_tickets").delete().eq("raffle_id", raffleId);
+    if (ticketsErr) { show("ERRO AO DELETAR TICKETS: " + ticketsErr.message, "danger"); return; }
+
+    setResetModal(false);
+    setRaffle(null);
+    setTickets([]);
+    show("SORTEIO ENCERRADO!");
     loadAll();
   };
 
@@ -699,91 +717,118 @@ const ARaffle = () => {
 
   if (loading) return <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>;
 
-  // FORMULÁRIO CRIAR SORTEIO
-  if (view === "create") return (
+  // ─── FORMULÁRIO (criar ou editar) ───
+  const isEdit = view === "edit";
+  if (view === "create" || view === "edit") return (
     <div style={{ animation: "fadeUp 0.45s ease-out" }}>
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-        <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>NOVO SORTEIO</h2>
-        <div onClick={() => setView("main")} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
+        <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase" }}>{isEdit ? "EDITAR" : "NOVO"} SORTEIO</h2>
+        <div onClick={() => { setView("main"); setImgFile(null); }} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
       </div>
       <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
         <Inp label="TÍTULO DO SORTEIO" placeholder="Ex: Grande Sorteio de Janeiro" value={form.titulo} onChange={e => setForm(p => ({ ...p, titulo: e.target.value }))} />
-        <Inp label="DESCRIÇÃO DO PRÊMIO" placeholder="Ex: iPhone 15 Pro Max 256GB" value={form.premio} onChange={e => setForm(p => ({ ...p, premio: e.target.value }))} multi />
+        <Inp label="DESCRIÇÃO DO PRÊMIO" placeholder="Ex: iPhone 17 Pro Max 256GB" value={form.premio} onChange={e => setForm(p => ({ ...p, premio: e.target.value }))} multi />
         <div style={{ marginBottom: 16 }}>
           <label style={{ display: "block", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.dim, marginBottom: 8, paddingLeft: 20 }}>IMAGEM DO PRÊMIO (OPCIONAL)</label>
           <div onClick={() => document.getElementById("prizeImgInput").click()} style={{ border: `1px solid ${imgFile ? "rgba(255,103,9,0.45)" : D.glassBorder}`, borderRadius: D.radiusSm, padding: "20px 16px", cursor: "pointer", textAlign: "center", background: imgFile ? "rgba(255,103,9,0.07)" : D.glass }}>
             <input id="prizeImgInput" type="file" accept="image/png,image/jpeg,image/webp" style={{ display: "none" }} onChange={e => setImgFile(e.target.files[0] || null)} />
-            {imgFile ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{imgFile.name}</p> : <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TOQUE PARA SELECIONAR</p>}
+            {imgFile ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{imgFile.name}</p> : <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>{isEdit && raffle?.imagem_url ? "TROCAR IMAGEM" : "TOQUE PARA SELECIONAR"}</p>}
           </div>
         </div>
       </Glass>
       <div style={{ display: "flex", gap: 12 }}>
-        <Btn v="outline" onClick={() => setView("main")} s={{ flex: 1 }}>CANCELAR</Btn>
-        <Btn onClick={createRaffle} disabled={!form.titulo || !form.premio} s={{ flex: 1 }}>CRIAR SORTEIO</Btn>
+        <Btn v="outline" onClick={() => { setView("main"); setImgFile(null); }} s={{ flex: 1 }}>CANCELAR</Btn>
+        <Btn onClick={isEdit ? editRaffle : createRaffle} disabled={!form.titulo || !form.premio} s={{ flex: 1 }}>{isEdit ? "SALVAR" : "CRIAR"}</Btn>
       </div>
     </div>
   );
 
-  // SEM SORTEIO ATIVO
+  // ─── SEM SORTEIO ATIVO ───
   if (!raffle) return (
     <div>
       <ToastC msg={toast?.m} type={toast?.t} />
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 8, flex: 1 }}>
+          <BadgeC l="0 ativos" c={D.muted} />
+        </div>
+        <Btn onClick={() => { setForm({ titulo: "", premio: "" }); setView("create"); }} s={{ padding: "10px 22px", flexShrink: 0 }}>NOVO</Btn>
+      </div>
       {winner && (
-        <Glass s={{ padding: "28px 24px", marginBottom: 22, textAlign: "center", background: "rgba(239,35,57,0.10)", borderColor: "rgba(239,35,57,0.35)" }}>
+        <Glass s={{ padding: "28px 24px", marginBottom: 18, textAlign: "center", background: "rgba(239,35,57,0.10)", borderColor: "rgba(239,35,57,0.35)" }}>
           <div style={{ fontSize: 32, marginBottom: 10 }}>🏆</div>
           <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textTransform: "uppercase", marginBottom: 4 }}>VENCEDOR DO ÚLTIMO SORTEIO:</p>
           <p style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.white, textTransform: "uppercase" }}>{winner}</p>
         </Glass>
       )}
-      <Glass s={{ padding: "40px 28px", textAlign: "center" }}>
+      <Glass s={{ padding: "40px 28px", textAlign: "center" }} a="fadeUp 0.45s ease-out">
         {IC.trophy(D.muted, 36)}
-        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", marginTop: 16, marginBottom: 24 }}>NENHUM SORTEIO ATIVO. CRIE UM NOVO!</p>
-        <Btn onClick={() => setView("create")} s={{ maxWidth: 220, margin: "0 auto" }}>{IC.trophy("white", 14)} CRIAR SORTEIO</Btn>
+        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", marginTop: 16 }}>NENHUM SORTEIO ATIVO.</p>
       </Glass>
     </div>
   );
 
-  // SORTEIO ATIVO
+  // ─── SORTEIO ATIVO ───
   const filtrados = tickets.filter(t => t.status === filtro);
 
   return (
     <div>
       <ToastC msg={toast?.m} type={toast?.t} />
 
-      {/* Info Card */}
-      <Glass s={{ padding: "24px 20px", marginBottom: 18, background: "rgba(239,35,57,0.08)", borderColor: "rgba(239,35,57,0.25)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-          {IC.trophy(D.orange, 16)}
-          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textTransform: "uppercase", letterSpacing: 0.5 }}>SORTEIO ATIVO</span>
+      {/* Header igual AMissions */}
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 8, flex: 1, flexWrap: "wrap" }}>
+          <BadgeC l="1 ativo" c={D.orange} />
+          <BadgeC l={`${totalApproved} tickets`} c={D.yellow} />
+          {totalPending > 0 && <BadgeC l={`${totalPending} pend.`} c={D.red} />}
         </div>
-        <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", color: D.white, marginBottom: 6 }}>{raffle.titulo}</h3>
-        <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 14 }}>{raffle.premio}</p>
-        {prizeUrl && <img src={prizeUrl} alt="Prêmio" style={{ width: "100%", borderRadius: D.radiusSm, maxHeight: 160, objectFit: "cover", marginBottom: 14 }} />}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
-          <div style={{ padding: "12px", background: D.glass, borderRadius: D.radiusSm, textAlign: "center" }}>
-            <div style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.red }}>{totalPending}</div>
-            <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>PENDENTES</div>
+      </div>
+
+      {/* Card do sorteio — mesmo estilo das missões */}
+      <Glass s={{ padding: "28px 24px", marginBottom: 14 }} a="fadeUp 0.45s ease-out">
+        <div style={{ position: "absolute", top: 0, right: 0, width: "40%", height: "100%", background: "radial-gradient(ellipse at 100% 50%, rgba(255,103,9,0.07), transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ display: "flex", gap: 10, alignItems: "flex-start", zIndex: 1, position: "relative" }}>
+          {/* Ícone lateral */}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, paddingTop: 3, flexShrink: 0 }}>
+            {IC.trophy(D.orange, 16)}
           </div>
-          <div style={{ padding: "12px", background: D.glass, borderRadius: D.radiusSm, textAlign: "center" }}>
-            <div style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.orange }}>{totalApproved}</div>
-            <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>TICKETS</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            {/* Título + ações */}
+            <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap", marginBottom: 6 }}>
+              <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", flex: 1, minWidth: 0 }}>{raffle.titulo}</span>
+              {/* Editar */}
+              <div onClick={() => { setForm({ titulo: raffle.titulo, premio: raffle.premio }); setImgFile(null); setView("edit"); }} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>{IC.edit(D.muted)}</div>
+              {/* Lixeira → abre modal de encerrar */}
+              <div onClick={() => setResetModal(true)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>{IC.trash("#EF4444")}</div>
+            </div>
+            {/* Descrição */}
+            <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase", marginBottom: 10, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{raffle.premio}</p>
+            {/* Stats inline */}
+            <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
+              <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Pendentes: <span style={{ fontWeight: 800, color: totalPending > 0 ? D.yellow : "rgba(255,255,255,0.4)" }}>{totalPending}</span></span>
+              <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Tickets: <span style={{ fontWeight: 800, color: totalApproved > 0 ? D.orange : "rgba(255,255,255,0.4)" }}>{totalApproved}</span></span>
+            </div>
+            {/* Botão sortear compacto */}
+            <div style={{ display: "flex" }}>
+              <Btn onClick={() => setDrawModal(true)} disabled={totalApproved === 0} s={{ width: "auto", maxWidth: 200, opacity: totalApproved === 0 ? 0.35 : 1 }}>
+                {IC.trophy("white", 13)} SORTEAR
+              </Btn>
+            </div>
           </div>
         </div>
-        <Btn onClick={() => setDrawModal(true)} disabled={totalApproved === 0}>{IC.trophy("white", 14)} REALIZAR SORTEIO</Btn>
       </Glass>
 
-      {/* Filtro Tickets */}
+      {/* Filtro Tickets — mantido igual */}
       <div style={{ display: "flex", gap: 6, marginBottom: 16 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "rejeitado", l: "Rejeitados" }].map(x => (
           <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, flex: 1, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
 
-      {filtrados.length === 0 && <div style={{ textAlign: "center", padding: "30px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Sem tickets aqui.</div>}
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
+      {filtrados.length === 0 && <div style={{ textAlign: "center", padding: "30px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>SEM TICKETS AQUI.</div>}
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {filtrados.map((t, i) => (
-          <Glass key={t.id} s={{ padding: "20px 18px" }} a={`slideUp 0.35s ease-out ${i * 0.04}s both`}>
+          <Glass key={t.id} s={{ padding: "20px 18px" }} a={`fadeUp 0.35s ease-out ${i * 0.04}s both`}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 3, flexWrap: "wrap" }}>
@@ -797,7 +842,7 @@ const ARaffle = () => {
               </div>
               {t.status === "pendente" && (
                 <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                  <div onClick={() => approveTicket(t.id, t.user_id, t.quantidade)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,103,9,0.08)", border: "1px solid rgba(255,103,9,0.22)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.orange, 13)}</div>
+                  <div onClick={() => approveTicket(t.id, t.quantidade)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,103,9,0.08)", border: "1px solid rgba(255,103,9,0.22)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.orange, 13)}</div>
                   <div onClick={() => rejectTicket(t.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x("#EF4444", 13)}</div>
                 </div>
               )}
@@ -806,10 +851,7 @@ const ARaffle = () => {
         ))}
       </div>
 
-      {/* Botão encerrar */}
-      <Btn v="danger" onClick={() => setResetModal(true)} s={{ background: "rgba(239,68,68,0.08)" }}>ENCERRAR E LIMPAR SORTEIO</Btn>
-
-      {/* Modal Sorteio */}
+      {/* Modal Sortear */}
       {drawModal && (
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.75)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDrawModal(false)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
@@ -827,17 +869,17 @@ const ARaffle = () => {
         </div>
       )}
 
-      {/* Modal Reset */}
+      {/* Modal Encerrar */}
       {resetModal && (
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.75)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setResetModal(false)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
             <Glass s={{ padding: "32px 24px", textAlign: "center" }}>
-              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.trash("#EF4444", 24)}</div>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444", 24)}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>ENCERRAR SORTEIO?</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24, lineHeight: 1.6 }}>TODOS OS TICKETS SERÃO DELETADOS E O SORTEIO ENCERRADO. UM NOVO PODERÁ SER CRIADO.</p>
               <div style={{ display: "flex", gap: 12 }}>
                 <Btn v="outline" onClick={() => setResetModal(false)} s={{ flex: 1 }}>CANCELAR</Btn>
-                <Btn v="danger" onClick={resetRaffle} s={{ flex: 1, background: "rgba(239,68,68,0.08)" }}>ENCERRAR</Btn>
+                <Btn v="danger" onClick={resetRaffle} s={{ flex: 1, background: "rgba(239,68,68,0.08)" }}>{IC.trash("#EF4444")} ENCERRAR</Btn>
               </div>
             </Glass>
           </div>
