@@ -417,7 +417,7 @@ const RaffleScreen = ({ go, profile }) => {
 
         {/* ── Header — idêntico ao UserDash ── */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: myPending ? D.yellow : myTickets > 0 ? D.orange : D.muted, textTransform: "uppercase" }}>
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
           </span>
@@ -630,7 +630,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.wallet()}</div>

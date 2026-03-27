@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import imgBackground from './assets/bg.png';
+import imgLogo from './assets/logo-t.png';
 
 // ═══════════════════════════════════════════
 // SUPABASE CLIENT
@@ -966,7 +967,7 @@ export default function AdminApp() {
       <><Styles /><BG>
         <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 20px 44px" }}>
           <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
-            <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>TASKY</span>
+            <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain", marginBottom: 16 }} />
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
             <Btn onClick={() => window.location.href = "/"}>IR PARA O LOGIN</Btn>
           </Glass>
@@ -1007,7 +1008,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "24px 0 18px 4px" }}>
-          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>TASKY</span>
+          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain", marginBottom: 6 }} />
           <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.86, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
