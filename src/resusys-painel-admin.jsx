@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import imgBackground from './assets/bg.png';
+import imgLogo from './assets/logotasky.svg';
 
 // ═══════════════════════════════════════════
 // SUPABASE CLIENT
@@ -199,8 +200,8 @@ const LogoutBtn = ({ onClick }) => {
         boxShadow: hov ? `0 3px 10px ${D.redGlow}` : "none",
       }}
     >
-      <svg width="22" height="22" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.3s", transform: "scaleX(-1)" }}>
-        <path d="M24,12A12,12,0,1,0,12,24,12.013,12.013,0,0,0,24,12ZM8,12a2.993,2.993,0,0,1,.752-1.987c.291-.327.574-.637.777-.84L12.353,6.3a1,1,0,0,1,1.426,1.4L10.95,10.58c-.187.188-.441.468-.7.759a1,1,0,0,0,0,1.323c.258.29.512.57.693.752L13.779,16.3a1,1,0,0,1-1.426,1.4L9.524,14.822c-.2-.2-.48-.507-.769-.833A2.99,2.99,0,0,1,8,12Z"/>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill={hov ? "white" : "rgba(255,255,255,0.4)"} style={{ transition: "fill 0.3s", transform: "scaleX(-1)" }}>
+        <path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/>
       </svg>
     </div>
   );
@@ -677,7 +678,7 @@ export default function AdminApp() {
       <><Styles /><BG>
         <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 20px 44px" }}>
           <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
-            <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -2, display: "block", marginBottom: 16 }}>TASKY</span>
+            <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain", display: "block", marginBottom: 16 }} />
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
             <Btn onClick={() => window.location.href = "/"}>IR PARA O LOGIN</Btn>
           </Glass>
@@ -717,7 +718,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "24px 0 18px 4px" }}>
-          <span style={{ fontSize: 30, color: D.white, fontFamily: "'Maver', sans-serif", letterSpacing: -1, display: "block", marginBottom: 6 }}>TASKY</span>
+          <img src={imgLogo} alt="TASKY" style={{ height: 22, objectFit: "contain", display: "block", marginBottom: 6 }} />
           <h1 style={{ fontFamily: D.maver, fontSize: 70, fontWeight: 400, textTransform: "uppercase", lineHeight: 0.86, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
