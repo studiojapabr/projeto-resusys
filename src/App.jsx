@@ -147,10 +147,10 @@ const ToastC = ({ msg, type }) => msg ? (
 
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 0.95, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.75) 45%, ${D.bg1} 80%)`, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
-    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end" }}>{children}</div>
+    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
 );
 
