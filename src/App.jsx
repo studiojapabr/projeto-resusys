@@ -147,7 +147,7 @@ const ToastC = ({ msg, type }) => msg ? (
 
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
@@ -195,7 +195,7 @@ const Landing = ({ go }) => (
           <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA<br/>TAREFAS<br/>E GANHE</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA TAREFAS E GANHE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -232,7 +232,7 @@ const LoginScreen = ({ go }) => {
             <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA<br/>BEM<br/>VINDO</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA BEM VINDO</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -274,7 +274,7 @@ const RegisterScreen = ({ go }) => {
             <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE<br/>SUA<br/>CONTA</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA CONTA</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -427,7 +427,7 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO<br/>ESPECIAL</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
@@ -638,7 +638,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS<br/>TAREFAS</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
@@ -769,7 +769,7 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88 }}>VALOR<br/>SOLICITADO!</h2>
+        <h2 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 1.08, wordBreak: "break-word" }}>VALOR SOLICITADO!</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
@@ -784,7 +784,7 @@ const Withdrawal = ({ go, profile }) => {
           <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 0.87, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE<br/>SEU PIX E<br/>AGUARDE</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE SEU PIX E AGUARDE</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>
