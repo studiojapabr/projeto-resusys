@@ -688,7 +688,7 @@ export default function AdminApp() {
   return (
     <><Styles /><BG>
       <div style={{ maxWidth: 430, width: "100%", padding: "0 20px 44px", boxSizing: "border-box", margin: "0 auto" }}>
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 8, overflow: "visible", zIndex: menuOpen ? 120 : 1 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, overflow: "visible", zIndex: menuOpen ? 120 : 1 }} a="fadeUp 0.6s ease-out">
           <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>{pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}</span>
           <div ref={menuRef} style={{ position: "relative" }}>
@@ -796,7 +796,7 @@ export default function AdminApp() {
           </div>
         </Glass>
 
-        <div style={{ margin: "8px 0 4px 4px" }}>
+        <div style={{ margin: "18px 0 8px 4px" }}>
           <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 1.08, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
