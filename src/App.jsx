@@ -191,12 +191,12 @@ const Landing = ({ go }) => (
   <BG>
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.9s ease-out">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA TAREFAS E GANHE</h1>
-        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 4 }}>CONCLUA TAREFAS E GANHE</h1>
+        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 16 }}>SOLICITE O SAQUE 24H</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
           <Btn v="outline" onClick={() => go("login")} s={{ flex: 1 }}>LOGIN</Btn>
@@ -228,11 +228,11 @@ const LoginScreen = ({ go }) => {
     <BG>
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
             <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA BEM VINDO</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 6 }}>SEJA BEM VINDO</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -270,11 +270,11 @@ const RegisterScreen = ({ go }) => {
     <BG>
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
             <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA CONTA</h1>
+          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 6 }}>CRIE SUA CONTA</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -416,7 +416,7 @@ const RaffleScreen = ({ go, profile }) => {
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
 
         {/* ── Header — idêntico ao UserDash ── */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 8 }} a="fadeUp 0.6s ease-out">
           <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: myPending ? D.yellow : myTickets > 0 ? D.orange : D.muted, textTransform: "uppercase" }}>
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
@@ -628,7 +628,7 @@ const UserDash = ({ profile, go, onLogout }) => {
     <>
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 8 }} a="fadeUp 0.6s ease-out">
           <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -779,12 +779,12 @@ const Withdrawal = ({ go, profile }) => {
     <><ToastC msg={toast?.msg} type={toast?.type} />
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "34px 28px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE SEU PIX E AGUARDE</h1>
-        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 4 }}>SOLICITE SEU PIX E AGUARDE</h1>
+        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 10 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
