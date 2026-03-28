@@ -427,17 +427,17 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "8px 0 4px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
-        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>
             R$20 = 1 <span style={{ color: D.orange }}>TICKET</span>
           </span>
         </div>
 
         {/* ── Ícones sociais — idênticos ao UserDash ── */}
-        <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
+        <div style={{ display: "flex", gap: 12, marginBottom: 12, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
           {socialLinks.map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
@@ -637,11 +637,11 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
-        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "8px 0 4px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 6, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
-        <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
+        <div style={{ display: "flex", gap: 12, marginBottom: 12, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
           {[
             { href: "https://instagram.com/SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
             { href: "https://t.me/SEU_CANAL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },

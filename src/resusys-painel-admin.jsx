@@ -796,7 +796,7 @@ export default function AdminApp() {
           </div>
         </Glass>
 
-        <div style={{ margin: "18px 0 8px 4px" }}>
+        <div style={{ margin: "8px 0 4px 4px" }}>
           <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 1.08, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
