@@ -147,7 +147,7 @@ const ToastC = ({ msg, type }) => msg ? (
 
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
@@ -427,7 +427,7 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
@@ -495,10 +495,9 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
                 {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
-                {iconBtn(
-                  <span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.80)", fontFamily: D.sora }}>i</span>,
-                  () => setInfoModal(true)
-                )}
+                <div onClick={() => setInfoModal(true)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: `0 3px 10px ${D.redGlow}`, flexShrink: 0 }}>
+                  <span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span>
+                </div>
               </div>
             </div>
           </div>
@@ -638,7 +637,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "24px 0 10px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
+        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
         </div>
@@ -677,7 +676,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease" }}><span style={{ fontWeight: 800, fontSize: 12, color: "rgba(255,255,255,0.60)", fontFamily: D.sora }}>i</span></div>
+                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", boxShadow: `0 3px 10px ${D.redGlow}` }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>

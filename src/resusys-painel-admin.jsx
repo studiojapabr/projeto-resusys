@@ -142,7 +142,7 @@ const ToastC = ({ msg, type }) => msg ? (
 const BG_IMG = imgBackground;
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
+    {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
@@ -716,14 +716,14 @@ export default function AdminApp() {
                   position: "absolute",
                   top: "calc(100% + 10px)",
                   right: 0,
-                  minWidth: 232,
+                  minWidth: 200,
                   zIndex: 200,
-                  background: D.glass,
-                  backdropFilter: D.blur,
-                  WebkitBackdropFilter: D.blur,
+                  background: "rgba(8,8,8,0.88)",
+                  backdropFilter: "blur(28px)",
+                  WebkitBackdropFilter: "blur(28px)",
                   border: `1px solid ${D.glassBorder}`,
                   borderRadius: D.radiusSm,
-                  boxShadow: "0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  boxShadow: "0 14px 34px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.06)",
                   padding: "8px 0",
                   animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)",
                 }}
@@ -796,8 +796,7 @@ export default function AdminApp() {
           </div>
         </Glass>
 
-        <div style={{ margin: "24px 0 18px 4px" }}>
-          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain", marginBottom: 6 }} />
+        <div style={{ margin: "18px 0 8px 4px" }}>
           <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 1.08, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
