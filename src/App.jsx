@@ -5,7 +5,8 @@ import { createClient } from "@supabase/supabase-js";
 import AdminApp from './resusys-painel-admin';
 
 // Importando as suas imagens da pasta assets
-import imgBackground from './assets/bg.png';
+import imgBgMobile from './assets/bg-mobile.png';
+import imgBgDesktop from './assets/bg-desktop.png';
 import { T } from './config/theme';
 import { C } from './config/content';
 import imgIconePrincipal from './assets/icone-task.png';
@@ -20,6 +21,18 @@ const supabase = createClient(
 );
 
 // ═══════════════════════════════════════════
+
+// ── Hook responsivo de background ──
+const useIsMobile = () => {
+  const [mobile, setMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const fn = () => setMobile(window.innerWidth < 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+  return mobile;
+};
+
 // DESIGN SYSTEM v2.0 — PREMIUM iGAMING 2026
 // ═══════════════════════════════════════════
 // Design tokens — gerados a partir do theme.js
@@ -148,9 +161,15 @@ const ToastC = ({ msg, type }) => msg ? (
   </div>
 ) : null;
 
+const BgResponsive = () => {
+  const isMobile = useIsMobile();
+  const img = isMobile ? imgBgMobile : imgBgDesktop;
+  return <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${img})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />;
+};
+
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
+    <BgResponsive />
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>

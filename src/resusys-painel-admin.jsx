@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import imgBackground from './assets/bg.png';
+import imgBgMobile from './assets/bg-mobile.png';
+import imgBgDesktop from './assets/bg-desktop.png';
 import { T } from './config/theme';
 import { C } from './config/content';
 import imgLogo from './assets/logo-t.png';
