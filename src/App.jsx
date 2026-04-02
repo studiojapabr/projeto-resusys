@@ -105,7 +105,7 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` },
+    primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(192,192,192,0.25)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" },
     success: { background: T.gradient, color: "#111111", border: `1px solid rgba(192,192,192,0.35)`, boxShadow: `0 6px 18px ${D.greenGlow}` },
     danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
@@ -170,7 +170,7 @@ const BgResponsive = () => {
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     <BgResponsive />
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
@@ -190,7 +190,7 @@ const IC = {
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: `drop-shadow(0px 8px 16px rgba(255,103,9,0.32))` }} />
+    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "drop-shadow(0px 8px 24px rgba(0,0,0,0.60))" }} />
   </div>
 );
 
@@ -217,7 +217,7 @@ const Landing = ({ go }) => (
           <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>{C.landing.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>{C.landing.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>{C.landing.subtitle}</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -254,7 +254,7 @@ const LoginScreen = ({ go }) => {
             <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -296,7 +296,7 @@ const RegisterScreen = ({ go }) => {
             <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.register.title}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.register.title}</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -335,7 +335,7 @@ const RaffleBtnUser = ({ go, profile }) => {
   return (
     <div
       onClick={() => go("raffle")}
-      style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite", boxShadow: `0 3px 10px ${D.redGlow}` }}
+      style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}
     >
       {IC.ticket("white", 18)}
       {myTickets > 0 && (
@@ -361,7 +361,7 @@ const RaffleScreen = ({ go, profile }) => {
   const [uploading, setUploading] = useState(false);
   const [toast, setToast] = useState(null);
 
-  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(null), 2500); };
+  const showToast = (msg, type = "success") => { setToast({ msg, type }); setTimeout(() => setToast(null), 2500); };
 
   const load = async () => {
     setLoading(true);
@@ -385,13 +385,13 @@ const RaffleScreen = ({ go, profile }) => {
   useEffect(() => { load(); }, [profile.id]);
 
   const handleSend = async () => {
-    if (!file || !valor || Number(valor) < 20) { showToast("VALOR MÍNIMO: R$20"); return; }
+    if (!file || !valor || Number(valor) < 20) { showToast("VALOR MÍNIMO: R$20", "danger"); return; }
     setUploading(true);
 
     // Garante que o user_id seja o do usuário autenticado na sessão atual
     const { data: { session } } = await supabase.auth.getSession();
     const authUserId = session?.user?.id;
-    if (!authUserId) { showToast("SESSÃO EXPIRADA. FAÇA LOGIN NOVAMENTE."); setUploading(false); return; }
+    if (!authUserId) { showToast("SESSÃO EXPIRADA. FAÇA LOGIN NOVAMENTE.", "danger"); setUploading(false); return; }
 
     const filePath = `${authUserId}/${raffle.id}/${Date.now()}_${file.name}`;
     const { error: upErr } = await supabase.storage.from("raffle-comprovantes").upload(filePath, file);
@@ -409,7 +409,7 @@ const RaffleScreen = ({ go, profile }) => {
     setUploading(false);
     if (insErr) { showToast("ERRO: " + insErr.message); return; }
     setModal(false); setFile(null); setValor("");
-    showToast("COMPROVANTE ENVIADO!");
+    showToast("COMPROVANTE ENVIADO!", "success");
     load();
   };
 
@@ -435,12 +435,12 @@ const RaffleScreen = ({ go, profile }) => {
 
   return (
     <>
-      {toast && <ToastC msg={toast} />}
+      {toast && <ToastC msg={toast?.msg || toast} type={toast?.type || "success"} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
 
         {/* ── Header — idêntico ao UserDash ── */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
+          <span style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.white, letterSpacing: 1, textTransform: "uppercase" }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: myPending ? D.yellow : myTickets > 0 ? D.orange : D.muted, textTransform: "uppercase" }}>
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
           </span>
@@ -450,7 +450,7 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.raffle.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.raffle.title}</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
@@ -464,7 +464,7 @@ const RaffleScreen = ({ go, profile }) => {
           {socialLinks.map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
-          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: `0 3px 10px ${D.redGlow}`, animation: "pulse 2.4s infinite" }}>
+          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 3px 12px rgba(0,0,0,0.50)", animation: "pulse 2.4s infinite" }}>
             {IC.ticket("white", 18)}
           </div>
         </div>
@@ -480,12 +480,12 @@ const RaffleScreen = ({ go, profile }) => {
           /* ── Card do prêmio — gradiente laranja/vermelho sem glassmorphism ── */
           <div style={{
             borderRadius: D.radiusSm,
-            background: "linear-gradient(145deg, #c01a2e 0%, #ef2339 30%, #d4400a 65%, #ff6709 100%)",
+            background: "linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 40%, #3a3a3a 100%)",
             padding: "28px 24px",
             position: "relative",
             overflow: "hidden",
             animation: "slideUp 0.6s ease-out 0.25s both",
-            boxShadow: "0 16px 40px rgba(239,35,57,0.35), 0 4px 12px rgba(0,0,0,0.30)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.60), 0 4px 12px rgba(0,0,0,0.40)",
           }}>
             {/* Brilho decorativo no topo */}
             <div style={{ position: "absolute", top: -40, right: -40, width: 180, height: 180, background: "radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
@@ -518,7 +518,7 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
                 {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
-                <div onClick={() => setInfoModal(true)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: `0 3px 10px ${D.redGlow}`, flexShrink: 0 }}>
+                <div onClick={() => setInfoModal(true)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 3px 12px rgba(0,0,0,0.50)", flexShrink: 0 }}>
                   <span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span>
                 </div>
               </div>
@@ -536,12 +536,12 @@ const RaffleScreen = ({ go, profile }) => {
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>Informe o valor depositado e envie o print.</p>
               <Inp placeholder="VALOR DEPOSITADO (R$):" type="number" value={valor} onChange={e => setValor(e.target.value)} />
               {valor && Number(valor) >= 20 && (
-                <div style={{ padding: "8px 16px", borderRadius: D.radius, background: "rgba(255,103,9,0.10)", border: "1px solid rgba(255,103,9,0.25)", marginBottom: 14, fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>
+                <div style={{ padding: "8px 16px", borderRadius: D.radius, background: "rgba(192,192,192,0.08)", border: "1px solid rgba(192,192,192,0.20)", marginBottom: 14, fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange }}>
                   = {Math.floor(Number(valor) / 20)} TICKET(S)
                 </div>
               )}
-              <div onClick={() => document.getElementById("raffleFileInput").click()} style={{ border: `1px solid ${file ? "rgba(255,103,9,0.45)" : D.glassBorder}`, borderRadius: D.radius, padding: "24px 16px", cursor: "pointer", marginBottom: 18, background: file ? "rgba(255,103,9,0.07)" : D.glass }}>
-                <input id="raffleFileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!"); return; } setFile(f || null); }} />
+              <div onClick={() => document.getElementById("raffleFileInput").click()} style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "24px 16px", cursor: "pointer", marginBottom: 18, background: D.glass }}>
+                <input id="raffleFileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!", "danger"); return; } setFile(f || null); }} />
                 {file
                   ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p>
                   : <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>TOQUE PARA ENVIAR</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginTop: 4, textTransform: "uppercase" }}>PNG, JPG — MÁX 5MB</p></>}
@@ -647,7 +647,7 @@ const UserDash = ({ profile, go, onLogout }) => {
     setModal(null);
     setFile(null);
     setObservacao("");
-    showToast("COMPROVANTE ENVIADO!");
+    showToast("COMPROVANTE ENVIADO!", "success");
   };
 
   return (
@@ -655,15 +655,15 @@ const UserDash = ({ profile, go, onLogout }) => {
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
+          <span style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.white, letterSpacing: 1, textTransform: "uppercase" }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.wallet()}</div>
+            <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.wallet()}</div>
             <div onClick={onLogout} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.logout("rgba(255,255,255,0.60)")}</div>
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.dashboard.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.dashboard.title}</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>{C.dashboard.subtitle}</span>
         </div>
@@ -688,8 +688,8 @@ const UserDash = ({ profile, go, onLogout }) => {
                   const completed = done[m.id];
                   const aprovado = done[m.id] === "aprovado";
                   return (
-                    <Glass key={m.id} s={{ padding: "28px 24px", background: aprovado ? "rgba(239,35,57,0.10)" : completed ? "rgba(245,158,11,0.06)" : D.glass, borderColor: aprovado ? "rgba(255,103,9,0.35)" : completed ? "rgba(245,158,11,0.18)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
-                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,${completed ? "rgba(255,103,9,0.08)" : "rgba(239,35,57,0.05)"},transparent 70%)`, pointerEvents: "none" }} />
+                    <Glass key={m.id} s={{ padding: "28px 24px", background: aprovado ? "rgba(192,192,192,0.10)" : completed ? "rgba(192,192,192,0.06)" : D.glass, borderColor: aprovado ? "rgba(192,192,192,0.35)" : completed ? "rgba(192,192,192,0.18)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
+                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,rgba(192,192,192,0.06),transparent 70%)`, pointerEvents: "none" }} />
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1, zIndex: 1 }}>
                           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: completed ? D.orange : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}><span className={completed ? "pulse-dot-green" : "pulse-dot-red"} /> TAREFA {String(i + 1).padStart(2, "0")}</span>
@@ -697,12 +697,12 @@ const UserDash = ({ profile, go, onLogout }) => {
                           <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: completed ? D.orange : D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>VALOR: {m.valor}R$</p>
                           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                             {aprovado
-                              ? <div style={{ padding: "10px 22px", background: "linear-gradient(135deg,rgba(239,35,57,0.15),rgba(255,103,9,0.15))", border: "1px solid rgba(255,103,9,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange, 13)} CONCLUÍDO</div>
+                              ? <div style={{ padding: "10px 22px", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange, 13)} CONCLUÍDO</div>
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", boxShadow: `0 3px 10px ${D.redGlow}` }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
+                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
@@ -739,7 +739,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8, letterSpacing: 0.5 }}>ENVIAR COMPROVANTE</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 22, fontWeight: 500, textTransform: "uppercase" }}>Envie o print para validação.</p>
-              <div onClick={() => document.getElementById("fileInput").click()} style={{ border: `1px solid ${file ? "rgba(255,103,9,0.45)" : D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", cursor: "pointer", marginBottom: 18, background: file ? "rgba(255,103,9,0.07)" : D.glass, transition: "all 0.2s ease" }}>
+              <div onClick={() => document.getElementById("fileInput").click()} style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", cursor: "pointer", marginBottom: 18, background: D.glass, transition: "all 0.2s ease" }}>
                 <input id="fileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!", "danger"); e.target.value = ""; return; } setFile(f || null); }} />
                 {file
                   ? <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginTop: 4, textTransform: "uppercase" }}>{(file.size / 1024).toFixed(0)}KB — TOQUE PARA TROCAR</p></>
@@ -757,7 +757,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                   style={{
                     width: "100%", boxSizing: "border-box",
                     background: D.glass, backdropFilter: D.blur,
-                    border: `1px solid ${observacao ? "rgba(255,103,9,0.45)" : D.glassBorder}`,
+                    border: `1px solid ${D.glassBorder}`,
                     borderRadius: 16, padding: "12px 16px",
                     fontFamily: D.sora, fontSize: 12, fontWeight: 600,
                     color: D.white, textTransform: "uppercase", letterSpacing: 0.3,
@@ -814,8 +814,8 @@ const Withdrawal = ({ go, profile }) => {
   if (ok) return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
-        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word" }}>{C.success.title}</h2>
+        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.check("white", 20)}</div>
+        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word" }}>{C.success.title}</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
@@ -830,7 +830,7 @@ const Withdrawal = ({ go, profile }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>

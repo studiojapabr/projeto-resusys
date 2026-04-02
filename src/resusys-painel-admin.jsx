@@ -21,12 +21,12 @@ const D = {
   bg1: "#050505", bg2: "#111111",
   glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
   radius: "999px", radiusSm: "20px",
-  red: "#ef2339", redDark: "#c01a2e", orange: "#ff6709", redGlow: "rgba(239,35,57,0.32)", orangeGlow: "rgba(255,103,9,0.30)",
-  green: "#ff6709", greenGlow: "rgba(255,103,9,0.30)",
+  red: T.primary, redDark: T.primaryDark, orange: T.secondary, redGlow: T.glowPrimary, orangeGlow: T.glowSecondary,
+  green: T.secondary, greenGlow: T.glowSecondary,
   yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)",
-  cardGrad: "linear-gradient(145deg, rgba(239,35,57,0.10) 0%, rgba(255,103,9,0.04) 100%)",
+  btnGrad: T.gradient,
+  cardGrad: T.gradientCard,
   sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
 };
 
@@ -84,7 +84,7 @@ const BadgeC = ({ l, c = D.red }) => (
 );
 
 const SB = ({ status }) => {
-  const m = { pendente: { l: "PENDENTE", c: D.yellow }, aprovado: { l: "APROVADO", c: D.orange }, recusado: { l: "RECUSADO", c: "#EF4444" }, pago: { l: "PAGO", c: D.orange }, ativo: { l: "ATIVO", c: D.orange }, bloqueado: { l: "BLOQ.", c: "#EF4444" } };
+  const m = { pendente: { l: "PENDENTE", c: "#F59E0B" }, aprovado: { l: "APROVADO", c: "#22C55E" }, recusado: { l: "RECUSADO", c: "#EF4444" }, pago: { l: "PAGO", c: "#22C55E" }, ativo: { l: "ATIVO", c: "#22C55E" }, bloqueado: { l: "BLOQ.", c: "#EF4444" } };
   const s = m[status] || m.pendente;
   return <BadgeC l={s.l} c={s.c} />;
 };
@@ -94,7 +94,7 @@ const Av = ({ ini, sz = 40 }) => (
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` }, success: { background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)", color: "white", border: "1px solid rgba(255,103,9,0.42)", boxShadow: `0 6px 18px ${D.orangeGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(192,192,192,0.25)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" }, success: { background: T.gradient, color: "#111111", border: "1px solid rgba(192,192,192,0.30)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -108,8 +108,8 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(239,35,57,0.18)" : D.faint, border: `1.5px solid ${active ? "rgba(239,35,57,0.30)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
-    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? D.orange : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: active ? `0 0 10px ${D.orangeGlow}` : "none" }} />
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(192,192,192,0.15)" : D.faint, border: `1.5px solid ${active ? "rgba(192,192,192,0.35)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? T.white : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: "none" }} />
   </div>
 );
 
@@ -127,7 +127,7 @@ const ToastC = ({ msg, type }) => msg ? (
     padding: "14px 20px",
   }}>
     <div style={{
-      background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)",
+      background: T.gradient,
       borderRadius: "50%",
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
@@ -146,7 +146,7 @@ const BG_IMG = typeof window !== 'undefined' && window.innerWidth >= 768 ? imgBg
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
     <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
@@ -191,10 +191,10 @@ const IC = {
 const AOverview = ({ subs, withs, usrs }) => (
   <div>
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 22 }}>
-      <StatC icon={IC.alert(D.yellow)} val={subs.filter(s => s.status === "pendente").length} label="Comprovantes" color={D.yellow} d={0} />
-      <StatC icon={IC.wallet(D.red)} val={withs.filter(w => w.status === "pendente").length} label="Saques pend." color={D.red} d={0.05} />
-      <StatC icon={IC.users(D.orange)} val={usrs.length} label="Usuários" color={D.orange} d={0.1} />
-      <StatC icon={IC.dollar(D.purple)} val={`R$${withs.reduce((s, w) => s + Number(w.valor), 0).toFixed(0)}`} label="Total saques" color={D.purple} d={0.15} />
+      <StatC icon={IC.alert("#F59E0B")} val={subs.filter(s => s.status === "pendente").length} label="Comprovantes" color="#F59E0B" d={0} />
+      <StatC icon={IC.wallet("#EF4444")} val={withs.filter(w => w.status === "pendente").length} label="Saques pend." color="#EF4444" d={0.05} />
+      <StatC icon={IC.users("#6B8EAD")} val={usrs.length} label="Usuários" color="#6B8EAD" d={0.1} />
+      <StatC icon={IC.dollar("#22C55E")} val={`R$${withs.reduce((s, w) => s + Number(w.valor), 0).toFixed(0)}`} label="Total saques" color="#22C55E" d={0.15} />
     </div>
     <Glass s={{ padding: "28px 24px" }} a="fadeUp 0.6s ease-out 0.2s both">
       <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 14 }}>ATIVIDADE RECENTE</div>
@@ -254,7 +254,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? D.white : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#111111" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -268,14 +268,14 @@ const ASubs = ({ subs, setSubs }) => {
                   <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase" }}>{s.user_name}</span>
                   <SB status={s.status} />
                 </div>
-                <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{s.mission_title} — <span style={{ color: D.orange, fontWeight: 700 }}>R${s.valor}</span></div>
+                <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{s.mission_title} — <span style={{ color: D.white, fontWeight: 700 }}>R${s.valor}</span></div>
                 <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 3 }}>{IC.clock(D.dim)}<span style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase" }}>{new Date(s.created_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span></div>
               </div>
               <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
                 <div onClick={() => setSel(s)} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.eye(D.muted)}</div>
                 {s.status === "pendente" && (
                   <>
-                    <div onClick={() => approve(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,103,9,0.08)", border: "1px solid rgba(255,103,9,0.22)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check(D.orange, 13)}</div>
+                    <div onClick={() => approve(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check("#22C55E", 13)}</div>
                     <div onClick={() => reject(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x("#EF4444", 13)}</div>
                   </>
                 )}
@@ -298,7 +298,7 @@ const ASubs = ({ subs, setSubs }) => {
                 </div>
                 <div onClick={() => setSel(null)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
               </div>
-              <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={D.orange} /></div>
+              <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={"#22C55E"} /></div>
               {sel.observacao && (
                 <div style={{ marginBottom: 14, padding: "12px 14px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm }}>
                   <p style={{ fontFamily: D.sora, fontSize: 10, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 5 }}>OBSERVAÇÃO DO USUÁRIO</p>
@@ -372,7 +372,7 @@ const AWiths = ({ withs, setWiths }) => {
             </div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, marginBottom: 12, textTransform: "uppercase" }}>R$ {Number(w.valor).toFixed(2).replace(".", ",")}</div>
             <Glass s={{ padding: "12px 14px", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-              {IC.pix(D.red)}
+              {IC.pix(D.muted)}
               <div>
                 <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, fontWeight: 800, letterSpacing: 0.3, textTransform: "uppercase" }}>CHAVE PIX ({w.pix_tipo})</div>
                 <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, marginTop: 2 }}>{w.pix_key}</div>
@@ -411,7 +411,7 @@ const AUsers = ({ usrs, setUsrs }) => {
         <input placeholder="Buscar nome ou email..." value={q} onChange={e => setQ(e.target.value)} style={{ flex: 1, background: "transparent", border: "none", color: D.white, fontFamily: D.sora, fontSize: 12, outline: "none", textTransform: "uppercase", fontWeight: 600 }} />
       </Glass>
       <div style={{ display: "flex", gap: 10, marginBottom: 18, flexWrap: "wrap" }}>
-        <BadgeC l={`${usrs.filter(u => u.status === "ativo").length} ativos`} c={D.orange} />
+        <BadgeC l={`${usrs.filter(u => u.status === "ativo").length} ativos`} c={"#22C55E"} />
         <BadgeC l={`${usrs.filter(u => u.status === "bloqueado").length} bloq.`} c="#EF4444" />
         <BadgeC l={`R$ ${usrs.reduce((s, u) => s + Number(u.saldo || 0), 0).toFixed(0)} saldos`} c={D.purple} />
       </div>
@@ -427,12 +427,12 @@ const AUsers = ({ usrs, setUsrs }) => {
                 </div>
                 <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{u.email}</div>
                 <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
-                  <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Saldo: <span style={{ color: D.orange, fontWeight: 700 }}>R${Number(u.saldo || 0).toFixed(0)}</span></span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Saldo: <span style={{ color: D.white, fontWeight: 700 }}>R${Number(u.saldo || 0).toFixed(0)}</span></span>
                   <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Missões: <span style={{ fontWeight: 700, color: "rgba(255,255,255,0.65)" }}>{u.missoes_cnt || 0}</span></span>
                 </div>
               </div>
-              <div onClick={() => toggle(u.id, u.status)} style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(255,103,9,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(255,103,9,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
-                {u.status === "bloqueado" ? IC.check(D.orange, 12) : IC.ban("#EF4444")}
+              <div onClick={() => toggle(u.id, u.status)} style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
+                {u.status === "bloqueado" ? IC.check(D.white, 12) : IC.ban("#EF4444")}
               </div>
             </div>
           </Glass>
@@ -529,7 +529,7 @@ const AMissions = ({ missions, setMissions }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, flexWrap: "wrap" }}>
         <div style={{ display: "flex", gap: 8, flex: 1 }}>
-          <BadgeC l={`${missions.filter(m => m.ativa).length} ativas`} c={D.orange} />
+          <BadgeC l={`${missions.filter(m => m.ativa).length} ativas`} c={"#22C55E"} />
           <BadgeC l={`R$ ${missions.filter(m => m.ativa).reduce((s, m) => s + Number(m.valor), 0)} total`} c={D.yellow} />
         </div>
         <Btn onClick={() => setView("create")} s={{ padding: "10px 22px", flexShrink: 0 }}>NOVA</Btn>
@@ -552,7 +552,7 @@ const AMissions = ({ missions, setMissions }) => {
                 </div>
                 {m.descricao && <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{m.descricao}</p>}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8 }}>
-                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.orange, textShadow: `0 0 8px ${D.orangeGlow}` }}>R$ {Number(m.valor).toFixed(2).replace(".", ",")}</span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.white, textShadow: "none" }}>R$ {Number(m.valor).toFixed(2).replace(".", ",")}</span>
                   {m.max_sub && <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Máx: {m.max_sub}</span>}
                 </div>
                 {m.link && (
@@ -698,7 +698,7 @@ export default function AdminApp() {
     <><Styles /><BG>
       <div style={{ maxWidth: 430, width: "100%", padding: "0 20px 44px", boxSizing: "border-box", margin: "0 auto" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, overflow: "visible", zIndex: menuOpen ? 120 : 1 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
+          <span style={{ fontFamily: D.sora, fontSize: 20, fontWeight: 800, color: D.white, letterSpacing: 1, textTransform: "uppercase" }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>{pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}</span>
           <div ref={menuRef} style={{ position: "relative" }}>
             <div
@@ -806,7 +806,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
