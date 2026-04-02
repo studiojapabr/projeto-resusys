@@ -6,6 +6,8 @@ import AdminApp from './resusys-painel-admin';
 
 // Importando as suas imagens da pasta assets
 import imgBackground from './assets/bg.png';
+import { T } from './config/theme';
+import { C } from './config/content';
 import imgIconePrincipal from './assets/icone-task.png';
 import imgLogo from './assets/logo-t.png';
 
@@ -20,17 +22,18 @@ const supabase = createClient(
 // ═══════════════════════════════════════════
 // DESIGN SYSTEM v2.0 — PREMIUM iGAMING 2026
 // ═══════════════════════════════════════════
+// Design tokens — gerados a partir do theme.js
 const D = {
-  bg1: "#050505", bg2: "#111111", bgCenter: "rgba(239,35,57,0.07)",
-  glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
-  radius: "999px", radiusSm: "20px",
-  red: "#ef2339", redDark: "#c01a2e", orange: "#ff6709", redGlow: "rgba(239,35,57,0.32)",
-  green: "#ff6709", greenGlow: "rgba(255,103,9,0.30)",
-  yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
-  white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)",
-  cardGrad: "linear-gradient(145deg, rgba(239,35,57,0.10) 0%, rgba(255,103,9,0.04) 100%)",
-  sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
+  bg1: T.bg1, bg2: T.bg2, bgCenter: T.bgAccent,
+  glass: T.glass, glassBorder: T.glassBorder, blur: T.blur,
+  radius: T.radius, radiusSm: T.radiusSm,
+  red: T.primary, redDark: T.primaryDark, orange: T.secondary,
+  redGlow: T.glowPrimary, green: T.secondary, greenGlow: T.glowSecondary,
+  yellow: T.yellow, blue: T.blue, purple: T.purple,
+  white: T.white, muted: T.muted, dim: T.dim, faint: T.faint,
+  btnGrad: T.gradient,
+  cardGrad: T.gradientCard,
+  sora: T.fontBody, maver: T.fontDisplay,
 };
 
 // ─── Styles, Components, Icons ───
@@ -40,21 +43,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(239,35,57,0.35); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(192,192,192,0.20); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(255,103,9,0.72) !important; box-shadow: 0 0 0 2px rgba(255,103,9,0.16), 0 0 14px rgba(239,35,57,0.20); }
+  input:focus, textarea:focus { outline: none; border-color: rgba(192,192,192,0.60) !important; box-shadow: 0 0 0 2px rgba(192,192,192,0.12), 0 0 14px rgba(192,192,192,0.14); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(239,35,57,0.20)} 50%{box-shadow:0 0 26px rgba(255,103,9,0.36)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(192,192,192,0.15)} 50%{box-shadow:0 0 24px rgba(192,192,192,0.28)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(239,35,57,0.70); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,35,57,0.80); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(255,103,9,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,103,9,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(160,160,160,0.50); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(160,160,160,0.60); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -64,7 +67,7 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #ff6709 0%, #ef2339 100%) !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(255,103,9,0.30), 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
+  .btn-hover-grad:hover { background: ${T.gradientV} !important; transform: scale(1.02); box-shadow: 0 0 20px ${T.glowSecondary}, 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
 `}</style>;
 
 const Spotlight = () => {
@@ -72,7 +75,7 @@ const Spotlight = () => {
   const handleMove = (e) => { const el = ref.current; if (!el) return; const rect = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - rect.left) + "px"; el.style.top = (e.clientY - rect.top) + "px"; };
   const handleLeave = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const parent = ref.current?.parentElement; if (!parent) return; parent.addEventListener("mousemove", handleMove); parent.addEventListener("mouseleave", handleLeave); return () => { parent.removeEventListener("mousemove", handleMove); parent.removeEventListener("mouseleave", handleLeave); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(239,35,57,0.12) 0%, rgba(255,103,9,0.06) 30%, rgba(239,35,57,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(192,192,192,0.10) 0%, rgba(136,136,136,0.05) 30%, rgba(192,192,192,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -89,8 +92,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "white", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` },
-    success: { background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)", color: "white", border: "1px solid rgba(255,103,9,0.42)", boxShadow: `0 6px 18px ${D.greenGlow}` },
+    primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` },
+    success: { background: T.gradient, color: "#111111", border: `1px solid rgba(192,192,192,0.35)`, boxShadow: `0 6px 18px ${D.greenGlow}` },
     danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -130,7 +133,7 @@ const ToastC = ({ msg, type }) => msg ? (
     padding: "14px 20px",
   }}>
     <div style={{
-      background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)",
+      background: T.gradient,
       borderRadius: "50%",
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
@@ -149,7 +152,7 @@ const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${imgBackground})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
+    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
 );
@@ -178,7 +181,7 @@ const MIcon = () => (
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(239,35,57,0.18)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(192,192,192,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>
@@ -192,11 +195,11 @@ const Landing = ({ go }) => (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.9s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>CONCLUA TAREFAS E GANHE</h1>
-        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>SOLICITE O SAQUE 24H</p>
+        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>{C.landing.title}</h1>
+        <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>{C.landing.subtitle}</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
           <Btn v="outline" onClick={() => go("login")} s={{ flex: 1 }}>LOGIN</Btn>
@@ -229,14 +232,14 @@ const LoginScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+            <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>SEJA BEM VINDO</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
-          <p onClick={() => go("register")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>Não tem conta? <span style={{ color: D.red, fontWeight: 800 }}>Cadastre-se</span></p>
+          <p onClick={() => go("register")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>{C.login.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.login.linkCta}</span></p>
         </Glass>
       </div>
     </BG></>
@@ -271,17 +274,17 @@ const RegisterScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+            <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>CRIE SUA CONTA</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.register.title}</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <div style={{ marginTop: 12 }}>
             <Btn onClick={handleRegister} disabled={loading || !nome || !email || !senha}>{loading ? "CRIANDO..." : "CONTINUAR"}</Btn>
           </div>
-          <p onClick={() => go("login")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>Já tem conta? <span style={{ color: D.red, fontWeight: 800 }}>Faça login</span></p>
+          <p onClick={() => go("login")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>{C.register.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.register.linkCta}</span></p>
         </Glass>
       </div>
     </BG></>
@@ -382,6 +385,7 @@ const RaffleScreen = ({ go, profile }) => {
       valor_depositado: Number(valor),
       file_name: filePath,
       status: "pendente",
+      observacao: observacao.trim() || null,
     });
     setUploading(false);
     if (insErr) { showToast("ERRO: " + insErr.message); return; }
@@ -405,9 +409,9 @@ const RaffleScreen = ({ go, profile }) => {
 
   // ─── Mesmos links sociais do UserDash ───
   const socialLinks = [
-    { href: "https://instagram.com/SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
-    { href: "https://t.me/SEU_CANAL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
-    { href: "https://tiktok.com/@SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
+    { href: C.social.instagram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
+    { href: C.social.telegram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
+    { href: C.social.tiktok, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
   ];
 
   return (
@@ -417,7 +421,7 @@ const RaffleScreen = ({ go, profile }) => {
 
         {/* ── Header — idêntico ao UserDash ── */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
+          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: myPending ? D.yellow : myTickets > 0 ? D.orange : D.muted, textTransform: "uppercase" }}>
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
           </span>
@@ -427,7 +431,7 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SORTEIO ESPECIAL</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.raffle.title}</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
@@ -451,7 +455,7 @@ const RaffleScreen = ({ go, profile }) => {
           <div style={{ textAlign: "center", padding: 40, color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>CARREGANDO...</div>
         ) : !raffle ? (
           <Glass s={{ padding: "36px 28px", textAlign: "center" }}>
-            <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>NENHUM SORTEIO ATIVO NO MOMENTO.</p>
+            <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase" }}>{C.raffle.empty}</p>
           </Glass>
         ) : (
           /* ── Card do prêmio — gradiente laranja/vermelho sem glassmorphism ── */
@@ -561,6 +565,7 @@ const UserDash = ({ profile, go, onLogout }) => {
   const [toast, setToast] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [file, setFile] = useState(null);
+  const [observacao, setObservacao] = useState("");
   const [saldo, setSaldo] = useState(profile?.saldo ?? 0);
 
   useEffect(() => {
@@ -614,6 +619,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       valor: mission.valor,
       file_name: filePath,
       status: "pendente",
+      observacao: observacao.trim() || null,
     });
 
     setUploading(false);
@@ -621,6 +627,7 @@ const UserDash = ({ profile, go, onLogout }) => {
     setDone(p => ({ ...p, [missionId]: "pendente" }));
     setModal(null);
     setFile(null);
+    setObservacao("");
     showToast("COMPROVANTE ENVIADO!");
   };
 
@@ -629,7 +636,7 @@ const UserDash = ({ profile, go, onLogout }) => {
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
       <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
+          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.wallet()}</div>
@@ -637,15 +644,15 @@ const UserDash = ({ profile, go, onLogout }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>SUAS TAREFAS</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.dashboard.title}</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
-          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>NOVAS TAREFAS EM <span style={{ color: D.red }}>24H</span></span>
+          <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>{C.dashboard.subtitle}</span>
         </div>
         <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
           {[
-            { href: "https://instagram.com/SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
-            { href: "https://t.me/SEU_CANAL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
-            { href: "https://tiktok.com/@SEU_PERFIL", icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
+            { href: C.social.instagram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
+            { href: C.social.telegram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
+            { href: C.social.tiktok, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
           ].map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
           ))}
@@ -674,13 +681,13 @@ const UserDash = ({ profile, go, onLogout }) => {
                               ? <div style={{ padding: "10px 22px", background: "linear-gradient(135deg,rgba(239,35,57,0.15),rgba(255,103,9,0.15))", border: "1px solid rgba(255,103,9,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange, 13)} CONCLUÍDO</div>
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
-                                : <Btn onClick={() => { setFile(null); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
+                                : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
                             <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", boxShadow: `0 3px 10px ${D.redGlow}` }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
-                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(239,35,57,0.35) 30%, rgba(255,103,9,0.45) 50%, rgba(239,35,57,0.25) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(28px)", pointerEvents: "none" }} />
+                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(192,192,192,0.25) 30%, rgba(200,200,200,0.35) 50%, rgba(160,160,160,0.20) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(28px)", pointerEvents: "none" }} />
                           <MIcon />
                         </div>
                       </div>
@@ -719,9 +726,30 @@ const UserDash = ({ profile, go, onLogout }) => {
                   ? <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginTop: 4, textTransform: "uppercase" }}>{(file.size / 1024).toFixed(0)}KB — TOQUE PARA TROCAR</p></>
                   : <>{IC.upload("rgba(255,255,255,0.15)")}<p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, marginTop: 10, textTransform: "uppercase" }}>TOQUE PARA ENVIAR</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginTop: 4, textTransform: "uppercase" }}>PNG, JPG — MÁX 5MB</p></>}
               </div>
+              {/* Campo de observação */}
+              <div style={{ marginBottom: 18, textAlign: "left" }}>
+                <p style={{ fontFamily: D.sora, fontSize: 11, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 8 }}>OBSERVAÇÃO <span style={{ color: D.dim, fontWeight: 400 }}>(OPCIONAL)</span></p>
+                <textarea
+                  value={observacao}
+                  onChange={e => setObservacao(e.target.value)}
+                  placeholder="DESCREVA AQUI SE NECESSÁRIO..."
+                  maxLength={300}
+                  rows={3}
+                  style={{
+                    width: "100%", boxSizing: "border-box",
+                    background: D.glass, backdropFilter: D.blur,
+                    border: `1px solid ${observacao ? "rgba(255,103,9,0.45)" : D.glassBorder}`,
+                    borderRadius: 16, padding: "12px 16px",
+                    fontFamily: D.sora, fontSize: 12, fontWeight: 600,
+                    color: D.white, textTransform: "uppercase", letterSpacing: 0.3,
+                    resize: "none", outline: "none",
+                    transition: "border-color 0.2s ease",
+                  }}
+                />
+              </div>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <Btn onClick={() => !uploading && file && handleSubmit(modal)} disabled={uploading || !file} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR ENVIO"}</Btn>
-                <div onClick={() => setModal(null)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+                <div onClick={() => { setModal(null); setObservacao(""); }} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
               </div>
             </Glass>
           </div>
@@ -768,7 +796,7 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: `0 3px 10px ${D.redGlow}` }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 1.08, wordBreak: "break-word" }}>VALOR SOLICITADO!</h2>
+        <h2 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word" }}>{C.success.title}</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
@@ -780,10 +808,10 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, lineHeight: 1.08, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>SOLICITE SEU PIX E AGUARDE</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>

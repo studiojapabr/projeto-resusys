@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import imgBackground from './assets/bg.png';
+import { T } from './config/theme';
+import { C } from './config/content';
 import imgLogo from './assets/logo-t.png';
 
 // ═══════════════════════════════════════════
@@ -33,21 +35,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(239,35,57,0.35); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(192,192,192,0.20); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(255,103,9,0.72) !important; box-shadow: 0 0 0 2px rgba(255,103,9,0.16), 0 0 14px rgba(239,35,57,0.20); }
+  input:focus, textarea:focus { outline: none; border-color: rgba(192,192,192,0.60) !important; box-shadow: 0 0 0 2px rgba(192,192,192,0.12), 0 0 14px rgba(192,192,192,0.14); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(239,35,57,0.20)} 50%{box-shadow:0 0 26px rgba(255,103,9,0.36)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(192,192,192,0.15)} 50%{box-shadow:0 0 24px rgba(192,192,192,0.28)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(239,35,57,0.70); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,35,57,0.80); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(255,103,9,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(255,103,9,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(160,160,160,0.50); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(160,160,160,0.60); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -57,7 +59,7 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #ff6709 0%, #ef2339 100%) !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(255,103,9,0.30), 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
+  .btn-hover-grad:hover { background: linear-gradient(135deg, #888888 0%, #C0C0C0 100%) !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(192,192,192,0.18), 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
 `}</style>;
 
 const Spotlight = () => {
@@ -65,7 +67,7 @@ const Spotlight = () => {
   const hm = (e) => { const el = ref.current; if (!el) return; const r = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - r.left) + "px"; el.style.top = (e.clientY - r.top) + "px"; };
   const hl = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const p = ref.current?.parentElement; if (!p) return; p.addEventListener("mousemove", hm); p.addEventListener("mouseleave", hl); return () => { p.removeEventListener("mousemove", hm); p.removeEventListener("mouseleave", hl); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(239,35,57,0.12) 0%, rgba(255,103,9,0.06) 30%, rgba(239,35,57,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(192,192,192,0.10) 0%, rgba(136,136,136,0.05) 30%, rgba(192,192,192,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -91,7 +93,7 @@ const Av = ({ ini, sz = 40 }) => (
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "white", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` }, success: { background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)", color: "white", border: "1px solid rgba(255,103,9,0.42)", boxShadow: `0 6px 18px ${D.orangeGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(239,35,57,0.45)", boxShadow: `0 6px 18px ${D.redGlow}` }, success: { background: "linear-gradient(135deg, #ef2339 0%, #ff6709 100%)", color: "white", border: "1px solid rgba(255,103,9,0.42)", boxShadow: `0 6px 18px ${D.orangeGlow}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -144,7 +146,7 @@ const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: `linear-gradient(180deg, rgba(255,103,9,0.06) 0%, rgba(255,103,9,0.22) 50%, transparent 100%)`, pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(239,35,57,0.09), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
+    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
     <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
 );
@@ -296,6 +298,12 @@ const ASubs = ({ subs, setSubs }) => {
                 <div onClick={() => setSel(null)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={D.orange} /></div>
+              {sel.observacao && (
+                <div style={{ marginBottom: 14, padding: "12px 14px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm }}>
+                  <p style={{ fontFamily: D.sora, fontSize: 10, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 5 }}>OBSERVAÇÃO DO USUÁRIO</p>
+                  <p style={{ fontFamily: D.sora, fontSize: 12, color: D.white, lineHeight: 1.5, textTransform: "uppercase" }}>{sel.observacao}</p>
+                </div>
+              )}
               <div style={{ width: "100%", borderRadius: D.radiusSm, background: D.glass, border: `1px solid ${D.glassBorder}`, overflow: "hidden", marginBottom: 14, minHeight: 120 }}>
                 {imgUrl
                   ? <img
@@ -689,7 +697,7 @@ export default function AdminApp() {
     <><Styles /><BG>
       <div style={{ maxWidth: 430, width: "100%", padding: "0 20px 44px", boxSizing: "border-box", margin: "0 auto" }}>
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, overflow: "visible", zIndex: menuOpen ? 120 : 1 }} a="fadeUp 0.6s ease-out">
-          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>TASKY</span>
+          <span style={{ fontFamily: D.maver, fontSize: 28, color: D.white, letterSpacing: -1 }}>{C.brandName}</span>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>{pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}</span>
           <div ref={menuRef} style={{ position: "relative" }}>
             <div
@@ -797,7 +805,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.maver, fontSize: 55, fontWeight: 400, textTransform: "uppercase", lineHeight: 1.08, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 55, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
