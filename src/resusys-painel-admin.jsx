@@ -142,7 +142,7 @@ const ToastC = ({ msg, type }) => msg ? (
   </div>
 ) : null;
 
-const BG_IMG = imgBackground;
+const BG_IMG = typeof window !== 'undefined' && window.innerWidth >= 768 ? imgBgDesktop : imgBgMobile;
 const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
