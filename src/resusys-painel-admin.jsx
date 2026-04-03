@@ -4,7 +4,6 @@ import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, F
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
-import { T } from "./config/theme";
 import { C } from "./config/content";
 import imgLogo from "./assets/logo-t.png";
 import imgIconePrincipal from "./assets/icone-task.png";
@@ -21,10 +20,10 @@ const supabase = createClient(
 // SETTINGS PUB-SUB (runtime icon/glow overrides)
 // ═══════════════════════════════════════════
 let _S = {
-  iconColor:    T.iconColor,
-  coinGlow:     T.coinGlow,
-  coinGlowMid:  T.coinGlowMid,
-  coinGlowBlur: T.coinGlowBlur,
+  iconColor:    "#ffffff",
+  coinGlow:     "rgba(35,35,35,0.90)",
+  coinGlowMid:  "rgba(239,239,239,0.50)",
+  coinGlowBlur: 22,
 };
 let _SL = [];
 export const updateSettings = (s) => { _S = { ..._S, ...s }; _SL.forEach((f) => f()); };
@@ -45,14 +44,14 @@ const D = {
   bg1: "#050505", bg2: "#111111",
   glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.10)", blur: "blur(18px)",
   radius: "999px", radiusSm: "20px",
-  red: T.primary, redDark: T.primaryDark, orange: T.secondary, redGlow: T.glowPrimary, orangeGlow: T.glowSecondary,
-  green: T.secondary, greenGlow: T.glowSecondary,
+  red: "#232323", redDark: "rgba(35,35,35,0.75)", orange: "#efefef", redGlow: "rgba(35,35,35,0.25)", orangeGlow: "rgba(239,239,239,0.18)",
+  green: "#efefef", greenGlow: "rgba(239,239,239,0.18)",
   yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
-  btnGrad: T.gradient, cardGrad: T.gradientCard,
-  btnGlow: T.btnGlow, btnGlowSm: T.btnGlowSm,
-  titleGrad: T.titleGradient,
-  sora: T.fontBody, maver: T.fontDisplay,
+  btnGrad: "linear-gradient(90deg, #232323 0%, #efefef 100%)", cardGrad: "rgba(35,35,35,0.07)",
+  btnGlow: "0 0 10px rgba(35,35,35,0.30), 0 0 20px rgba(239,239,239,0.12)", btnGlowSm: "0 0 8px rgba(35,35,35,0.25), 0 0 18px rgba(239,239,239,0.10)",
+  titleGrad: "linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)",
+  sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
 };
 
 // ═══════════════════════════════════════════
@@ -62,28 +61,28 @@ const solidIC = (Icon, c, s) => <Icon size={s} color={c} />;
 const boldIC  = (Icon, c, s) => <Icon size={s} color={c} />;
 
 const IC = {
-  check:   (c, s = 12) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 12) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 12) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
-  alert:   (c, s = 12) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
-  dollar:  (c, s = 12) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
-  pix:     (c, s = 12) => solidIC(FaBolt,               c ?? _S.iconColor, s),
-  ban:     (c, s = 12) => solidIC(FaBan,               c ?? _S.iconColor, s),
-  clock:   (c, s = 12) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 12) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  logout:  (c, s = 12) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 12) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  eye:     (c, s = 12) => boldIC(FaEye,                c ?? _S.iconColor, s),
-  search:  (c, s = 12) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
-  users:   (c, s = 12) => boldIC(FaUsers,              c ?? _S.iconColor, s),
-  edit:    (c, s = 12) => boldIC(FaPencil,             c ?? _S.iconColor, s),
-  trash:   (c, s = 12) => boldIC(FaTrash,             c ?? _S.iconColor, s),
-  grip:    (c, s = 12) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
-  arrowUp: (c, s = 12) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
-  arrowDn: (c, s = 12) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
-  link:    (c, s = 12) => boldIC(FaLink,               c ?? _S.iconColor, s),
-  extLink: (c, s = 12) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
-  grid:    (c, s = 12) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
+  check:   (c, s = 10) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 10) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 10) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  alert:   (c, s = 10) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
+  dollar:  (c, s = 10) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
+  pix:     (c, s = 10) => solidIC(FaBolt,               c ?? _S.iconColor, s),
+  ban:     (c, s = 10) => solidIC(FaBan,               c ?? _S.iconColor, s),
+  clock:   (c, s = 10) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 10) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  logout:  (c, s = 10) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 10) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  eye:     (c, s = 10) => boldIC(FaEye,                c ?? _S.iconColor, s),
+  search:  (c, s = 10) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
+  users:   (c, s = 10) => boldIC(FaUsers,              c ?? _S.iconColor, s),
+  edit:    (c, s = 10) => boldIC(FaPencil,             c ?? _S.iconColor, s),
+  trash:   (c, s = 10) => boldIC(FaTrash,             c ?? _S.iconColor, s),
+  grip:    (c, s = 10) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
+  arrowUp: (c, s = 10) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
+  arrowDn: (c, s = 10) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
+  link:    (c, s = 10) => boldIC(FaLink,               c ?? _S.iconColor, s),
+  extLink: (c, s = 10) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
+  grid:    (c, s = 10) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
 };
 
 // ── SVG Icons customizados ──────────────────
@@ -95,16 +94,16 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: ${T.scrollThumb}; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: ${"rgba(35,35,35,0.25)"}; border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
-  input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: ${T.inputBorderFocus} !important; }
+  input, textarea, button { transition: all 0.2s ease; outline: none; border: none; }
+  input:focus, textarea:focus { outline: none; border-color: ${"#232323"} !important; }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px ${T.pulseShadowLo}} 50%{box-shadow:0 0 24px ${T.pulseShadowHi}} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px ${"rgba(35,35,35,0.22)"}} 50%{box-shadow:0 0 24px ${"rgba(35,35,35,0.35)"}} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
@@ -121,7 +120,7 @@ const Styles = () => <style>{`
   .txt-link:hover { filter: brightness(0.55); }
   .txt-link { transition: filter 0.18s ease; cursor: pointer; }
   input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.12); outline: none; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: ${T.primary}; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: ${"#232323"}; cursor: pointer; }
   input[type=color] { -webkit-appearance: none; padding: 0; border: none; cursor: pointer; background: transparent; }
   input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
   input[type=color]::-webkit-color-swatch { border: none; border-radius: 10px; }
@@ -154,11 +153,11 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${"rgba(35,35,35,0.25)"}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${"rgba(35,35,35,0.25)"}` }, danger: { background: "transparent", color: "#EF4444", border: "1px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, boxShadow: "none", ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -172,8 +171,8 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? T.gradientCard : D.faint, border: `1.5px solid ${active ? T.glowPrimary : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
-    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? T.white : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease" }} />
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(35,35,35,0.07)" : D.faint, border: `1px solid ${active ? "rgba(35,35,35,0.25)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+    <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? "#ffffff" : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease" }} />
   </div>
 );
 
@@ -268,7 +267,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? T.btnTextOnGradient : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#000000" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -286,11 +285,11 @@ const ASubs = ({ subs, setSubs }) => {
                 <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 3 }}>{IC.clock(D.dim)}<span style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase" }}>{new Date(s.created_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span></div>
               </div>
               <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
-                <div onClick={() => setSel(s)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.eye(D.muted)}</div>
+                <div onClick={() => setSel(s)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.eye(D.muted)}</div>
                 {s.status === "pendente" && (
                   <>
-                    <div onClick={() => approve(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.check("#22C55E")}</div>
-                    <div onClick={() => reject(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.x("#EF4444")}</div>
+                    <div onClick={() => approve(s.id)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.check("#22C55E")}</div>
+                    <div onClick={() => reject(s.id)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.x("#EF4444")}</div>
                   </>
                 )}
               </div>
@@ -310,7 +309,7 @@ const ASubs = ({ subs, setSubs }) => {
                     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{sel.mission_title}</div>
                   </div>
                 </div>
-                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={18} color={D.muted} />}</div>
+                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color={D.muted} />}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={"#22C55E"} /></div>
               {sel.observacao && (
@@ -435,7 +434,7 @@ const AUsers = ({ usrs, setUsrs }) => {
                   <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Missões: <span style={{ fontWeight: 700, color: "rgba(255,255,255,0.65)" }}>{u.missoes_cnt || 0}</span></span>
                 </div>
               </div>
-              <div onClick={() => toggle(u.id, u.status)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div onClick={() => toggle(u.id, u.status)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {u.status === "bloqueado" ? IC.check(D.white) : IC.ban("#EF4444")}
               </div>
             </div>
@@ -497,7 +496,7 @@ const AMissions = ({ missions, setMissions }) => {
       <div style={{ animation: "fadeUp 0.45s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
-          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={18} color={D.muted} />}</div>
+          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color={D.muted} />}</div>
         </div>
         <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
           <Inp label="TÍTULO" placeholder="Ex: Deposite R$50" value={f.titulo} onChange={e => set("titulo", e.target.value)} />
@@ -547,8 +546,8 @@ const AMissions = ({ missions, setMissions }) => {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap", marginBottom: 5 }}>
                   <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", textDecoration: m.ativa ? "none" : "line-through", textDecorationColor: "rgba(239,68,68,0.4)" }}>{m.titulo}</span>
-                  <div onClick={() => { setEditing(m); setView("edit"); }} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.edit(D.muted)}</div>
-                  <div onClick={() => setDel(m)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.trash("#EF4444")}</div>
+                  <div onClick={() => { setEditing(m); setView("edit"); }} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.edit(D.muted)}</div>
+                  <div onClick={() => setDel(m)} style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.trash("#EF4444")}</div>
                 </div>
                 {m.descricao && <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{m.descricao}</p>}
                 <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 8 }}>
@@ -573,7 +572,7 @@ const AMissions = ({ missions, setMissions }) => {
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDel(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.35s" }}>
             <Glass s={{ padding: "28px 24px", textAlign: "center" }}>
-              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444")}</div>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444")}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>DELETAR?</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>"{del.titulo}"</p>
               <div style={{ display: "flex", gap: 10 }}>
@@ -611,7 +610,7 @@ const hexToRGB = (hex) => {
 // Helper: rgba string → hex (#rrggbb)
 const rgbaToHex = (rgba) => {
   const m = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (!m) return T.primary;
+  if (!m) return "#232323";
   return "#" + [m[1], m[2], m[3]].map(n => parseInt(n).toString(16).padStart(2, "0")).join("");
 };
 
@@ -630,7 +629,7 @@ const ColorRow = ({ label, value, onChange, hint }) => (
     </div>
     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
       {/* Color swatch picker */}
-      <div style={{ width: 44, height: 44, borderRadius: 12, background: value, border: `2px solid rgba(255,255,255,0.15)`, flexShrink: 0, overflow: "hidden", position: "relative" }}>
+      <div style={{ width: 44, height: 44, borderRadius: 12, background: value, border: `1px solid rgba(255,255,255,0.15)`, flexShrink: 0, overflow: "hidden", position: "relative" }}>
         <input
           type="color"
           value={value}
@@ -674,10 +673,10 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange, unit = "" }) =>
 
 const AConfig = () => {
   const [cfg, setCfg] = useState({
-    iconColor:     T.iconColor,      // #ffffff
-    coinGlowHex:   T.primary,        // cor base do glow
+    iconColor:     "#ffffff",      // #ffffff
+    coinGlowHex:   "#232323",        // cor base do glow
     coinGlowAlpha: 0.90,             // opacidade central
-    coinGlowBlur:  T.coinGlowBlur,   // 22
+    coinGlowBlur:  22,   // 22
   });
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -693,10 +692,10 @@ const AConfig = () => {
           try {
             const s = JSON.parse(data.value);
             setCfg({
-              iconColor:     s.iconColor    ?? T.iconColor,
-              coinGlowHex:   s.coinGlowHex  ?? rgbaToHex(T.coinGlow),
-              coinGlowAlpha: s.coinGlowAlpha ?? rgbaToAlpha(T.coinGlow),
-              coinGlowBlur:  s.coinGlowBlur  ?? T.coinGlowBlur,
+              iconColor:     s.iconColor    ?? "#ffffff",
+              coinGlowHex:   s.coinGlowHex  ?? rgbaToHex("rgba(35,35,35,0.90)"),
+              coinGlowAlpha: s.coinGlowAlpha ?? rgbaToAlpha("rgba(35,35,35,0.90)"),
+              coinGlowBlur:  s.coinGlowBlur  ?? 22,
             });
           } catch {}
         }
@@ -742,10 +741,10 @@ const AConfig = () => {
 
   const handleReset = () => {
     setCfg({
-      iconColor:     T.iconColor,
-      coinGlowHex:   rgbaToHex(T.coinGlow),
-      coinGlowAlpha: rgbaToAlpha(T.coinGlow),
-      coinGlowBlur:  T.coinGlowBlur,
+      iconColor:     "#ffffff",
+      coinGlowHex:   rgbaToHex("rgba(35,35,35,0.90)"),
+      coinGlowAlpha: rgbaToAlpha("rgba(35,35,35,0.90)"),
+      coinGlowBlur:  22,
     });
     show("PADRÕES RESTAURADOS.");
   };
@@ -764,8 +763,8 @@ const AConfig = () => {
       {/* ── Seção: Ícones ── */}
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaPaintbrush size={25}  color="#000" />
+          <div style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <FaPaintbrush size={10}  color="#000" />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>COR DOS ÍCONES</div>
@@ -805,8 +804,8 @@ const AConfig = () => {
       {/* ── Seção: Glow da Moeda ── */}
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaSliders size={25}  color="#000" />
+          <div style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <FaSliders size={10}  color="#000" />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>GLOW DA MOEDA</div>
@@ -839,7 +838,7 @@ const AConfig = () => {
         <div style={{ padding: "28px 20px", background: "rgba(0,0,0,0.40)", borderRadius: D.radiusSm, border: `1px solid ${D.glassBorder}`, marginTop: 4, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
           <span style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5 }}>PREVIEW AO VIVO</span>
           <div style={{ position: "relative", width: 110, height: 110, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, ${T.coinGlowFar} 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, ${"rgba(35,35,35,0.15)"} 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
             <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
           </div>
         </div>
@@ -848,10 +847,10 @@ const AConfig = () => {
       {/* ── Botões de ação ── */}
       <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
         <Btn v="outline" onClick={handleReset} s={{ flex: 1 }}>
-          <FaArrowsRotate size={25} /> RESTAURAR PADRÃO
+          <FaArrowsRotate size={10} /> RESTAURAR PADRÃO
         </Btn>
         <Btn onClick={handleSave} disabled={saving} s={{ flex: 1 }}>
-          <FaDownload size={25} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
+          <FaDownload size={10} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
         </Btn>
       </div>
 
@@ -943,7 +942,7 @@ export default function AdminApp() {
 
   if (session === undefined) return (
     <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid ${T.spinnerTrack}`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `1px solid ${"rgba(35,35,35,0.15)"}`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
     </div></>
   );
 
@@ -994,7 +993,7 @@ export default function AdminApp() {
             {pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}
           </span>
           <div ref={menuRef} style={{ position: "relative" }}>
-            <div onClick={() => setMenuOpen(o => !o)} style={{ width: 40, height: 40, borderRadius: "50%", background: menuOpen ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", position: "relative" }}>
+            <div onClick={() => setMenuOpen(o => !o)} style={{ width: 35, height: 35, borderRadius: "50%", background: menuOpen ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", position: "relative" }}>
               {IC.grid(menuOpen ? "white" : "rgba(255,255,255,0.70)")}
               {pendTotal > 0 && !menuOpen && (
                 <div style={{ position: "absolute", top: -2, right: -2, minWidth: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 800, fontFamily: D.sora, color: "white", padding: "0 3px" }}>{pendTotal > 9 ? "9+" : pendTotal}</div>
@@ -1012,7 +1011,7 @@ export default function AdminApp() {
                   }
                   const active = adminTab === item.k;
                   return (
-                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? T.primary : "rgba(255,255,255,0.72)", background: active ? T.gradientCard : "transparent", borderLeft: active ? `3px solid ${T.primary}` : "3px solid transparent" }}>
+                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#232323" : "rgba(255,255,255,0.72)", background: active ? "rgba(35,35,35,0.07)" : "transparent", borderLeft: active ? `1px solid ${"#232323"}` : "1px solid transparent" }}>
                       <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
                       {item.badge > 0 && (
                         <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
@@ -1027,7 +1026,7 @@ export default function AdminApp() {
 
         {/* Tab title */}
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: T.titleGradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
         </div>
 
         {/* Content */}
