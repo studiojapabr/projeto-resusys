@@ -52,7 +52,7 @@ const D = {
   btnGrad: T.gradient, cardGrad: T.gradientCard,
   btnGlow: T.btnGlow, btnGlowSm: T.btnGlowSm,
   titleGrad: T.titleGradient,
-  sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
+  sora: T.fontBody, maver: T.fontDisplay,
 };
 
 // ═══════════════════════════════════════════
@@ -154,11 +154,11 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${T.glowPrimary}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${T.glowPrimary}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, boxShadow: "none", ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -180,7 +180,7 @@ const Tog = ({ active, onToggle }) => (
 const ToastC = ({ msg, type }) => msg ? (
   <div style={{ position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)", maxWidth: 340, width: "calc(100% - 40px)", background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, boxShadow: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px" }}>
     <div style={{ background: D.btnGrad, boxShadow: D.btnGlowSm, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-      {IC.check("black")}
+      {IC.check("white")}
     </div>
     <span style={{ fontFamily: D.sora, fontSize: 11, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: "rgba(255,255,255,0.92)", lineHeight: 1.4, textAlign: "center" }}>{msg}</span>
   </div>
@@ -268,7 +268,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#000000" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? T.btnTextOnGradient : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}

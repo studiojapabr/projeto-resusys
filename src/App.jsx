@@ -166,8 +166,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#000000", border: `1px solid rgba(${T.primary.replace("#","").match(/.{2}/g).map(h=>parseInt(h,16)).join(",")},0.35)`, boxShadow: D.btnGlow },
-    success: { background: D.btnGrad, color: "#000000", border: `1px solid rgba(${T.primary.replace("#","").match(/.{2}/g).map(h=>parseInt(h,16)).join(",")},0.35)`, boxShadow: D.btnGlow },
+    primary: { background: D.btnGrad, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}`, boxShadow: D.btnGlow },
+    success: { background: D.btnGrad, color: T.btnTextOnGradient, border: `1px solid ${T.glowPrimary}`, boxShadow: D.btnGlow },
     danger:  { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost:   { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -650,7 +650,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                           <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: completed ? D.orange : D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>VALOR: {m.valor}R$</p>
                           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                             {aprovado
-                              ? <div style={{ padding: "10px 22px", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange)} CONCLUÍDO</div>
+                              ? <div style={{ padding: "10px 22px", background: T.badgeSuccessBg, border: `1px solid ${T.badgeSuccessBorder}`, borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: T.badgeSuccessText, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(T.badgeSuccessText)} CONCLUÍDO</div>
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
