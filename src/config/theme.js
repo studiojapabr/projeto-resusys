@@ -5,7 +5,7 @@
 
 // ── 1. COR PRINCIPAL ─────────────────────────
 const PRIMARY   = "#fc4d00";
-const SECONDARY = "#646464";
+const SECONDARY = "#ffffff";
 
 // ── 2. TOKENS ────────────────────────────────
 export const T = {
@@ -30,7 +30,7 @@ export const T = {
   blur:        "blur(20px)",
 
   radius:   "60px",
-  radiusSm: "16px",
+  radiusSm: "30px",
 
   white:  "#FFFFFF",
   muted:  "rgba(255,255,255,0.55)",
