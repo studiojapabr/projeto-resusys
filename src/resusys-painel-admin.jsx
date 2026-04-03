@@ -982,7 +982,7 @@ export default function AdminApp() {
       <div style={{ maxWidth: 430, width: "100%", padding: "0 20px 44px", boxSizing: "border-box", margin: "0 auto" }}>
 
         {/* Header */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, overflow: "visible", zIndex: menuOpen ? 120 : 1 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>
             {pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}
@@ -997,12 +997,19 @@ export default function AdminApp() {
                 <div style={{ position: "absolute", top: -2, right: -2, minWidth: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 800, fontFamily: D.sora, color: "white", padding: "0 3px" }}>{pendTotal > 9 ? "9+" : pendTotal}</div>
               )}
             </div>
+          </div>
+        </Glass>
 
-            {menuOpen && (
-              <div
-                style={{ position: "absolute", top: "calc(100% + 10px)", right: 0, minWidth: 200, zIndex: 200, background: "rgba(8,8,8,0.92)", backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)" }}
-                onClick={e => e.stopPropagation()}
-              >
+        {/* Menu Dropdown — fora do Glass para evitar conflito de stacking context */}
+        {menuOpen && (
+          <div ref={menuRef}
+            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 199 }}
+            onClick={() => setMenuOpen(false)}
+          >
+            <div
+              style={{ position: "absolute", top: 72, right: "calc((100% - 430px) / 2 + 20px)", minWidth: 200, zIndex: 200, background: "rgba(8,8,8,0.97)", backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)" }}
+              onClick={e => e.stopPropagation()}
+            >
                 {menuItems.map(item => {
                   if (item.k === "logout") {
                     return (
@@ -1035,9 +1042,9 @@ export default function AdminApp() {
                   );
                 })}
               </div>
-            )}
+            </div>
           </div>
-        </Glass>
+        )}
 
         {/* Tab title */}
         <div style={{ margin: "18px 0 8px 4px" }}>
