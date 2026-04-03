@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Wallet, LogOut, ChevronLeft, X, Check, Clock, CloudUpload, Ticket, Trophy, Info, ExternalLink, Globe, MessageCircle, Music2, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
+import { Wallet, LogOut, ChevronLeft, X, Check, Clock, CloudUpload, Ticket, Trophy, Info, Camera, Send, Headphones, Link2, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
 import AdminApp from "./resusys-painel-admin";
@@ -106,13 +106,13 @@ const IC = {
   trophy:  (col = "#ffffff", s = 14) => <Trophy size={s} color={col} strokeWidth={1.75} />,
   ticket:  (col = "#ffffff", s = 14) => <Ticket size={s} color={col} strokeWidth={1.75} />,
   info:    (col = "#ffffff", s = 14) => <Info size={s} color={col} strokeWidth={1.75} />,
-  link:    (col = "#ffffff", s = 14) => <ExternalLink size={s} color={col} strokeWidth={1.75} />,
+  link:    (col = "#ffffff", s = 14) => <Link2 size={s} color={col} strokeWidth={1.75} />,
 };
 
 const SocialIcons = [
-  { href: "https://instagram.com/SEU_PERFIL", icon: <Globe size={14} strokeWidth={1.75} /> },
-  { href: "https://t.me/SEU_CANAL",           icon: <MessageCircle size={14} strokeWidth={1.75} /> },
-  { href: "https://tiktok.com/@SEU_PERFIL",   icon: <Music2 size={14} strokeWidth={1.75} /> },
+  { href: "https://www.instagram.com/yanzeeera/", icon: <Camera size={14} strokeWidth={1.75} /> },
+  { href: "https://t.me/YanzeeraGrupo",           icon: <Send size={14} strokeWidth={1.75} /> },
+  { href: "https://t.me/YanzeeraGrupo",           icon: <Headphones size={14} strokeWidth={1.75} /> },
 ];
 
 const MIcon = () => {
@@ -195,9 +195,9 @@ const ToastC = ({ msg, type }) => {
   );
 };
 
-const SvgPhone    = ({ size = 14 }) => <Globe size={size} strokeWidth={1.75} />;
-const SvgTelegram = ({ size = 14 }) => <MessageCircle size={size} strokeWidth={1.75} />;
-const SvgTiktok   = ({ size = 14 }) => <Music2 size={size} strokeWidth={1.75} />;
+const SvgPhone    = ({ size = 14 }) => <Camera size={size} strokeWidth={1.75} />;
+const SvgTelegram = ({ size = 14 }) => <Send size={size} strokeWidth={1.75} />;
+const SvgTiktok   = ({ size = 14 }) => <Headphones size={size} strokeWidth={1.75} />;
 
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
@@ -396,9 +396,9 @@ const RaffleScreen = ({ go, profile }) => {
   };
 
   const socialLinks = [
-    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={14} /> },
-    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={14} /> },
-    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={14} /> },
+    { href: "https://www.instagram.com/yanzeeera/", icon: <SvgPhone size={14} /> },
+    { href: "https://t.me/YanzeeraGrupo",  icon: <SvgTelegram size={14} /> },
+    { href: "https://t.me/YanzeeraGrupo",    icon: <SvgTiktok size={14} /> },
   ];
 
   return (
@@ -458,12 +458,12 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && (
                   <div onClick={() => window.open(raffle.link, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
+                    <Link2 size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                   </div>
                 )}
                 {raffle.link2 && (
                   <div onClick={() => window.open(raffle.link2, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
+                    <Link2 size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                   </div>
                 )}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -571,9 +571,9 @@ const UserDash = ({ profile, go, onLogout }) => {
   };
 
   const socialLinks = [
-    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={14} /> },
-    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={14} /> },
-    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={14} /> },
+    { href: "https://www.instagram.com/yanzeeera/", icon: <SvgPhone size={14} /> },
+    { href: "https://t.me/YanzeeraGrupo",  icon: <SvgTelegram size={14} /> },
+    { href: "https://t.me/YanzeeraGrupo",    icon: <SvgTiktok size={14} /> },
   ];
 
   return (
@@ -628,7 +628,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && (
                               <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
+                                <Link2 size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                               </div>
                             )}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
