@@ -6,7 +6,7 @@
 
 // ── 1. COR PRINCIPAL ─────────────────────────
 const PRIMARY   = "#fc4d00";
-const SECONDARY = "#646464";
+const SECONDARY = "#ffffff";
 
 // ── 2. Extrai RGB para usar em rgba() ────────
 const hexToRgb = (hex) => {
