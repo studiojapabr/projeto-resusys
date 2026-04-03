@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaSackDollar, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSackDollar, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "./Icons";
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
@@ -55,8 +55,8 @@ const D = {
 // ═══════════════════════════════════════════
 // ICON SYSTEM — Lucide React (filled/solid)
 // ═══════════════════════════════════════════
-const solidIC = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
-const boldIC  = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
+const solidIC = (Icon, c, s) => <Icon size={s} color={c} />;
+const boldIC  = (Icon, c, s) => <Icon size={s} color={c} />;
 
 const IC = {
   check:   (c, s = 25) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
@@ -759,7 +759,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaPaintbrush size={25} style={{ color: "#000" }} />
+            <FaPaintbrush size={25}  color="#000" />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>COR DOS ÍCONES</div>
@@ -800,7 +800,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaSliders size={25} style={{ color: "#000" }} />
+            <FaSliders size={25}  color="#000" />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>GLOW DA MOEDA</div>
