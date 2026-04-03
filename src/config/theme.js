@@ -29,8 +29,8 @@ export const T = {
   glassBorder: "rgba(255,255,255,0.09)",
   blur:        "blur(20px)",
 
-  radius:   "30px",
-  radiusSm: "16px",
+  radius:   "60px",
+  radiusSm: "30px",
 
   white:  "#FFFFFF",
   muted:  "rgba(255,255,255,0.55)",
@@ -43,7 +43,7 @@ export const T = {
 
   // ── Ícones ──────────────────────────────────
   iconColor:  "#ffffff",        // cor padrão de todos os ícones
-  iconSize:   18,               // tamanho padrão
+  iconSize:   8,               // tamanho padrão
 
   // ── Glow da moeda ────────────────────────────
   coinGlow:   "rgba(100,100,100,0.90)",  // cor central do glow
