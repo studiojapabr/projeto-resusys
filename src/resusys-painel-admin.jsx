@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  ChevronLeft, LogOut, Wallet, X, CircleCheck, CircleX,
-  Clock, Eye, CircleAlert, Search, Users, CircleDollarSign,
-  Pencil, Trash2, Ban, GripVertical, ChevronUp, ChevronDown,
-  Link, ExternalLink, Zap, LayoutGrid, Info, Settings,
-  Palette, Sliders, Save, RefreshCw,
-} from "lucide-react";
+import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleDollarSign, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
@@ -61,32 +55,32 @@ const D = {
 // ═══════════════════════════════════════════
 // ICON SYSTEM — Lucide React (filled/solid)
 // ═══════════════════════════════════════════
-const solidIC = (Icon, c, s) => <Icon size={s} fill={c} color={c} strokeWidth={0} />;
-const boldIC  = (Icon, c, s) => <Icon size={s} color={c} strokeWidth={2.5} fill="none" />;
+const solidIC = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
+const boldIC  = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
 
 const IC = {
-  check:   (c, s = 18) => solidIC(CircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 18) => solidIC(CircleX,           c ?? _S.iconColor, s),
-  info:    (c, s = 18) => solidIC(Info,               c ?? _S.iconColor, s),
-  alert:   (c, s = 18) => solidIC(CircleAlert,        c ?? _S.iconColor, s),
-  dollar:  (c, s = 18) => solidIC(CircleDollarSign,  c ?? _S.iconColor, s),
-  pix:     (c, s = 18) => solidIC(Zap,               c ?? _S.iconColor, s),
-  ban:     (c, s = 18) => solidIC(Ban,               c ?? _S.iconColor, s),
-  clock:   (c, s = 18) => boldIC(Clock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 18) => boldIC(Wallet,             c ?? _S.iconColor, s),
-  logout:  (c, s = 18) => boldIC(LogOut,             c ?? _S.iconColor, s),
-  back:    (c, s = 18) => boldIC(ChevronLeft,        c ?? _S.iconColor, s),
-  eye:     (c, s = 18) => boldIC(Eye,                c ?? _S.iconColor, s),
-  search:  (c, s = 18) => boldIC(Search,             c ?? _S.iconColor, s),
-  users:   (c, s = 18) => boldIC(Users,              c ?? _S.iconColor, s),
-  edit:    (c, s = 18) => boldIC(Pencil,             c ?? _S.iconColor, s),
-  trash:   (c, s = 18) => boldIC(Trash2,             c ?? _S.iconColor, s),
-  grip:    (c, s = 18) => boldIC(GripVertical,       c ?? _S.iconColor, s),
-  arrowUp: (c, s = 18) => boldIC(ChevronUp,          c ?? _S.iconColor, s),
-  arrowDn: (c, s = 18) => boldIC(ChevronDown,        c ?? _S.iconColor, s),
-  link:    (c, s = 18) => boldIC(Link,               c ?? _S.iconColor, s),
-  extLink: (c, s = 18) => boldIC(ExternalLink,       c ?? _S.iconColor, s),
-  grid:    (c, s = 18) => boldIC(LayoutGrid,         c ?? _S.iconColor, s),
+  check:   (c, s = 18) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 18) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 18) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  alert:   (c, s = 18) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
+  dollar:  (c, s = 18) => solidIC(FaCircleDollarSign,  c ?? _S.iconColor, s),
+  pix:     (c, s = 18) => solidIC(FaBolt,               c ?? _S.iconColor, s),
+  ban:     (c, s = 18) => solidIC(FaBan,               c ?? _S.iconColor, s),
+  clock:   (c, s = 18) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 18) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  logout:  (c, s = 18) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 18) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  eye:     (c, s = 18) => boldIC(FaEye,                c ?? _S.iconColor, s),
+  search:  (c, s = 18) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
+  users:   (c, s = 18) => boldIC(FaUsers,              c ?? _S.iconColor, s),
+  edit:    (c, s = 18) => boldIC(FaPencil,             c ?? _S.iconColor, s),
+  trash:   (c, s = 18) => boldIC(FaTrash,             c ?? _S.iconColor, s),
+  grip:    (c, s = 18) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
+  arrowUp: (c, s = 18) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
+  arrowDn: (c, s = 18) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
+  link:    (c, s = 18) => boldIC(FaLink,               c ?? _S.iconColor, s),
+  extLink: (c, s = 18) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
+  grid:    (c, s = 18) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
 };
 
 // ─── Styles ────────────────────────────────
@@ -765,7 +759,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Palette size={16} color="#000" strokeWidth={2.5} />
+            <FaPaintbrush size={16} style={{ color: "#000" }} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>COR DOS ÍCONES</div>
@@ -783,16 +777,16 @@ const AConfig = () => {
           <div style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 12 }}>PREVIEW DOS ÍCONES</div>
           <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap" }}>
             {[
-              boldIC(Wallet,       cfg.iconColor, 22),
-              boldIC(LogOut,       cfg.iconColor, 22),
-              boldIC(Clock,        cfg.iconColor, 22),
-              solidIC(CircleCheck, cfg.iconColor, 22),
-              solidIC(CircleX,     cfg.iconColor, 22),
-              boldIC(Trophy,       cfg.iconColor, 22),
-              boldIC(Ticket,       cfg.iconColor, 22),
-              solidIC(Info,        cfg.iconColor, 22),
-              boldIC(ExternalLink, cfg.iconColor, 22),
-              solidIC(Zap,         cfg.iconColor, 22),
+              boldIC(FaWallet,       cfg.iconColor, 22),
+              boldIC(FaRightFromBracket,       cfg.iconColor, 22),
+              boldIC(FaClock,        cfg.iconColor, 22),
+              solidIC(FaCircleCheck, cfg.iconColor, 22),
+              solidIC(FaCircleXmark,     cfg.iconColor, 22),
+              boldIC(FaTrophy,       cfg.iconColor, 22),
+              boldIC(FaTicket,       cfg.iconColor, 22),
+              solidIC(FaCircleInfo,        cfg.iconColor, 22),
+              boldIC(FaArrowUpRightFromSquare, cfg.iconColor, 22),
+              solidIC(FaBolt,         cfg.iconColor, 22),
             ].map((icon, i) => (
               <div key={i} style={{ width: 36, height: 36, borderRadius: 10, background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {icon}
@@ -806,7 +800,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Sliders size={16} color="#000" strokeWidth={2.5} />
+            <FaSliders size={16} style={{ color: "#000" }} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>GLOW DA MOEDA</div>
@@ -848,10 +842,10 @@ const AConfig = () => {
       {/* ── Botões de ação ── */}
       <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
         <Btn v="outline" onClick={handleReset} s={{ flex: 1 }}>
-          <RefreshCw size={14} strokeWidth={2.5} /> RESTAURAR PADRÃO
+          <FaArrowsRotate size={14} /> RESTAURAR PADRÃO
         </Btn>
         <Btn onClick={handleSave} disabled={saving} s={{ flex: 1 }}>
-          <Save size={14} strokeWidth={2.5} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
+          <FaDownload size={14} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
         </Btn>
       </div>
 
@@ -1014,7 +1008,7 @@ export default function AdminApp() {
                   if (item.k === "logout") {
                     return (
                       <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4, transition: "background 0.15s ease, color 0.15s ease" }}>
-                        {boldIC(LogOut, "rgba(255,255,255,0.55)", 16)}
+                        {boldIC(FaRightFromBracket, "rgba(255,255,255,0.55)", 16)}
                         Sair
                       </div>
                     );
@@ -1025,7 +1019,7 @@ export default function AdminApp() {
                     return (
                       <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.12)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent", transition: "background 0.15s ease, color 0.15s ease" }}>
                         <span style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 8 }}>
-                          <Settings size={13} strokeWidth={2} style={{ flexShrink: 0 }} />
+                          <FaGear size={13} style={{ flexShrink: 0 }} />
                           {item.label}
                         </span>
                       </div>

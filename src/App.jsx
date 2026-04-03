@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  ChevronLeft, LogOut, Wallet, X, CircleCheck, CircleX,
-  Clock, CloudUpload, Ticket, Trophy, Camera, Send, Music2,
-  ExternalLink, Info, CircleAlert, Zap, Link,
-  Eye, Search, Users, CircleDollarSign, LayoutGrid,
-  Pencil, Trash2, Ban, GripVertical, ChevronUp, ChevronDown,
-} from "lucide-react";
+import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleDollarSign, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
 import { createClient } from "@supabase/supabase-js";
 
 import AdminApp from "./resusys-painel-admin";
@@ -66,25 +60,25 @@ const D = {
 // ═══════════════════════════════════════════
 // filled circle icons: fill the background shape
 const solidIC = (Icon, c, s) => (
-  <Icon size={s} fill={c} color={c} strokeWidth={0} />
+  <Icon size={s} style={{ color: c }} />
 );
 // bold stroke icons: heavy stroke = solid look
 const boldIC = (Icon, c, s) => (
-  <Icon size={s} color={c} strokeWidth={2.5} fill="none" />
+  <Icon size={s} style={{ color: c }} />
 );
 
 const IC = {
-  check:   (c, s = 18) => solidIC(CircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 18) => solidIC(CircleX,           c ?? _S.iconColor, s),
-  info:    (c, s = 18) => solidIC(Info,               c ?? _S.iconColor, s),
-  clock:   (c, s = 18) => boldIC(Clock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 18) => boldIC(Wallet,             c ?? _S.iconColor, s),
-  upload:  (c, s = 18) => boldIC(CloudUpload,        c ?? _S.iconColor, s),
-  logout:  (c, s = 18) => boldIC(LogOut,             c ?? _S.iconColor, s),
-  back:    (c, s = 18) => boldIC(ChevronLeft,        c ?? _S.iconColor, s),
-  trophy:  (c, s = 18) => boldIC(Trophy,             c ?? _S.iconColor, s),
-  ticket:  (c, s = 18) => boldIC(Ticket,             c ?? _S.iconColor, s),
-  link:    (c, s = 18) => boldIC(ExternalLink,       c ?? _S.iconColor, s),
+  check:   (c, s = 18) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 18) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 18) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  clock:   (c, s = 18) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 18) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  upload:  (c, s = 18) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
+  logout:  (c, s = 18) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 18) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  trophy:  (c, s = 18) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
+  ticket:  (c, s = 18) => boldIC(FaTicket,             c ?? _S.iconColor, s),
+  link:    (c, s = 18) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
 };
 
 // ─── Hook para leitura de settings ─────────
@@ -418,9 +412,9 @@ const RaffleScreen = ({ go, profile }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <Camera size={22} strokeWidth={2} /> },
-    { href: C.social.telegram,  icon: <Send     size={22} strokeWidth={2} /> },
-    { href: C.social.tiktok,    icon: <Music2   size={22} strokeWidth={2} /> },
+    { href: C.social.instagram, icon: <FaCamera size={22} /> },
+    { href: C.social.telegram,  icon: <FaPaperPlane size={22} /> },
+    { href: C.social.tiktok,    icon: <FaMusic size={22} /> },
   ];
 
   return (
@@ -480,12 +474,12 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && (
                   <div onClick={() => window.open(raffle.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Link size={16} color="rgba(255,255,255,0.60)" strokeWidth={2.5} />
+                    <FaLink size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
                   </div>
                 )}
                 {raffle.link2 && (
                   <div onClick={() => window.open(raffle.link2, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Link size={16} color="rgba(255,255,255,0.60)" strokeWidth={2.5} />
+                    <FaLink size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
                   </div>
                 )}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -525,7 +519,7 @@ const RaffleScreen = ({ go, profile }) => {
         </div>
       )}
 
-      {/* Modal: Info sorteio */}
+      {/* Modal: FaCircleInfo sorteio */}
       {infoModal && raffle && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.24s" }} onClick={() => setInfoModal(false)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
@@ -593,9 +587,9 @@ const UserDash = ({ profile, go, onLogout }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <Camera size={22} strokeWidth={2} /> },
-    { href: C.social.telegram,  icon: <Send     size={22} strokeWidth={2} /> },
-    { href: C.social.tiktok,    icon: <Music2   size={22} strokeWidth={2} /> },
+    { href: C.social.instagram, icon: <FaCamera size={22} /> },
+    { href: C.social.telegram,  icon: <FaPaperPlane size={22} /> },
+    { href: C.social.tiktok,    icon: <FaMusic size={22} /> },
   ];
 
   return (
@@ -650,7 +644,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && (
                               <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <ExternalLink size={16} color="rgba(255,255,255,0.60)" strokeWidth={2.5} />
+                                <FaArrowUpRightFromSquare size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
                               </div>
                             )}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -669,7 +663,7 @@ const UserDash = ({ profile, go, onLogout }) => {
         }
       </div>
 
-      {/* Info Modal */}
+      {/* FaCircleInfo Modal */}
       {info && (
         <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 20, animation: "fadeIn 0.24s" }} onClick={() => setInfo(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 380, animation: "scaleIn 0.35s ease-out" }}>
