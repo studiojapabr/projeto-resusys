@@ -133,7 +133,7 @@ const Spotlight = () => {
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
-  <div className="premium-glass" onClick={onClick} style={{ background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, position: "relative", overflow: "hidden", animation: a, ...s }}>
+  <div className="premium-glass" onClick={onClick} style={{ background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, position: "relative", animation: a, ...s }}>
     <Spotlight />{children}
   </div>
 );
@@ -985,58 +985,31 @@ export default function AdminApp() {
       <div style={{ maxWidth: 430, width: "100%", padding: "0 20px 44px", boxSizing: "border-box", margin: "0 auto" }}>
 
         {/* Header */}
-        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
+        <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, overflow: "visible" }} a="fadeUp 0.6s ease-out">
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>
             {pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}
           </span>
           <div ref={menuRef} style={{ position: "relative" }}>
-            <div
-              onClick={() => setMenuOpen(o => !o)}
-              style={{ width: 40, height: 40, borderRadius: "50%", background: menuOpen ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: menuOpen ? `0 3px 10px ${D.orangeGlow}` : "none", transition: "all 0.2s ease", position: "relative" }}
-            >
+            <div onClick={() => setMenuOpen(o => !o)} style={{ width: 40, height: 40, borderRadius: "50%", background: menuOpen ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", position: "relative" }}>
               {IC.grid(menuOpen ? "white" : "rgba(255,255,255,0.70)")}
               {pendTotal > 0 && !menuOpen && (
                 <div style={{ position: "absolute", top: -2, right: -2, minWidth: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 800, fontFamily: D.sora, color: "white", padding: "0 3px" }}>{pendTotal > 9 ? "9+" : pendTotal}</div>
               )}
             </div>
-          </div>
-        </Glass>
-
-        {/* Menu Dropdown — fora do Glass para evitar conflito de stacking context */}
-        {menuOpen && (
-          <div ref={menuRef}
-            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 199 }}
-            onClick={() => setMenuOpen(false)}
-          >
-            <div
-              style={{ position: "absolute", top: 72, right: "calc((100% - 430px) / 2 + 20px)", minWidth: 200, zIndex: 200, background: "rgba(8,8,8,0.97)", backdropFilter: "blur(28px)", WebkitBackdropFilter: "blur(28px)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)" }}
-              onClick={e => e.stopPropagation()}
-            >
+            {menuOpen && (
+              <div style={{ position: "absolute", top: "calc(100% + 10px)", right: 0, minWidth: 200, zIndex: 9999, background: "rgba(8,8,8,0.97)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)", boxShadow: "0 20px 60px rgba(0,0,0,0.8)" }} onClick={e => e.stopPropagation()}>
                 {menuItems.map(item => {
                   if (item.k === "logout") {
                     return (
-                      <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4, transition: "background 0.15s ease, color 0.15s ease" }}>
-                        {<SvgBack size={18} color="rgba(255,255,255,0.55)" />}
+                      <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4 }}>
                         Sair
-                      </div>
-                    );
-                  }
-                  // Config item gets a special icon
-                  if (item.k === "config") {
-                    const active = adminTab === item.k;
-                    return (
-                      <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.12)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent", transition: "background 0.15s ease, color 0.15s ease" }}>
-                        <span style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 8 }}>
-                          <FaGear size={25} style={{ flexShrink: 0 }} />
-                          {item.label}
-                        </span>
                       </div>
                     );
                   }
                   const active = adminTab === item.k;
                   return (
-                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.10)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent", transition: "background 0.15s ease, color 0.15s ease" }}>
+                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.10)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent" }}>
                       <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
                       {item.badge > 0 && (
                         <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
@@ -1045,9 +1018,9 @@ export default function AdminApp() {
                   );
                 })}
               </div>
-            </div>
+            )}
           </div>
-        )}
+        </Glass>
 
         {/* Tab title */}
         <div style={{ margin: "18px 0 8px 4px" }}>
