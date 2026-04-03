@@ -65,6 +65,7 @@ const Styles = () => <style>{`
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: rgba(35,35,35,0.25); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 10px; letter-spacing: 0.5px; }
+  input, textarea { font-size: 10px; font-family: ${D.sora}; font-weight: 600; }
   input, textarea, button { transition: all 0.2s ease; outline: none; } button { border: none; appearance: none; -webkit-appearance: none; }
   input:focus, textarea:focus { outline: none; border-color: #232323 !important; box-shadow: 0 0 0 2px rgba(35,35,35,0.14), 0 0 14px rgba(35,35,35,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -194,9 +195,9 @@ const ToastC = ({ msg, type }) => {
   );
 };
 
-const SvgPhone    = ({ size = 18 }) => <Globe size={size} strokeWidth={1.75} />;
-const SvgTelegram = ({ size = 18 }) => <MessageCircle size={size} strokeWidth={1.75} />;
-const SvgTiktok   = ({ size = 18 }) => <Music2 size={size} strokeWidth={1.75} />;
+const SvgPhone    = ({ size = 14 }) => <Globe size={size} strokeWidth={1.75} />;
+const SvgTelegram = ({ size = 14 }) => <MessageCircle size={size} strokeWidth={1.75} />;
+const SvgTiktok   = ({ size = 14 }) => <Music2 size={size} strokeWidth={1.75} />;
 
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
@@ -395,9 +396,9 @@ const RaffleScreen = ({ go, profile }) => {
   };
 
   const socialLinks = [
-    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={18} /> },
-    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={18} /> },
-    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={18} /> },
+    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={14} /> },
+    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={14} /> },
+    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={14} /> },
   ];
 
   return (
@@ -570,9 +571,9 @@ const UserDash = ({ profile, go, onLogout }) => {
   };
 
   const socialLinks = [
-    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={18} /> },
-    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={18} /> },
-    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={18} /> },
+    { href: "https://instagram.com/SEU_PERFIL", icon: <SvgPhone size={14} /> },
+    { href: "https://t.me/SEU_CANAL",  icon: <SvgTelegram size={14} /> },
+    { href: "https://tiktok.com/@SEU_PERFIL",    icon: <SvgTiktok size={14} /> },
   ];
 
   return (
