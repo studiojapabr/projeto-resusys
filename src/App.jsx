@@ -57,7 +57,7 @@ const Styles = () => <style>{`
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: rgba(140,252,0,0.25); border-radius: 10px; }
-  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; }
   input:focus, textarea:focus { outline: none; border-color: #8cfc00 !important; box-shadow: 0 0 0 2px rgba(140,252,0,0.14), 0 0 14px rgba(140,252,0,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -67,10 +67,10 @@ const Styles = () => <style>{`
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
   @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(140,252,0,0.22)} 50%{box-shadow:0 0 24px rgba(140,252,0,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(160,160,160,0.50); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(160,160,160,0.60); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -80,13 +80,13 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { filter: brightness(0.78); transform: scale(1.01); }
-  [data-click]:hover, .clickable:hover { filter: brightness(0.78); transition: filter 0.18s ease; }
-  a[href]:hover { filter: brightness(0.78); transition: filter 0.18s ease; }
-  .ic-btn:hover { filter: brightness(0.78); }
+  .btn-hover-grad:hover { filter: brightness(0.55); transform: scale(1.01); }
+  [data-click]:hover, .clickable:hover { filter: brightness(0.55); transition: filter 0.18s ease; }
+  a[href]:hover { filter: brightness(0.55); transition: filter 0.18s ease; }
+  .ic-btn:hover { filter: brightness(0.55); }
   .ic-btn { transition: filter 0.18s ease, transform 0.18s ease; cursor: pointer; }
-  .ic-btn:active { transform: scale(0.94); filter: brightness(0.65); }
-  .txt-link:hover { filter: brightness(0.78); }
+  .ic-btn:active { transform: scale(0.94); filter: brightness(0.45); }
+  .txt-link:hover { filter: brightness(0.55); }
   .txt-link { transition: filter 0.18s ease; cursor: pointer; }
 `}</style>;
 
@@ -95,7 +95,7 @@ const Spotlight = () => {
   const handleMove = (e) => { const el = ref.current; if (!el) return; const rect = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - rect.left) + "px"; el.style.top = (e.clientY - rect.top) + "px"; };
   const handleLeave = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const parent = ref.current?.parentElement; if (!parent) return; parent.addEventListener("mousemove", handleMove); parent.addEventListener("mouseleave", handleLeave); return () => { parent.removeEventListener("mousemove", handleMove); parent.removeEventListener("mouseleave", handleLeave); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(192,192,192,0.10) 0%, rgba(136,136,136,0.05) 30%, rgba(192,192,192,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return null;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -112,8 +112,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" },
-    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" },
+    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" },
+    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" },
     danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -125,8 +125,8 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
   <div style={{ marginBottom: 16, ...s }}>
     {label && <label style={{ display: "block", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.dim, marginBottom: 8, paddingLeft: 20 }}>{label}</label>}
     {multi
-      ? <textarea placeholder={placeholder} value={value} onChange={onChange} rows={2} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, resize: "none", backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textTransform: "uppercase", minHeight: 40, textAlign: "left", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />
-      : <input type={type} placeholder={placeholder} value={value} onChange={onChange} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textTransform: "uppercase", textAlign: "left", minHeight: 40, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />}
+      ? <textarea placeholder={placeholder} value={value} onChange={onChange} rows={2} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, resize: "none", backdropFilter: D.blur, WebkitBackdropFilter: D.blur, minHeight: 40, textAlign: "left", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />
+      : <input type={type} placeholder={placeholder} value={value} onChange={onChange} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textAlign: "left", minHeight: 40, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />}
   </div>
 );
 
@@ -148,7 +148,7 @@ const ToastC = ({ msg, type }) => msg ? (
     backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
     border: `1px solid ${D.glassBorder}`,
     borderRadius: D.radiusSm,
-    boxShadow: `0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)`,
+    boxShadow: "none",
     display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
     padding: "14px 20px",
   }}>
@@ -178,8 +178,7 @@ const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     <BgResponsive />
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
-    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
+        <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
 );
 
@@ -196,8 +195,9 @@ const IC = {
 };
 
 const MIcon = () => (
-  <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", filter: "drop-shadow(0px 8px 24px rgba(0,0,0,0.60))" }} />
+  <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
+    <div style={{ position: "absolute", inset: -20, background: "radial-gradient(circle, rgba(140,252,0,0.22) 0%, rgba(140,252,0,0.08) 50%, transparent 75%)", borderRadius: "50%", filter: "blur(12px)", pointerEvents: "none" }} />
+    <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
   </div>
 );
 
@@ -222,9 +222,9 @@ const Landing = ({ go }) => (
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.9s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-          <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
+          <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}>BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>{C.landing.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 14 }}>{C.landing.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>{C.landing.subtitle}</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -261,7 +261,7 @@ const LoginScreen = ({ go }) => {
             <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }}>{C.login.title}</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -301,9 +301,9 @@ const RegisterScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-            <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
+            <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}>BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.register.title}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }}>{C.register.title}</h1>
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -342,7 +342,7 @@ const RaffleBtnUser = ({ go, profile }) => {
   return (
     <div
       onClick={() => go("raffle")}
-      className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}
+      className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite" }}
     >
       {IC.ticket("white", 18)}
       {myTickets > 0 && (
@@ -457,7 +457,7 @@ const RaffleScreen = ({ go, profile }) => {
         </Glass>
 
         {/* ── Título principal — idêntico ao UserDash ── */}
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.raffle.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }}>{C.raffle.title}</h1>
 
         {/* ── Subtitle — idêntico ao UserDash ── */}
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
@@ -471,7 +471,7 @@ const RaffleScreen = ({ go, profile }) => {
           {socialLinks.map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
-          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 3px 12px rgba(0,0,0,0.50)", animation: "pulse 2.4s infinite" }}>
+          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, animation: "pulse 2.4s infinite" }}>
             {IC.ticket("white", 18)}
           </div>
         </div>
@@ -492,10 +492,10 @@ const RaffleScreen = ({ go, profile }) => {
             position: "relative",
             overflow: "hidden",
             animation: "slideUp 0.6s ease-out 0.25s both",
-            boxShadow: "0 16px 40px rgba(0,0,0,0.60), 0 4px 12px rgba(0,0,0,0.40)",
+            boxShadow: "none",
           }}>
             {/* Brilho decorativo no topo */}
-            <div style={{ position: "absolute", top: -40, right: -40, width: 180, height: 180, background: "radial-gradient(circle, rgba(255,255,255,0.12), transparent 65%)", borderRadius: "50%", pointerEvents: "none" }} />
+            
             {/* Vinheta escura no fundo */}
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(to top, rgba(0,0,0,0.28), transparent)", pointerEvents: "none" }} />
 
@@ -525,7 +525,7 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
                 {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
-                <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 3px 12px rgba(0,0,0,0.50)", flexShrink: 0 }}>
+                <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span>
                 </div>
               </div>
@@ -665,12 +665,12 @@ const UserDash = ({ profile, go, onLogout }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.wallet()}</div>
+            <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none" }}>{IC.wallet()}</div>
             <div onClick={onLogout} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.logout("rgba(255,255,255,0.60)")}</div>
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both", color: D.white }}>{C.dashboard.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }}>{C.dashboard.title}</h1>
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>{C.dashboard.subtitle}</span>
         </div>
@@ -696,8 +696,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                   const aprovado = done[m.id] === "aprovado";
                   return (
                     <Glass key={m.id} s={{ padding: "28px 24px", background: aprovado ? "rgba(192,192,192,0.10)" : completed ? "rgba(192,192,192,0.06)" : D.glass, borderColor: aprovado ? "rgba(192,192,192,0.35)" : completed ? "rgba(192,192,192,0.18)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
-                      <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: `radial-gradient(ellipse at 100% 50%,rgba(192,192,192,0.06),transparent 70%)`, pointerEvents: "none" }} />
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1, zIndex: 1 }}>
                           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: completed ? D.orange : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}><span className={completed ? "pulse-dot-green" : "pulse-dot-red"} /> TAREFA {String(i + 1).padStart(2, "0")}</span>
                           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, lineHeight: 1.15, textTransform: "uppercase", margin: "8px 0 10px", color: completed ? D.muted : D.white, letterSpacing: 0.5 }}>{m.titulo}</h2>
@@ -709,12 +708,11 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
+                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
-                          <div style={{ position: "absolute", inset: -20, background: "linear-gradient(45deg, transparent 0%, rgba(192,192,192,0.25) 30%, rgba(200,200,200,0.35) 50%, rgba(160,160,160,0.20) 75%, transparent 100%)", borderRadius: "50%", filter: "blur(28px)", pointerEvents: "none" }} />
-                          <MIcon />
+                                                    <MIcon />
                         </div>
                       </div>
                     </Glass>
@@ -767,7 +765,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                     border: `1px solid ${D.glassBorder}`,
                     borderRadius: 16, padding: "12px 16px",
                     fontFamily: D.sora, fontSize: 12, fontWeight: 600,
-                    color: D.white, textTransform: "uppercase", letterSpacing: 0.3,
+                    color: D.white, letterSpacing: 0.3,
                     resize: "none", outline: "none",
                     transition: "border-color 0.2s ease",
                   }}
@@ -821,8 +819,8 @@ const Withdrawal = ({ go, profile }) => {
   if (ok) return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
-        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.check("white", 20)}</div>
-        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word" }}>{C.success.title}</h2>
+        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("white", 20)}</div>
+        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{C.success.title}</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
@@ -837,7 +835,7 @@ const Withdrawal = ({ go, profile }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 10 }}>{C.withdrawal.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>

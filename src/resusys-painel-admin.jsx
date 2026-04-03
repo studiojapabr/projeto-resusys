@@ -37,7 +37,7 @@ const Styles = () => <style>{`
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: rgba(140,252,0,0.25); border-radius: 10px; }
-  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; }
   input:focus, textarea:focus { outline: none; border-color: #8cfc00 !important; box-shadow: 0 0 0 2px rgba(140,252,0,0.14), 0 0 14px rgba(140,252,0,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -47,10 +47,10 @@ const Styles = () => <style>{`
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
   @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(140,252,0,0.22)} 50%{box-shadow:0 0 24px rgba(140,252,0,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(160,160,160,0.50); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(160,160,160,0.60); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -60,11 +60,11 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { filter: brightness(0.78); transform: scale(1.01); }
-  .ic-btn:hover { filter: brightness(0.78); }
+  .btn-hover-grad:hover { filter: brightness(0.55); transform: scale(1.01); }
+  .ic-btn:hover { filter: brightness(0.55); }
   .ic-btn { transition: filter 0.18s ease, transform 0.18s ease; cursor: pointer; }
-  .ic-btn:active { transform: scale(0.94); filter: brightness(0.65); }
-  .txt-link:hover { filter: brightness(0.78); }
+  .ic-btn:active { transform: scale(0.94); filter: brightness(0.45); }
+  .txt-link:hover { filter: brightness(0.55); }
   .txt-link { transition: filter 0.18s ease; cursor: pointer; }
 `}</style>;
 
@@ -73,7 +73,7 @@ const Spotlight = () => {
   const hm = (e) => { const el = ref.current; if (!el) return; const r = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - r.left) + "px"; el.style.top = (e.clientY - r.top) + "px"; };
   const hl = () => { if (ref.current) ref.current.style.opacity = "0"; };
   useEffect(() => { const p = ref.current?.parentElement; if (!p) return; p.addEventListener("mousemove", hm); p.addEventListener("mouseleave", hl); return () => { p.removeEventListener("mousemove", hm); p.removeEventListener("mouseleave", hl); }; }, []);
-  return <div ref={ref} style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(192,192,192,0.10) 0%, rgba(136,136,136,0.05) 30%, rgba(192,192,192,0.02) 55%, transparent 75%)", transform: "translate(-50%,-50%)", pointerEvents: "none", opacity: 0, transition: "opacity 0.2s ease", zIndex: 0 }} />;
+  return null;
 };
 
 const Glass = ({ children, s = {}, a = "", onClick }) => (
@@ -95,11 +95,11 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: `0 8px 20px ${D.orangeGlow}`, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: "none", textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" }, success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" }, success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -107,8 +107,8 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
   <div style={{ marginBottom: 16, ...s }}>
     {label && <label style={{ display: "block", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.dim, marginBottom: 8, paddingLeft: 20 }}>{label}</label>}
     {multi
-      ? <textarea placeholder={placeholder} value={value} onChange={onChange} rows={2} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, resize: "none", backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textTransform: "uppercase", minHeight: 40, textAlign: "left", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />
-      : <input type={type} placeholder={placeholder} value={value} onChange={onChange} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textTransform: "uppercase", textAlign: "left", minHeight: 40, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />}
+      ? <textarea placeholder={placeholder} value={value} onChange={onChange} rows={2} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, resize: "none", backdropFilter: D.blur, WebkitBackdropFilter: D.blur, minHeight: 40, textAlign: "left", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />
+      : <input type={type} placeholder={placeholder} value={value} onChange={onChange} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textAlign: "left", minHeight: 40, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }} />}
   </div>
 );
 
@@ -127,7 +127,7 @@ const ToastC = ({ msg, type }) => msg ? (
     backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
     border: `1px solid ${D.glassBorder}`,
     borderRadius: D.radiusSm,
-    boxShadow: `0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)`,
+    boxShadow: "none",
     display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
     padding: "14px 20px",
   }}>
@@ -152,8 +152,7 @@ const BG = ({ children }) => (
   <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
     {BG_IMG && <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${BG_IMG})`, backgroundSize: "cover", backgroundPosition: "center top", backgroundRepeat: "no-repeat", opacity: 1, pointerEvents: "none" }} />}
     <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
-    <div style={{ position: "fixed", top: "5%", right: "-8%", width: 280, height: 280, background: "radial-gradient(circle, rgba(192,192,192,0.06), transparent 70%)", borderRadius: "50%", filter: "blur(48px)", pointerEvents: "none", animation: "glowPulse 7s ease-in-out infinite" }} />
-    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
+        <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
   </div>
 );
 
@@ -259,7 +258,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#000000" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#000000" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -710,7 +709,7 @@ export default function AdminApp() {
               onClick={() => setMenuOpen(o => !o)}
               style={{
                 width: 40, height: 40, borderRadius: "50%",
-                background: menuOpen ? D.btnGrad : "rgba(255,255,255,0.08)",
+                background: menuOpen ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.08)",
                 border: "1.5px solid rgba(255,255,255,0.15)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 cursor: "pointer",
@@ -737,7 +736,7 @@ export default function AdminApp() {
                   WebkitBackdropFilter: "blur(28px)",
                   border: `1px solid ${D.glassBorder}`,
                   borderRadius: D.radiusSm,
-                  boxShadow: "0 14px 34px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  boxShadow: "none",
                   padding: "8px 0",
                   animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)",
                 }}
@@ -788,9 +787,9 @@ export default function AdminApp() {
                         fontWeight: active ? 800 : 700,
                         textTransform: "uppercase",
                         letterSpacing: 0.4,
-                        color: active ? D.red : "rgba(255,255,255,0.72)",
+                        color: active ? "#8cfc00" : "rgba(255,255,255,0.72)",
                         background: active ? "rgba(255,103,9,0.10)" : "transparent",
-                        borderLeft: active ? `3px solid ${D.red}` : "3px solid transparent",
+                        borderLeft: active ? "3px solid #8cfc00" : "3px solid transparent",
                         transition: "background 0.15s ease, color 0.15s ease",
                       }}
                     >
@@ -807,7 +806,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
         </div>
 
         {loadingData
