@@ -88,21 +88,21 @@ const IC = {
 const SvgBack = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color} style={{ transform: "rotate(180deg)" }}><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg>;
 
 // ─── Styles ────────────────────────────────
-const Styles = () => <style>{`
+const Styles = () => <style>{"
   @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: ${"rgba(35,35,35,0.25)"}; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(35,35,35,0.25); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; outline: none; } button { border: none; appearance: none; -webkit-appearance: none; }
-  input:focus, textarea:focus { outline: none; border-color: ${"#232323"} !important; }
+  input:focus, textarea:focus { outline: none; border-color: #232323 !important; }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px ${"rgba(35,35,35,0.22)"}} 50%{box-shadow:0 0 24px ${"rgba(35,35,35,0.35)"}} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(35,35,35,0.22)} 50%{box-shadow:0 0 24px rgba(35,35,35,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
@@ -119,11 +119,11 @@ const Styles = () => <style>{`
   .txt-link:hover { filter: brightness(0.55); }
   .txt-link { transition: filter 0.18s ease; cursor: pointer; }
   input[type=range] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.12); outline: none; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: ${"#232323"}; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #232323; cursor: pointer; }
   input[type=color] { -webkit-appearance: none; padding: 0; border: none; cursor: pointer; background: transparent; }
   input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
   input[type=color]::-webkit-color-swatch { border: none; border-radius: 10px; }
-`}</style>;
+"}</style>;
 
 const Spotlight = () => {
   const ref = useRef(null);
@@ -156,7 +156,7 @@ const Av = ({ ini, sz = 40 }) => (
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${"rgba(35,35,35,0.25)"}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${"rgba(35,35,35,0.25)"}` }, danger: { background: "transparent", color: "#EF4444", border: "1px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: "1px solid rgba(35,35,35,0.25)" }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: "1px solid rgba(35,35,35,0.25)" }, danger: { background: "transparent", color: "#EF4444", border: "1px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, boxShadow: "none", ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -837,7 +837,7 @@ const AConfig = () => {
         <div style={{ padding: "28px 20px", background: "rgba(0,0,0,0.40)", borderRadius: D.radiusSm, border: `1px solid ${D.glassBorder}`, marginTop: 4, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
           <span style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5 }}>PREVIEW AO VIVO</span>
           <div style={{ position: "relative", width: 110, height: 110, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, ${"rgba(35,35,35,0.15)"} 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: -40, background: "radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, rgba(35,35,35,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
             <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
           </div>
         </div>
@@ -941,7 +941,7 @@ export default function AdminApp() {
 
   if (session === undefined) return (
     <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `1px solid ${"rgba(35,35,35,0.15)"}`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: "1px solid rgba(35,35,35,0.15)", borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
     </div></>
   );
 
@@ -1010,7 +1010,7 @@ export default function AdminApp() {
                   }
                   const active = adminTab === item.k;
                   return (
-                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#232323" : "rgba(255,255,255,0.72)", background: active ? "rgba(35,35,35,0.07)" : "transparent", borderLeft: active ? `1px solid ${"#232323"}` : "1px solid transparent" }}>
+                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#232323" : "rgba(255,255,255,0.72)", background: active ? "rgba(35,35,35,0.07)" : "transparent", borderLeft: active ? "1px solid #232323" : "1px solid transparent" }}>
                       <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
                       {item.badge > 0 && (
                         <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
