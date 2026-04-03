@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSackDollar, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "./Icons";
+import { Wallet, LogOut, ChevronLeft, X, Check, Clock, CloudUpload, Ticket, Trophy, Info, ExternalLink, Instagram, Send, Music, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
 import AdminApp from "./resusys-painel-admin";
@@ -57,195 +57,28 @@ const D = {
 
 // ═══════════════════════════════════════════
 // ICON SYSTEM — Lucide React (filled/solid)
-// ═══════════════════════════════════════════
-// filled circle icons: fill the background shape
-const solidIC = (Icon, c, s) => (
-  <Icon size={s} color={c} />
-);
-// bold stroke icons: heavy stroke = solid look
-const boldIC = (Icon, c, s) => (
-  <Icon size={s} color={c} />
-);
 
 const IC = {
-  check:   (c, s = 10) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 10) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 10) => <SvgInfo size={s} color={c ?? _S.iconColor} />,
-  clock:   (c, s = 10) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 10) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  upload:  (c, s = 10) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
-  logout:  (c, s = 10) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 10) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  trophy:  (c, s = 10) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
-  ticket:  (c, s = 10) => boldIC(FaTicket,             c ?? _S.iconColor, s),
-  link:    (c, s = 10) => <SvgLink size={s} color={c ?? _S.iconColor} />,
+  check:   (col = "#ffffff", s = 14) => <Check size={s} color={col} strokeWidth={1.75} />,
+  x:       (col = "#ffffff", s = 14) => <X size={s} color={col} strokeWidth={1.75} />,
+  clock:   (col = "#ffffff", s = 14) => <Clock size={s} color={col} strokeWidth={1.75} />,
+  wallet:  (col = "#ffffff", s = 14) => <Wallet size={s} color={col} strokeWidth={1.75} />,
+  upload:  (col = "#ffffff", s = 14) => <CloudUpload size={s} color={col} strokeWidth={1.75} />,
+  logout:  (col = "#ffffff", s = 14) => <LogOut size={s} color={col} strokeWidth={1.75} />,
+  back:    (col = "#ffffff", s = 14) => <ChevronLeft size={s} color={col} strokeWidth={1.75} />,
+  trophy:  (col = "#ffffff", s = 14) => <Trophy size={s} color={col} strokeWidth={1.75} />,
+  ticket:  (col = "#ffffff", s = 14) => <Ticket size={s} color={col} strokeWidth={1.75} />,
+  info:    (col = "#ffffff", s = 14) => <Info size={s} color={col} strokeWidth={1.75} />,
+  link:    (col = "#ffffff", s = 14) => <ExternalLink size={s} color={col} strokeWidth={1.75} />,
 };
 
-// ═══════════════════════════════════════════
-// SVG ICONS — Redes Sociais Customizadas
-// ═══════════════════════════════════════════
-const SvgLink     = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color}><path d="M7.835,16.17c-.23-.23-.446-.482-.641-.748-.325-.446-.227-1.072,.22-1.397,.446-.325,1.071-.227,1.397,.219,.129,.178,.274,.349,.437,.511,.803,.803,1.87,1.245,3.005,1.245s2.203-.442,3.005-1.245l5.5-5.5c1.657-1.657,1.657-4.354,0-6.011s-4.354-1.657-6.011,0l-1.058,1.058c-.391,.391-1.023,.391-1.414,0s-.391-1.023,0-1.414l1.058-1.058c2.437-2.438,6.402-2.438,8.839,0,2.437,2.437,2.437,6.402,0,8.839l-5.5,5.5c-1.18,1.181-2.75,1.831-4.419,1.831s-3.239-.65-4.418-1.83Zm-1.582,7.83c1.67,0,3.239-.65,4.419-1.831l1.058-1.058c.391-.39,.391-1.023,0-1.414-.39-.391-1.023-.39-1.414,0l-1.059,1.058c-.803,.803-1.87,1.245-3.005,1.245s-2.202-.442-3.005-1.245-1.245-1.87-1.245-3.005,.442-2.203,1.245-3.005l5.5-5.5c.803-.803,1.87-1.245,3.005-1.245s2.203,.442,3.005,1.245c.16,.161,.306,.332,.436,.51,.324,.447,.949,.547,1.397,.221,.447-.325,.546-.95,.221-1.397-.19-.262-.405-.513-.639-.747-1.181-1.182-2.751-1.832-4.42-1.832s-3.239,.65-4.419,1.831L1.834,13.331C.653,14.511,.003,16.081,.003,17.75c0,1.669,.65,3.239,1.831,4.419,1.18,1.181,2.749,1.831,4.419,1.831Z"/></svg>;
-const SvgInfo     = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color}><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"/><path d="M12,10H11a1,1,0,0,0,0,2h1v6a1,1,0,0,0,2,0V12A2,2,0,0,0,12,10Z"/><circle cx="12" cy="6.5" r="1.5"/></svg>;
-const SvgBack     = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color} style={{ transform: "rotate(180deg)" }}><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg>;
-const SvgPhone    = ({ size = 24 }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="M12,0C5.383,0,0,5.383,0,12s5.383,12,12,12,12-5.383,12-12S18.617,0,12,0Zm5.665,16.587l-.522,.6c-.551,.552-1.277,.813-2,.813-3.714,0-9.143-5.143-9.143-9.143,0-.723,.261-1.449,.813-2l.6-.522c.446-.446,1.17-.446,1.616,0l1,1.302c.446,.446,.446,1.17,0,1.616l-.851,1.069c.901,2.244,2.429,3.71,4.5,4.5l1.069-.851c.446-.446,1.17-.446,1.616,0l1.302,1c.446,.446,.446,1.17,0,1.616Z"/></svg>;
-const SvgTelegram = ({ size = 24 }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg>;
-const SvgTiktok   = ({ size = 24 }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg>;
+const SocialIcons = [
+  { href: "https://instagram.com/SEU_PERFIL", icon: <Instagram size={14} strokeWidth={1.75} /> },
+  { href: "https://t.me/SEU_CANAL",           icon: <Send size={14} strokeWidth={1.75} /> },
+  { href: "https://tiktok.com/@SEU_PERFIL",   icon: <Music size={14} strokeWidth={1.75} /> },
+];
 
-// ─── Hook para leitura de settings ─────────
-const useIsMobile = () => {
-  const [mobile, setMobile] = useState(window.innerWidth < 768);
-  useEffect(() => {
-    const fn = () => setMobile(window.innerWidth < 768);
-    window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
-  }, []);
-  return mobile;
-};
-
-// ─── Styles ────────────────────────────────
-const Styles = () => <style>{`
-  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
-  @font-face { font-family: 'Maver'; src: url('data:font/opentype;base64,T1RUTwANAIAAAwBQQ0ZGIPL1x6sAABNoAABuBERTSUcAAAABAAD5nAAAAAhHREVGLXIuhAAAgWwAAAEoR1BPU9rV2xsAAIKUAABjykdTVULKGQpQAADmYAAAEzxPUy8yaSqvaQAACoQAAABgY21hcOCC+eAAAA3gAAAFaGhlYWQVXdvXAAAA5AAAADZoaGVhB1wHVAAACmAAAAAkaG10eHnc+8sAAAEcAAAJRG1heHACWFAAAAAA3AAAAAZuYW1lQ8UqMAAACuQAAAL8cG9zdP+4ADIAABNIAAAAIAABAAIAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') format('opentype'); font-weight: normal; font-style: normal; }
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
-  ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(35,35,35,0.25); border-radius: 10px; }
-  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
-  input, textarea, button { transition: all 0.2s ease; outline: none; } button { border: none; appearance: none; -webkit-appearance: none; }
-  input:focus, textarea:focus { outline: none; border-color: #232323 !important; box-shadow: 0 0 0 2px rgba(35,35,35,0.14), 0 0 14px rgba(35,35,35,0.10); }
-  @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-  @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(35,35,35,0.22)} 50%{box-shadow:0 0 24px rgba(35,35,35,0.35)} }
-  @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
-  @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
-  @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
-  @keyframes countUp   { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
-  @keyframes popIn     { 0%{opacity:0;transform:scale(0.45)} 60%{transform:scale(1.02)} 100%{opacity:1;transform:scale(1)} }
-  @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
-  @keyframes spin      { to { transform: rotate(360deg); } }
-  .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
-  .btn-hover-grad:hover { filter: brightness(0.55); transform: scale(1.01); }
-  [data-click]:hover, .clickable:hover { filter: brightness(0.55); transition: filter 0.18s ease; }
-  a[href]:hover { filter: brightness(0.55); transition: filter 0.18s ease; }
-  .ic-btn:hover { filter: brightness(0.55); }
-  .ic-btn { transition: filter 0.18s ease, transform 0.18s ease; cursor: pointer; }
-  .ic-btn:active { transform: scale(0.94); filter: brightness(0.45); }
-  .txt-link:hover { filter: brightness(0.55); }
-  .txt-link { transition: filter 0.18s ease; cursor: pointer; }
-`}</style>;
-
-const Spotlight = () => {
-  const ref = useRef(null);
-  const handleMove = (e) => { const el = ref.current; if (!el) return; const rect = el.parentElement.getBoundingClientRect(); el.style.opacity = "1"; el.style.left = (e.clientX - rect.left) + "px"; el.style.top = (e.clientY - rect.top) + "px"; };
-  const handleLeave = () => { if (ref.current) ref.current.style.opacity = "0"; };
-  useEffect(() => { const parent = ref.current?.parentElement; if (!parent) return; parent.addEventListener("mousemove", handleMove); parent.addEventListener("mouseleave", handleLeave); return () => { parent.removeEventListener("mousemove", handleMove); parent.removeEventListener("mouseleave", handleLeave); }; }, []);
-  return null;
-};
-
-const Glass = ({ children, s = {}, a = "", onClick }) => (
-  <div className="premium-glass" onClick={onClick} style={{ background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, position: "relative", overflow: "hidden", animation: a, ...s }}>
-    <Spotlight />{children}
-  </div>
-);
-
-const BadgeC = ({ l, c = D.red }) => (
-  <span style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "5px 14px", borderRadius: 30, background: `${c}20`, color: c, fontSize: 12, fontFamily: D.sora, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", whiteSpace: "nowrap" }}>
-    <span style={{ width: 5, height: 5, borderRadius: "50%", background: c }} />{l}
-  </span>
-);
-
-const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = {
-    primary: { background: D.btnGrad, color: "#000000" },
-    success: { background: D.btnGrad, color: "#000000" },
-    danger:  { background: "transparent", color: "#EF4444", border: "1px solid rgba(239,68,68,0.30)" },
-    outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" },
-    ghost:   { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
-  };
-  return (
-    <div
-      className="btn-hover-grad"
-      onClick={disabled ? undefined : onClick}
-      style={{
-        padding: "10px 22px",
-        borderRadius: D.radius,
-        minHeight: 40,
-        width: "100%",
-        boxSizing: "border-box",
-        justifyContent: "center",
-        cursor: disabled ? "not-allowed" : "pointer",
-        fontFamily: D.sora,
-        fontSize: 12,
-        fontWeight: 700,
-        letterSpacing: 0.3,
-        textTransform: "uppercase",
-        transition: "filter 0.18s ease",
-        whiteSpace: "nowrap",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 10,
-        opacity: disabled ? 0.35 : 1,
-        userSelect: "none",
-        ...vs[v],
-        ...s,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi = false }) => (
-  <div style={{ marginBottom: 16, ...s }}>
-    {label && <label style={{ display: "block", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.dim, marginBottom: 8, paddingLeft: 20 }}>{label}</label>}
-    {multi
-      ? <textarea placeholder={placeholder} value={value} onChange={onChange} rows={2} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, resize: "none", backdropFilter: D.blur, WebkitBackdropFilter: D.blur, minHeight: 40, textAlign: "left" }} />
-      : <input type={type} placeholder={placeholder} value={value} onChange={onChange} style={{ width: "100%", padding: "12px 18px", background: D.glass, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, color: D.white, fontFamily: D.sora, fontSize: 12, fontWeight: 500, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, textAlign: "left", minHeight: 40 }} />}
-  </div>
-);
-
-const Chk = ({ checked, onChange, label }) => (
-  <div onClick={onChange} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", padding: "6px 0" }}>
-    <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: D.muted }}>{label}</span>
-    <div style={{ width: 28, height: 28, borderRadius: "50%", border: `1px solid ${checked ? D.red : D.faint}`, background: checked ? D.red : "transparent", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", boxShadow: checked ? `0 0 10px ${D.redGlow}` : "none" }}>
-      {checked && IC.check("white")}
-    </div>
-  </div>
-);
-
-const ToastC = ({ msg, type }) => msg ? (
-  <div style={{ position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)", maxWidth: 340, width: "calc(100% - 40px)", background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, boxShadow: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px" }}>
-    <div style={{ background: D.btnGrad, boxShadow: D.btnGlowSm, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-      {IC.check("white")}
-    </div>
-    <span style={{ fontFamily: D.sora, fontSize: 11, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: "rgba(255,255,255,0.92)", lineHeight: 1.4, textAlign: "center" }}>{msg}</span>
-  </div>
-) : null;
-
-const BgResponsive = () => {
-  const isMobile = useIsMobile();
-  const img = isMobile ? imgBgMobile : imgBgDesktop;
-  return <div style={{ position: "fixed", inset: 0, zIndex: 0, backgroundImage: `linear-gradient(rgba(0,0,0,0.40), rgba(0,0,0,0.40)), url(${img})`, backgroundSize: "cover", backgroundPosition: "center center", backgroundRepeat: "no-repeat", backgroundAttachment: "scroll", opacity: 1, pointerEvents: "none" }} />;
-};
-
-const BG = ({ children }) => (
-  <div style={{ minHeight: "100dvh", background: D.bg1, position: "relative", overflow: "hidden" }}>
-    <BgResponsive />
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
-    <div style={{ position: "relative", zIndex: 1, minHeight: "100dvh", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>{children}</div>
-  </div>
-);
-
-// ── Moeda com glow dinâmico ─────────────────
-const MIcon = () => {
+const MIconconst MIcon = () => {
   const s = useRuntimeSettings();
   return (
     <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
@@ -310,7 +143,7 @@ const LoginScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <img src={imgLogo} alt={"TASKY"} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-            <div onClick={() => go("landing")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{<SvgBack size={10} color="rgba(255,255,255,0.7)" />}</div>
+            <div onClick={() => go("landing")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }} dangerouslySetInnerHTML={{ __html: "SEJA BEM VINDO" }} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
@@ -469,7 +302,7 @@ const RaffleScreen = ({ go, profile }) => {
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
           </span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color="rgba(255,255,255,0.7)" />}</div>
+            <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
         </Glass>
 
@@ -514,12 +347,12 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && (
                   <div onClick={() => window.open(raffle.link, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <SvgLink size={14} color="rgba(255,255,255,0.60)" />
+                    <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                   </div>
                 )}
                 {raffle.link2 && (
                   <div onClick={() => window.open(raffle.link2, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <SvgLink size={14} color="rgba(255,255,255,0.60)" />
+                    <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                   </div>
                 )}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -643,7 +476,7 @@ const UserDash = ({ profile, go, onLogout }) => {
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none" }}>{IC.wallet("white")}</div>
-            <div onClick={onLogout} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color="rgba(255,255,255,0.60)" />}</div>
+            <div onClick={onLogout} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back("rgba(255,255,255,0.60)")}</div>
           </div>
         </Glass>
 
@@ -684,7 +517,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && (
                               <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <SvgLink size={14} color="rgba(255,255,255,0.60)" />
+                                <ExternalLink size={14} color="rgba(255,255,255,0.60)" strokeWidth={1.75} />
                               </div>
                             )}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -778,7 +611,7 @@ const Withdrawal = ({ go, profile }) => {
         <div style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("white")}</div>
         <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: "VALOR SOLICITADO!" }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
-        <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{<SvgBack size={10} color="rgba(255,255,255,0.7)" />}</div>
+        <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
     </div>
   );
@@ -789,7 +622,7 @@ const Withdrawal = ({ go, profile }) => {
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <img src={imgLogo} alt={"TASKY"} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-          <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{<SvgBack size={10} color="rgba(255,255,255,0.7)" />}</div>
+          <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 10 }} dangerouslySetInnerHTML={{ __html: "SOLICITE SEU PIX E AGUARDE" }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>

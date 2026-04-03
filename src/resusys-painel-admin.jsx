@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSackDollar, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "./Icons";
+import { Wallet, LogOut, ChevronLeft, X, Check, Clock, AlertCircle, Eye, Search, Users, DollarSign, Pencil, Trash2, GripVertical, ChevronUp, ChevronDown, Link, Zap, LayoutGrid, Info, Ban, ExternalLink, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
@@ -56,36 +56,33 @@ const D = {
 // ═══════════════════════════════════════════
 // ICON SYSTEM — Lucide React (filled/solid)
 // ═══════════════════════════════════════════
-const solidIC = (Icon, c, s) => <Icon size={s} color={c} />;
-const boldIC  = (Icon, c, s) => <Icon size={s} color={c} />;
 
 const IC = {
-  check:   (c, s = 10) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 10) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 10) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
-  alert:   (c, s = 10) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
-  dollar:  (c, s = 10) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
-  pix:     (c, s = 10) => solidIC(FaBolt,               c ?? _S.iconColor, s),
-  ban:     (c, s = 10) => solidIC(FaBan,               c ?? _S.iconColor, s),
-  clock:   (c, s = 10) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 10) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  logout:  (c, s = 10) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 10) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  eye:     (c, s = 10) => boldIC(FaEye,                c ?? _S.iconColor, s),
-  search:  (c, s = 10) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
-  users:   (c, s = 10) => boldIC(FaUsers,              c ?? _S.iconColor, s),
-  edit:    (c, s = 10) => boldIC(FaPencil,             c ?? _S.iconColor, s),
-  trash:   (c, s = 10) => boldIC(FaTrash,             c ?? _S.iconColor, s),
-  grip:    (c, s = 10) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
-  arrowUp: (c, s = 10) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
-  arrowDn: (c, s = 10) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
-  link:    (c, s = 10) => boldIC(FaLink,               c ?? _S.iconColor, s),
-  extLink: (c, s = 10) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
-  grid:    (c, s = 10) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
+  check:   (col = "#ffffff", s = 14) => <Check size={s} color={col} strokeWidth={1.75} />,
+  x:       (col = "#ffffff", s = 14) => <X size={s} color={col} strokeWidth={1.75} />,
+  clock:   (col = "#ffffff", s = 14) => <Clock size={s} color={col} strokeWidth={1.75} />,
+  wallet:  (col = "#ffffff", s = 14) => <Wallet size={s} color={col} strokeWidth={1.75} />,
+  eye:     (col = "#ffffff", s = 14) => <Eye size={s} color={col} strokeWidth={1.75} />,
+  alert:   (col = "#ffffff", s = 14) => <AlertCircle size={s} color={col} strokeWidth={1.75} />,
+  search:  (col = "#ffffff", s = 14) => <Search size={s} color={col} strokeWidth={1.75} />,
+  users:   (col = "#ffffff", s = 14) => <Users size={s} color={col} strokeWidth={1.75} />,
+  dollar:  (col = "#ffffff", s = 14) => <DollarSign size={s} color={col} strokeWidth={1.75} />,
+  edit:    (col = "#ffffff", s = 14) => <Pencil size={s} color={col} strokeWidth={1.75} />,
+  trash:   (col = "#ffffff", s = 14) => <Trash2 size={s} color={col} strokeWidth={1.75} />,
+  ban:     (col = "#ffffff", s = 14) => <Ban size={s} color={col} strokeWidth={1.75} />,
+  grip:    (col = "#ffffff", s = 14) => <GripVertical size={s} color={col} strokeWidth={1.75} />,
+  arrowUp: (col = "#ffffff", s = 14) => <ChevronUp size={s} color={col} strokeWidth={1.75} />,
+  arrowDn: (col = "#ffffff", s = 14) => <ChevronDown size={s} color={col} strokeWidth={1.75} />,
+  link:    (col = "#ffffff", s = 14) => <Link size={s} color={col} strokeWidth={1.75} />,
+  pix:     (col = "#ffffff", s = 14) => <Zap size={s} color={col} strokeWidth={1.75} />,
+  grid:    (col = "#ffffff", s = 14) => <LayoutGrid size={s} color={col} strokeWidth={1.75} />,
+  back:    (col = "#ffffff", s = 14) => <ChevronLeft size={s} color={col} strokeWidth={1.75} />,
+  logout:  (col = "#ffffff", s = 14) => <LogOut size={s} color={col} strokeWidth={1.75} />,
+  info:    (col = "#ffffff", s = 14) => <Info size={s} color={col} strokeWidth={1.75} />,
+  extLink: (col = "#ffffff", s = 14) => <ExternalLink size={s} color={col} strokeWidth={1.75} />,
 };
 
 // ── SVG Icons customizados ──────────────────
-const SvgBack = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color} style={{ transform: "rotate(180deg)" }}><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg>;
 
 // ─── Styles ────────────────────────────────
 const Styles = () => <style>{`
@@ -344,7 +341,7 @@ const ASubs = ({ subs, setSubs }) => {
                     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{sel.mission_title}</div>
                   </div>
                 </div>
-                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color={D.muted} />}</div>
+                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{{IC.back(D.muted)}}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={"#22C55E"} /></div>
               {sel.observacao && (
@@ -531,7 +528,7 @@ const AMissions = ({ missions, setMissions }) => {
       <div style={{ animation: "fadeUp 0.45s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
-          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={10} color={D.muted} />}</div>
+          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 35, height: 35, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{{IC.back(D.muted)}}</div>
         </div>
         <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
           <Inp label="TÍTULO" placeholder="Ex: Deposite R$50" value={f.titulo} onChange={e => set("titulo", e.target.value)} />
@@ -799,7 +796,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaPaintbrush size={10}  color="#000" />
+            <Paintbrush size={14} color="currentColor" strokeWidth={1.75} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>COR DOS ÍCONES</div>
@@ -840,7 +837,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 35, height: 35, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaSliders size={10}  color="#000" />
+            <SlidersHorizontal size={14} color="currentColor" strokeWidth={1.75} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>GLOW DA MOEDA</div>
@@ -882,10 +879,10 @@ const AConfig = () => {
       {/* ── Botões de ação ── */}
       <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
         <Btn v="outline" onClick={handleReset} s={{ flex: 1 }}>
-          <FaArrowsRotate size={10} /> RESTAURAR PADRÃO
+          <RefreshCw size={14} color="currentColor" strokeWidth={1.75} /> RESTAURAR PADRÃO
         </Btn>
         <Btn onClick={handleSave} disabled={saving} s={{ flex: 1 }}>
-          <FaDownload size={10} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
+          <Download size={14} color="currentColor" strokeWidth={1.75} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
         </Btn>
       </div>
 
