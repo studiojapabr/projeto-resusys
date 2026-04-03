@@ -124,6 +124,99 @@ const MIcon = () => {
   );
 };
 
+// ═══════════════════════════════════════════
+// COMPONENTES BASE
+// ═══════════════════════════════════════════
+const BG = ({ children }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", fn);
+    return () => window.removeEventListener("resize", fn);
+  }, []);
+  return (
+    <div style={{ minHeight: "100dvh", position: "relative", background: D.bg1, overflowX: "hidden" }}>
+      <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}>
+        <img
+          src={isMobile ? imgBgMobile : imgBgDesktop}
+          alt=""
+          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.55 }}
+        />
+      </div>
+      <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+    </div>
+  );
+};
+
+const Glass = ({ children, s = {}, a }) => (
+  <div className="premium-glass" style={{
+    background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
+    border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm,
+    animation: a, ...s
+  }}>
+    {children}
+  </div>
+);
+
+const Btn = ({ children, onClick, disabled, v, s = {} }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className="btn-hover-grad"
+    style={{
+      width: "100%", padding: "14px 22px", borderRadius: D.radius, cursor: disabled ? "not-allowed" : "pointer",
+      fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 1, textTransform: "uppercase",
+      background: v === "outline" ? "transparent" : D.btnGrad,
+      color: D.white,
+      border: v === "outline" ? `1px solid ${D.glassBorder}` : "none",
+      boxShadow: v === "outline" ? "none" : D.btnGlow,
+      opacity: disabled ? 0.45 : 1,
+      ...s
+    }}
+  >
+    {children}
+  </button>
+);
+
+const Inp = ({ placeholder, type = "text", value, onChange, s = {} }) => (
+  <input
+    type={type}
+    placeholder={placeholder}
+    value={value}
+    onChange={onChange}
+    style={{
+      width: "100%", padding: "14px 22px", borderRadius: D.radius, marginBottom: 14,
+      background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
+      border: `1px solid ${D.glassBorder}`, color: D.white,
+      fontFamily: D.sora, fontSize: 13, fontWeight: 600, letterSpacing: 0.5,
+      ...s
+    }}
+  />
+);
+
+const ToastC = ({ msg, type }) => {
+  if (!msg) return null;
+  const bg = type === "success" ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)";
+  const border = type === "success" ? "rgba(34,197,94,0.30)" : "rgba(239,68,68,0.30)";
+  return (
+    <div style={{
+      position: "fixed", top: 20, left: "50%", transform: "translateX(-50%)", zIndex: 999,
+      padding: "12px 24px", borderRadius: D.radius, background: bg,
+      border: `1px solid ${border}`, backdropFilter: "blur(20px)",
+      fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.white,
+      letterSpacing: 0.5, textTransform: "uppercase", animation: "slideDown 0.3s ease-out",
+      whiteSpace: "nowrap", maxWidth: "90vw", textAlign: "center"
+    }}>
+      {msg}
+    </div>
+  );
+};
+
+// Ícones customizados (redes sociais)
+const SvgPhone = ({ size = 18 }) => <Globe size={size} strokeWidth={1.75} />;
+const SvgTelegram = ({ size = 18 }) => <MessageCircle size={size} strokeWidth={1.75} />;
+const SvgTiktok = ({ size = 18 }) => <Music2 size={size} strokeWidth={1.75} />;
+
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
