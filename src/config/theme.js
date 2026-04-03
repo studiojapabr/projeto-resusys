@@ -61,7 +61,7 @@ export const T = {
   radius:   "60px",
   radiusSm: "30px",
 
-  white:  "#000000",
+  white:  "#ffffff",
   muted:  "rgba(255,255,255,0.55)",
   dim:    "rgba(255,255,255,0.35)",
   faint:  "rgba(255,255,255,0.08)",
@@ -70,7 +70,7 @@ export const T = {
   blue:   "#6B8EAD",
   purple: "#7A6B8A",
 
-  iconColor: "#ffffff",
+  iconColor: "#000000",
   iconSize:  8,
 
   fontDisplay: "'Maver', sans-serif",
