@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, LogOut, Wallet, X, Check, Clock, Upload, Trophy, Info } from 'lucide-react';
 import { createClient } from "@supabase/supabase-js";
 
 // ✅ CORREÇÃO PRINCIPAL: importar o painel admin
@@ -183,20 +184,20 @@ const BG = ({ children }) => (
 );
 
 const IC = {
-  check: (c = "white", s = 14) => <svg width={s} height={s} viewBox="0 0 465.822 465.822" fill={c}><path d="M5.988,289.981l88.875,88.875c24.992,24.984,65.504,24.984,90.496,0l274.475-274.475c8.185-8.475,7.95-21.98-0.525-30.165c-8.267-7.985-21.374-7.985-29.641,0L155.194,348.691c-8.331,8.328-21.835,8.328-30.165,0l-88.875-88.875c-8.475-8.185-21.98-7.95-30.165,0.525C-1.996,268.608-1.996,281.714,5.988,289.981z"/></svg>,
-  x: (c = "white", s = 14) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M18,6h0a1,1,0,0,0-1.414,0L12,10.586,7.414,6A1,1,0,0,0,6,6H6A1,1,0,0,0,6,7.414L10.586,12,6,16.586A1,1,0,0,0,6,18H6a1,1,0,0,0,1.414,0L12,13.414,16.586,18A1,1,0,0,0,18,18h0a1,1,0,0,0,0-1.414L13.414,12,18,7.414A1,1,0,0,0,18,6Z"/></svg>,
-  clock: (c = "white") => <svg width="12" height="12" viewBox="0 0 24 24" fill={c}><path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm1,11.879a1,1,0,0,1-.469.848l-3.84,2.4a1,1,0,1,1-1.062-1.7L11,11.325V7a1,1,0,0,1,2,0Z"/></svg>,
-  wallet: (c = "white") => <svg width="18" height="18" viewBox="0 0 24 24" fill={c}><path d="M21,6H5c-.859,0-1.672-.372-2.235-.999,.55-.614,1.349-1.001,2.235-1.001H23c1.308-.006,1.307-1.995,0-2H5C2.239,2,0,4.239,0,7v10c0,2.761,2.239,5,5,5H21c1.657,0,3-1.343,3-3V9c0-1.657-1.343-3-3-3Zm-1,9c-1.308-.006-1.308-1.994,0-2,1.308,.006,1.308,1.994,0,2Z"/></svg>,
-  upload: (c = "white") => <svg width="24" height="24" viewBox="0 0 24 24" fill={c}><path d="M18.385,7.373a1.128,1.128,0,0,1-.751-.748h0a8,8,0,1,0-15.1,5.237A1.046,1.046,0,0,1,2.223,13.1,5.5,5.5,0,0,0,.057,18.3,5.622,5.622,0,0,0,5.683,23H14V15.414l-1.293,1.293a1,1,0,0,1-1.414-1.414l1.586-1.586a3,3,0,0,1,4.242,0l1.586,1.586a1,1,0,1,1-1.414,1.414L16,15.414v7.573a8.181,8.181,0,0,0,7.971-7.309A7.964,7.964,0,0,0,18.385,7.373Z"/></svg>,
-  logout: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c} style={{ transform: "scaleX(-1)" }}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
-  back: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>,
-  trophy: (c = "white", s = 20) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M21,3H18V1a1,1,0,0,0-1-1H7A1,1,0,0,0,6,1V3H3A1,1,0,0,0,2,4V7a5.006,5.006,0,0,0,4.424,4.952A7.011,7.011,0,0,0,11,15.92V18H9a3,3,0,0,0-3,3v2a1,1,0,0,0,1,1h10a1,1,0,0,0,1-1V21a3,3,0,0,0-3-3H13V15.92a7.011,7.011,0,0,0,4.576-3.968A5.006,5.006,0,0,0,22,7V4A1,1,0,0,0,21,3ZM4,7V5H6v4.9A3,3,0,0,1,4,7Zm16,0a3,3,0,0,1-2,2.9V5h2Z"/></svg>,
+  check: (c = "white", s = 16) => <Check size={s} color={c} strokeWidth={2.5} />,
+  x: (c = "white", s = 16) => <X size={s} color={c} strokeWidth={2.5} />,
+  clock: (c = "white", s = 13) => <Clock size={s} color={c} strokeWidth={2} />,
+  wallet: (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
+  upload: (c = "white", s = 24) => <Upload size={s} color={c} strokeWidth={1.5} />,
+  logout: (c = "white", s = 20) => <LogOut size={s} color={c} strokeWidth={2} />,
+  back: (c = "white", s = 20) => <ChevronLeft size={s} color={c} strokeWidth={2.5} />,
+  trophy: (c = "white", s = 20) => <Trophy size={s} color={c} strokeWidth={2} />,
   ticket: (c = "white", s = 18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M22.536,5.172l-3.708-3.708A1.528,1.528,0,0,0,17.75,1a1.528,1.528,0,0,0-1.078.464L15.2,2.936A3.5,3.5,0,0,1,10.8,2.936L9.328,1.464A1.528,1.528,0,0,0,8.25,1,1.528,1.528,0,0,0,7.172,1.464L1.464,7.172A1.528,1.528,0,0,0,1,8.25a1.528,1.528,0,0,0,.464,1.078L2.936,10.8a3.5,3.5,0,0,1,0,4.4L1.464,16.672A1.528,1.528,0,0,0,1,17.75a1.528,1.528,0,0,0,.464,1.078l3.708,3.708A1.528,1.528,0,0,0,6.25,23a1.528,1.528,0,0,0,1.078-.464L8.8,21.064a3.5,3.5,0,0,1,4.4,0l1.472,1.472A1.528,1.528,0,0,0,15.75,23a1.528,1.528,0,0,0,1.078-.464l5.708-5.708A1.528,1.528,0,0,0,23,15.75a1.528,1.528,0,0,0-.464-1.078L21.064,13.2a3.5,3.5,0,0,1,0-4.4l1.472-1.472A1.528,1.528,0,0,0,23,6.25,1.528,1.528,0,0,0,22.536,5.172ZM9,8A1,1,0,1,1,8,9,1,1,0,0,1,9,8Zm6,8a1,1,0,1,1,1-1A1,1,0,0,1,15,16Zm.707-7.293-7,7a1,1,0,0,1-1.414-1.414l7-7a1,1,0,0,1,1.414,1.414Z"/></svg>,
 };
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
-    <div style={{ position: "absolute", inset: -30, background: "radial-gradient(circle, rgba(140,252,0,0.55) 0%, rgba(140,252,0,0.25) 40%, transparent 72%)", borderRadius: "50%", filter: "blur(18px)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", inset: -50, background: "radial-gradient(circle, rgba(140,252,0,0.90) 0%, rgba(140,252,0,0.50) 35%, rgba(140,252,0,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: "blur(22px)", pointerEvents: "none" }} />
     <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
   </div>
 );
@@ -526,7 +527,7 @@ const RaffleScreen = ({ go, profile }) => {
                 {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
                 {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <span style={{ fontWeight: 800, fontSize: 12, color: "#000000", fontFamily: D.sora }}>i</span>
+                  <Info size={16} color="#000000" strokeWidth={2.5} />
                 </div>
               </div>
             </div>
@@ -708,7 +709,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ fontWeight: 800, fontSize: 12, color: "#000000", fontFamily: D.sora }}>i</span></div>
+                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}><Info size={16} color="#000000" strokeWidth={2.5} /></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
