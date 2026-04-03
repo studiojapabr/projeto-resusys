@@ -3,7 +3,7 @@ import {
   RiArrowLeftSLine, RiLogoutBoxRLine, RiWallet3Fill, RiCloseLine,
   RiCheckFill, RiTimeFill, RiAlertFill, RiEyeFill, RiSearchFill,
   RiGroupFill, RiMoneyDollarCircleFill, RiPencilFill, RiDeleteBin6Fill,
-  RiBanFill, RiDraggable, RiArrowUpSLine, RiArrowDownSLine,
+  RiForbidFill,, RiDraggable, RiArrowUpSLine, RiArrowDownSLine,
   RiLink, RiFlashFill, RiLayoutGridFill, RiInformationFill, RiExternalLinkFill
 } from 'react-icons/ri';
 import { createClient } from "@supabase/supabase-js";
