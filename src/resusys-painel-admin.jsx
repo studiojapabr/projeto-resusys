@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSackDollar, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "./Icons";
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
@@ -997,11 +998,9 @@ export default function AdminApp() {
                 <div style={{ position: "absolute", top: -2, right: -2, minWidth: 14, height: 14, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, fontWeight: 800, fontFamily: D.sora, color: "white", padding: "0 3px" }}>{pendTotal > 9 ? "9+" : pendTotal}</div>
               )}
             </div>
-            {menuOpen && (
+            {menuOpen && createPortal(
               <>
-                {/* Overlay invisível para fechar ao clicar fora */}
                 <div style={{ position: "fixed", inset: 0, zIndex: 9998 }} onClick={() => setMenuOpen(false)} />
-                {/* Dropdown fixo na tela, sempre por cima de tudo */}
                 <div style={{ position: "fixed", top: 70, right: 20, minWidth: 220, zIndex: 9999, background: "rgba(8,8,8,0.98)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)", boxShadow: "0 20px 60px rgba(0,0,0,0.9)" }}>
                   {menuItems.map(item => {
                     if (item.k === "logout") {
@@ -1022,7 +1021,8 @@ export default function AdminApp() {
                     );
                   })}
                 </div>
-              </>
+              </>,
+              document.body
             )}
           </div>
         </Glass>
