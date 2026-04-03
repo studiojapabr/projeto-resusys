@@ -91,7 +91,7 @@ const Styles = () => <style>{`
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: rgba(35,35,35,0.25); border-radius: 10px; }
-  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 10px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; outline: none; } button { border: none; appearance: none; -webkit-appearance: none; }
   input:focus, textarea:focus { outline: none; border-color: #232323 !important; }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -1058,7 +1058,7 @@ export default function AdminApp() {
 
         {/* Tab title */}
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 600, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
         </div>
 
         {/* Content */}
