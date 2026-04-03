@@ -61,7 +61,7 @@ export const T = {
   radius:   "60px",
   radiusSm: "30px",
 
-  white:  "#FFFFFF",
+  white:  "#000000",
   muted:  "rgba(255,255,255,0.55)",
   dim:    "rgba(255,255,255,0.35)",
   faint:  "rgba(255,255,255,0.08)",
