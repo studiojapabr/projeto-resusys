@@ -78,11 +78,11 @@ const SocialIcons = [
   { href: "https://tiktok.com/@SEU_PERFIL",   icon: <Music size={14} strokeWidth={1.75} /> },
 ];
 
-const MIconconst MIcon = () => {
+const MIcon = () => {
   const s = useRuntimeSettings();
   return (
     <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
-      <div style={{ position: "absolute", inset: -50, background: "radial-gradient(circle, ${s.coinGlow} 0%, ${s.coinGlowMid} 35%, rgba(35,35,35,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: `blur(${s.coinGlowBlur}px)`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: -50, background: `radial-gradient(circle, ${s.coinGlow} 0%, ${s.coinGlowMid} 35%, rgba(35,35,35,0.15) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${s.coinGlowBlur}px)`, pointerEvents: "none" }} />
       <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
     </div>
   );
