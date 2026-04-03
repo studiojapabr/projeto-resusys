@@ -12,7 +12,7 @@ export const C = {
 
   // ── TELAS ──────────────────────────────────
   landing: {
-    title:    "<span style="display:block">CONCLUA</span><span style="display:block">TAREFAS</span><span style="display:block">E GANHE</span>",
+    title:    "CONCLUA TAREFAS E GANHE",
     subtitle: "SOLICITE O SAQUE 24H",
     btnRegister: "CADASTRE-SE",
     btnLogin:    "LOGIN",
@@ -20,34 +20,34 @@ export const C = {
   },
 
   login: {
-    title:    "<span style="display:block">SEJA</span><span style="display:block">BEM</span><span style="display:block">VINDO</span>",
+    title:    "SEJA BEM VINDO",
     linkText: "NÃO TEM CONTA?",
     linkCta:  "CADASTRE-SE",
   },
 
   register: {
-    title:    "<span style="display:block">CRIE SUA</span><span style="display:block">CONTA</span>",
+    title:    "CRIE SUA CONTA",
     linkText: "JÁ TEM CONTA?",
     linkCta:  "FAÇA LOGIN",
   },
 
   dashboard: {
-    title:    "<span style="display:block">SUAS</span><span style="display:block">TAREFAS</span>",
+    title:    "SUAS TAREFAS",
     subtitle: "NOVAS TAREFAS EM 24H",
   },
 
   raffle: {
-    title: "<span style="display:block">SORTEIO</span><span style="display:block">ESPECIAL</span>",
+    title: "SORTEIO ESPECIAL",
     empty: "NENHUM SORTEIO ATIVO NO MOMENTO.",
   },
 
   withdrawal: {
-    title:    "<span style="display:block">SOLICITE</span><span style="display:block">SEU PIX</span><span style="display:block">E AGUARDE</span>",
+    title:    "SOLICITE SEU PIX E AGUARDE",
     subtitle: "PREENCHA OS DADOS CORRETAMENTE",
   },
 
   success: {
-    title: "<span style="display:block">VALOR</span><span style="display:block">SOLICITADO!</span>",
+    title: "VALOR SOLICITADO!",
   },
 
   // ── REDES SOCIAIS ───────────────────────────
