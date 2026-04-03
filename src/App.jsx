@@ -56,16 +56,16 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(192,192,192,0.20); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(140,252,0,0.25); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(192,192,192,0.60) !important; box-shadow: 0 0 0 2px rgba(192,192,192,0.12), 0 0 14px rgba(192,192,192,0.14); }
+  input:focus, textarea:focus { outline: none; border-color: #8cfc00 !important; box-shadow: 0 0 0 2px rgba(140,252,0,0.14), 0 0 14px rgba(140,252,0,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(192,192,192,0.15)} 50%{box-shadow:0 0 24px rgba(192,192,192,0.28)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(140,252,0,0.22)} 50%{box-shadow:0 0 24px rgba(140,252,0,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
   .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
@@ -80,7 +80,7 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { background: ${T.gradientV} !important; transform: scale(1.02); box-shadow: 0 0 20px ${T.glowSecondary}, 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
+  .btn-hover-grad:hover { background: #000000 !important; color: #8cfc00 !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(140,252,0,0.22), 0 10px 22px rgba(0,0,0,0.50); }
 `}</style>;
 
 const Spotlight = () => {
@@ -105,8 +105,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(192,192,192,0.25)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" },
-    success: { background: T.gradient, color: "#111111", border: `1px solid rgba(192,192,192,0.35)`, boxShadow: `0 6px 18px ${D.greenGlow}` },
+    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" },
+    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" },
     danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -146,7 +146,7 @@ const ToastC = ({ msg, type }) => msg ? (
     padding: "14px 20px",
   }}>
     <div style={{
-      background: T.gradient,
+      background: D.btnGrad,
       borderRadius: "50%",
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
@@ -200,7 +200,7 @@ const MIcon = () => (
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(192,192,192,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(140,252,0,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>
@@ -214,7 +214,7 @@ const Landing = ({ go }) => (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px" }} a="slideUp 0.9s ease-out">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 14 }}>{C.landing.title}</h1>
@@ -251,7 +251,7 @@ const LoginScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
+            <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
@@ -293,7 +293,7 @@ const RegisterScreen = ({ go }) => {
       <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-            <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
+            <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><span style={{ color: D.red, fontWeight: 400, fontSize: 12 }}>|</span> BEM VINDO</span>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.register.title}</h1>
@@ -827,7 +827,7 @@ const Withdrawal = ({ go, profile }) => {
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
-          <img src={imgLogo} alt={C.brandName} style={{ height: 36, width: "auto", objectFit: "contain" }} />
+          <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>

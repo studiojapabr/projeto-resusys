@@ -36,16 +36,16 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(192,192,192,0.20); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(140,252,0,0.25); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: rgba(192,192,192,0.60) !important; box-shadow: 0 0 0 2px rgba(192,192,192,0.12), 0 0 14px rgba(192,192,192,0.14); }
+  input:focus, textarea:focus { outline: none; border-color: #8cfc00 !important; box-shadow: 0 0 0 2px rgba(140,252,0,0.14), 0 0 14px rgba(140,252,0,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(192,192,192,0.15)} 50%{box-shadow:0 0 24px rgba(192,192,192,0.28)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(140,252,0,0.22)} 50%{box-shadow:0 0 24px rgba(140,252,0,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   .pulse-dot-red { width:10px; height:10px; background:rgba(192,192,192,0.60); border-radius:50%; position:relative; flex-shrink:0; }
   .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(192,192,192,0.70); animation:pulseDot 2s infinite; }
@@ -90,11 +90,11 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: `0 8px 20px ${D.orangeGlow}`, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, boxShadow: `0 8px 20px ${D.orangeGlow}`, textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#111111", border: "1px solid rgba(192,192,192,0.25)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" }, success: { background: T.gradient, color: "#111111", border: "1px solid rgba(192,192,192,0.30)", boxShadow: "0 6px 18px rgba(0,0,0,0.40)" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" }, success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "0 6px 18px rgba(140,252,0,0.15)" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -108,7 +108,7 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(192,192,192,0.15)" : D.faint, border: `1.5px solid ${active ? "rgba(192,192,192,0.35)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(140,252,0,0.15)" : D.faint, border: `1.5px solid ${active ? "rgba(140,252,0,0.40)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
     <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? T.white : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease", boxShadow: "none" }} />
   </div>
 );
@@ -127,7 +127,7 @@ const ToastC = ({ msg, type }) => msg ? (
     padding: "14px 20px",
   }}>
     <div style={{
-      background: T.gradient,
+      background: D.btnGrad,
       borderRadius: "50%",
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
@@ -254,7 +254,7 @@ const ASubs = ({ subs, setSubs }) => {
       <ToastC msg={toast?.m} type={toast?.t} />
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         {[{ k: "pendente", l: "Pendentes" }, { k: "aprovado", l: "Aprovados" }, { k: "recusado", l: "Recusados" }].map(x => (
-          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#111111" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
+          <button key={x.k} onClick={() => setFiltro(x.k)} style={{ padding: "10px 6px", borderRadius: D.radius, border: filtro === x.k ? "none" : `1px solid ${D.glassBorder}`, minHeight: 40, flex: 1, minWidth: 0, background: filtro === x.k ? D.btnGrad : D.glass, color: filtro === x.k ? "#000000" : D.muted, fontFamily: D.sora, fontSize: 12, fontWeight: 700, cursor: "pointer", textTransform: "uppercase", boxShadow: filtro === x.k ? `0 3px 18px ${D.redGlow}` : "none", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{x.l}</button>
         ))}
       </div>
       {f.length === 0 && <div style={{ textAlign: "center", padding: "40px", color: D.muted, fontFamily: D.sora, fontSize: 12, textTransform: "uppercase" }}>Nenhuma submissão.</div>}
@@ -562,7 +562,7 @@ const AMissions = ({ missions, setMissions }) => {
                 )}
                 <div style={{ display: "flex", gap: 7, alignItems: "center" }}>
                   <Tog active={m.ativa} onToggle={() => toggle(m.id, m.ativa)} />
-                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, color: m.ativa ? D.orange : "rgba(239,68,68,0.6)", textTransform: "uppercase" }}>{m.ativa ? "ATIVA" : "OFF"}</span>
+                  <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.3, color: m.ativa ? D.red : "rgba(239,68,68,0.6)", textTransform: "uppercase" }}>{m.ativa ? "ATIVA" : "OFF"}</span>
                 </div>
               </div>
             </div>
@@ -664,7 +664,7 @@ export default function AdminApp() {
   }, [menuOpen]);
 
   // Loading inicial
-  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(239,35,57,0.18)`, borderTopColor: D.orange, animation: "spin 0.8s linear infinite" }} /></div></>;
+  if (session === undefined) return <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}><div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(140,252,0,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} /></div></>;
 
   // Não autenticado ou sem permissão
   if (!session || profile?.role !== "admin") {
@@ -672,7 +672,7 @@ export default function AdminApp() {
       <><Styles /><BG>
         <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", padding: "0 20px 44px" }}>
           <Glass s={{ padding: "36px 30px", textAlign: "center", maxWidth: 360 }}>
-            <img src={imgLogo} alt="TASKY" style={{ height: 36, width: "auto", objectFit: "contain", marginBottom: 16 }} />
+            <img src={imgLogo} alt="TASKY" style={{ height: 28, width: "auto", objectFit: "contain", marginBottom: 16 }} />
             <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase", marginBottom: 24 }}>ACESSO RESTRITO AO ADMINISTRADOR.</p>
             <Btn onClick={() => window.location.href = "/"}>IR PARA O LOGIN</Btn>
           </Glass>
@@ -785,9 +785,9 @@ export default function AdminApp() {
                         fontWeight: active ? 800 : 700,
                         textTransform: "uppercase",
                         letterSpacing: 0.4,
-                        color: active ? D.orange : "rgba(255,255,255,0.72)",
+                        color: active ? D.red : "rgba(255,255,255,0.72)",
                         background: active ? "rgba(255,103,9,0.10)" : "transparent",
-                        borderLeft: active ? `3px solid ${D.orange}` : "3px solid transparent",
+                        borderLeft: active ? `3px solid ${D.red}` : "3px solid transparent",
                         transition: "background 0.15s ease, color 0.15s ease",
                       }}
                       onMouseEnter={e => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
