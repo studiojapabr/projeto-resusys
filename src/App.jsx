@@ -68,17 +68,17 @@ const boldIC = (Icon, c, s) => (
 );
 
 const IC = {
-  check:   (c, s = 18) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 18) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 18) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
-  clock:   (c, s = 18) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 18) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  upload:  (c, s = 18) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
-  logout:  (c, s = 18) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 18) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  trophy:  (c, s = 18) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
-  ticket:  (c, s = 18) => boldIC(FaTicket,             c ?? _S.iconColor, s),
-  link:    (c, s = 18) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
+  check:   (c, s = 25) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 25) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 25) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  clock:   (c, s = 25) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 25) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  upload:  (c, s = 25) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
+  logout:  (c, s = 25) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 25) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  trophy:  (c, s = 25) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
+  ticket:  (c, s = 25) => boldIC(FaTicket,             c ?? _S.iconColor, s),
+  link:    (c, s = 25) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
 };
 
 // ─── Hook para leitura de settings ─────────
@@ -412,9 +412,9 @@ const RaffleScreen = ({ go, profile }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <FaCamera size={22} /> },
-    { href: C.social.telegram,  icon: <FaPaperPlane size={22} /> },
-    { href: C.social.tiktok,    icon: <FaMusic size={22} /> },
+    { href: C.social.instagram, icon: <FaCamera size={25} /> },
+    { href: C.social.telegram,  icon: <FaPaperPlane size={25} /> },
+    { href: C.social.tiktok,    icon: <FaMusic size={25} /> },
   ];
 
   return (
@@ -474,12 +474,12 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && (
                   <div onClick={() => window.open(raffle.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <FaLink size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
+                    <FaLink size={25} style={{ color: "rgba(255,255,255,0.60)" }} />
                   </div>
                 )}
                 {raffle.link2 && (
                   <div onClick={() => window.open(raffle.link2, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <FaLink size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
+                    <FaLink size={25} style={{ color: "rgba(255,255,255,0.60)" }} />
                   </div>
                 )}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -587,9 +587,9 @@ const UserDash = ({ profile, go, onLogout }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <FaCamera size={22} /> },
-    { href: C.social.telegram,  icon: <FaPaperPlane size={22} /> },
-    { href: C.social.tiktok,    icon: <FaMusic size={22} /> },
+    { href: C.social.instagram, icon: <FaCamera size={25} /> },
+    { href: C.social.telegram,  icon: <FaPaperPlane size={25} /> },
+    { href: C.social.tiktok,    icon: <FaMusic size={25} /> },
   ];
 
   return (
@@ -644,7 +644,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
                             {m.link && (
                               <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                <FaArrowUpRightFromSquare size={16} style={{ color: "rgba(255,255,255,0.60)" }} />
+                                <FaArrowUpRightFromSquare size={25} style={{ color: "rgba(255,255,255,0.60)" }} />
                               </div>
                             )}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>

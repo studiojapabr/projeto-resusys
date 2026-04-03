@@ -59,28 +59,28 @@ const solidIC = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
 const boldIC  = (Icon, c, s) => <Icon size={s} style={{ color: c }} />;
 
 const IC = {
-  check:   (c, s = 18) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 18) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 18) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
-  alert:   (c, s = 18) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
-  dollar:  (c, s = 18) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
-  pix:     (c, s = 18) => solidIC(FaBolt,               c ?? _S.iconColor, s),
-  ban:     (c, s = 18) => solidIC(FaBan,               c ?? _S.iconColor, s),
-  clock:   (c, s = 18) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 18) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  logout:  (c, s = 18) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 18) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  eye:     (c, s = 18) => boldIC(FaEye,                c ?? _S.iconColor, s),
-  search:  (c, s = 18) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
-  users:   (c, s = 18) => boldIC(FaUsers,              c ?? _S.iconColor, s),
-  edit:    (c, s = 18) => boldIC(FaPencil,             c ?? _S.iconColor, s),
-  trash:   (c, s = 18) => boldIC(FaTrash,             c ?? _S.iconColor, s),
-  grip:    (c, s = 18) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
-  arrowUp: (c, s = 18) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
-  arrowDn: (c, s = 18) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
-  link:    (c, s = 18) => boldIC(FaLink,               c ?? _S.iconColor, s),
-  extLink: (c, s = 18) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
-  grid:    (c, s = 18) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
+  check:   (c, s = 25) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 25) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 25) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  alert:   (c, s = 25) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
+  dollar:  (c, s = 25) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
+  pix:     (c, s = 25) => solidIC(FaBolt,               c ?? _S.iconColor, s),
+  ban:     (c, s = 25) => solidIC(FaBan,               c ?? _S.iconColor, s),
+  clock:   (c, s = 25) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 25) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  logout:  (c, s = 25) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 25) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  eye:     (c, s = 25) => boldIC(FaEye,                c ?? _S.iconColor, s),
+  search:  (c, s = 25) => boldIC(FaMagnifyingGlass,             c ?? _S.iconColor, s),
+  users:   (c, s = 25) => boldIC(FaUsers,              c ?? _S.iconColor, s),
+  edit:    (c, s = 25) => boldIC(FaPencil,             c ?? _S.iconColor, s),
+  trash:   (c, s = 25) => boldIC(FaTrash,             c ?? _S.iconColor, s),
+  grip:    (c, s = 25) => boldIC(FaEllipsisVertical,       c ?? _S.iconColor, s),
+  arrowUp: (c, s = 25) => boldIC(FaChevronUp,          c ?? _S.iconColor, s),
+  arrowDn: (c, s = 25) => boldIC(FaChevronDown,        c ?? _S.iconColor, s),
+  link:    (c, s = 25) => boldIC(FaLink,               c ?? _S.iconColor, s),
+  extLink: (c, s = 25) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
+  grid:    (c, s = 25) => boldIC(FaBorderAll,         c ?? _S.iconColor, s),
 };
 
 // ─── Styles ────────────────────────────────
@@ -759,7 +759,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaPaintbrush size={16} style={{ color: "#000" }} />
+            <FaPaintbrush size={25} style={{ color: "#000" }} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>COR DOS ÍCONES</div>
@@ -800,7 +800,7 @@ const AConfig = () => {
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
           <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <FaSliders size={16} style={{ color: "#000" }} />
+            <FaSliders size={25} style={{ color: "#000" }} />
           </div>
           <div>
             <div style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>GLOW DA MOEDA</div>
@@ -842,10 +842,10 @@ const AConfig = () => {
       {/* ── Botões de ação ── */}
       <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
         <Btn v="outline" onClick={handleReset} s={{ flex: 1 }}>
-          <FaArrowsRotate size={14} /> RESTAURAR PADRÃO
+          <FaArrowsRotate size={25} /> RESTAURAR PADRÃO
         </Btn>
         <Btn onClick={handleSave} disabled={saving} s={{ flex: 1 }}>
-          <FaDownload size={14} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
+          <FaDownload size={25} />{saving ? "SALVANDO..." : "SALVAR TUDO"}
         </Btn>
       </div>
 
@@ -1019,7 +1019,7 @@ export default function AdminApp() {
                     return (
                       <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.12)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent", transition: "background 0.15s ease, color 0.15s ease" }}>
                         <span style={{ flex: 1, minWidth: 0, display: "flex", alignItems: "center", gap: 8 }}>
-                          <FaGear size={13} style={{ flexShrink: 0 }} />
+                          <FaGear size={25} style={{ flexShrink: 0 }} />
                           {item.label}
                         </span>
                       </div>
