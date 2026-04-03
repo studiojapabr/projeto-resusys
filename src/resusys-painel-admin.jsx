@@ -998,26 +998,31 @@ export default function AdminApp() {
               )}
             </div>
             {menuOpen && (
-              <div style={{ position: "absolute", top: "calc(100% + 10px)", right: 0, minWidth: 200, zIndex: 9999, background: "rgba(8,8,8,0.97)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)", boxShadow: "0 20px 60px rgba(0,0,0,0.8)" }} onClick={e => e.stopPropagation()}>
-                {menuItems.map(item => {
-                  if (item.k === "logout") {
+              <>
+                {/* Overlay invisível para fechar ao clicar fora */}
+                <div style={{ position: "fixed", inset: 0, zIndex: 9998 }} onClick={() => setMenuOpen(false)} />
+                {/* Dropdown fixo na tela, sempre por cima de tudo */}
+                <div style={{ position: "fixed", top: 70, right: 20, minWidth: 220, zIndex: 9999, background: "rgba(8,8,8,0.98)", border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, padding: "8px 0", animation: "slideDown 0.28s cubic-bezier(0.34,1.56,0.64,1)", boxShadow: "0 20px 60px rgba(0,0,0,0.9)" }}>
+                  {menuItems.map(item => {
+                    if (item.k === "logout") {
+                      return (
+                        <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4 }}>
+                          Sair
+                        </div>
+                      );
+                    }
+                    const active = adminTab === item.k;
                     return (
-                      <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4 }}>
-                        Sair
+                      <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.10)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent" }}>
+                        <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
+                        {item.badge > 0 && (
+                          <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
+                        )}
                       </div>
                     );
-                  }
-                  const active = adminTab === item.k;
-                  return (
-                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.10)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent" }}>
-                      <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
-                      {item.badge > 0 && (
-                        <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+                  })}
+                </div>
+              </>
             )}
           </div>
         </Glass>
