@@ -5,8 +5,8 @@
 // ═══════════════════════════════════════════
 
 // ── 1. CORES BASE ────────────────────────────
-const PRIMARY   = "#ef2339";   // Vermelho
-const SECONDARY = "#ff6709";   // Laranja
+const PRIMARY   = "#232323";   // Vermelho
+const SECONDARY = "#efefef";   // Laranja
 
 // ── 2. Extrai RGB para usar em rgba() ────────
 const hexToRgb = (hex) => {
