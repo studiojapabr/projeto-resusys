@@ -68,17 +68,17 @@ const boldIC = (Icon, c, s) => (
 );
 
 const IC = {
-  check:   (c, s = 25) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
-  x:       (c, s = 25) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
-  info:    (c, s = 25) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
-  clock:   (c, s = 25) => boldIC(FaClock,              c ?? _S.iconColor, s),
-  wallet:  (c, s = 25) => boldIC(FaWallet,             c ?? _S.iconColor, s),
-  upload:  (c, s = 25) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
-  logout:  (c, s = 25) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
-  back:    (c, s = 25) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
-  trophy:  (c, s = 25) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
-  ticket:  (c, s = 25) => boldIC(FaTicket,             c ?? _S.iconColor, s),
-  link:    (c, s = 25) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
+  check:   (c, s = 12) => solidIC(FaCircleCheck,       c ?? _S.iconColor, s),
+  x:       (c, s = 12) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
+  info:    (c, s = 12) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
+  clock:   (c, s = 12) => boldIC(FaClock,              c ?? _S.iconColor, s),
+  wallet:  (c, s = 12) => boldIC(FaWallet,             c ?? _S.iconColor, s),
+  upload:  (c, s = 12) => boldIC(FaCloudArrowUp,        c ?? _S.iconColor, s),
+  logout:  (c, s = 12) => boldIC(FaRightFromBracket,             c ?? _S.iconColor, s),
+  back:    (c, s = 12) => boldIC(FaChevronLeft,        c ?? _S.iconColor, s),
+  trophy:  (c, s = 12) => boldIC(FaTrophy,             c ?? _S.iconColor, s),
+  ticket:  (c, s = 12) => boldIC(FaTicket,             c ?? _S.iconColor, s),
+  link:    (c, s = 12) => boldIC(FaArrowUpRightFromSquare,       c ?? _S.iconColor, s),
 };
 
 // ─── Hook para leitura de settings ─────────
@@ -176,7 +176,7 @@ const Chk = ({ checked, onChange, label }) => (
   <div onClick={onChange} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", padding: "6px 0" }}>
     <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: D.muted }}>{label}</span>
     <div style={{ width: 28, height: 28, borderRadius: "50%", border: `2px solid ${checked ? D.red : D.faint}`, background: checked ? D.red : "transparent", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", boxShadow: checked ? `0 0 10px ${D.redGlow}` : "none" }}>
-      {checked && IC.check("white", 10)}
+      {checked && IC.check("white", 12)}
     </div>
   </div>
 );
@@ -483,7 +483,7 @@ const RaffleScreen = ({ go, profile }) => {
                   </div>
                 )}
                 <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  {IC.info("black", 16)}
+                  {IC.info("black", 12)}
                 </div>
               </div>
             </div>
@@ -648,7 +648,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                               </div>
                             )}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                              {IC.info("black", 16)}
+                              {IC.info("black", 12)}
                             </div>
                           </div>
                         </div>
