@@ -1,5 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, LogOut, Wallet, X, Check, Clock, Upload, Trophy, Info } from 'lucide-react';
+import {
+  RiArrowLeftSLine, RiLogoutBoxRLine, RiWallet3Fill, RiCloseLine,
+  RiCheckFill, RiTimeFill, RiUploadCloud2Fill, RiTicket2Fill,
+  RiTrophyFill, RiInstagramFill, RiTelegramFill, RiTiktokFill,
+  RiExternalLinkFill, RiInformationFill
+} from 'react-icons/ri';
 import { createClient } from "@supabase/supabase-js";
 
 // ✅ CORREÇÃO PRINCIPAL: importar o painel admin
@@ -135,7 +140,7 @@ const Chk = ({ checked, onChange, label }) => (
   <div onClick={onChange} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", padding: "6px 0" }}>
     <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", color: D.muted }}>{label}</span>
     <div style={{ width: 28, height: 28, borderRadius: "50%", border: `2px solid ${checked ? D.red : D.faint}`, background: checked ? D.red : "transparent", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s ease", boxShadow: checked ? `0 0 10px ${D.redGlow}` : "none" }}>
-      {checked && <svg width="10" height="10" viewBox="0 0 465.822 465.822" fill="white"><path d="M5.988,289.981l88.875,88.875c24.992,24.984,65.504,24.984,90.496,0l274.475-274.475c8.185-8.475,7.95-21.98-0.525-30.165c-8.267-7.985-21.374-7.985-29.641,0L155.194,348.691c-8.331,8.328-21.835,8.328-30.165,0l-88.875-88.875c-8.475-8.185-21.98-7.95-30.165,0.525C-1.996,268.608-1.996,281.714,5.988,289.981z"/></svg>}
+      {checked && <RiCheckFill size={10} color="white" />}
     </div>
   </div>
 );
@@ -184,20 +189,22 @@ const BG = ({ children }) => (
 );
 
 const IC = {
-  check:   (c = "white", s = 18) => <Check size={s} color={c} strokeWidth={2} />,
-  x:       (c = "white", s = 18) => <X size={s} color={c} strokeWidth={2} />,
-  clock:   (c = "white", s = 18) => <Clock size={s} color={c} strokeWidth={2} />,
-  wallet:  (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
-  upload:  (c = "white", s = 18) => <Upload size={s} color={c} strokeWidth={2} />,
-  logout:  (c = "white", s = 18) => <LogOut size={s} color={c} strokeWidth={2} />,
-  back:    (c = "white", s = 18) => <ChevronLeft size={s} color={c} strokeWidth={2} />,
-  trophy:  (c = "white", s = 18) => <Trophy size={s} color={c} strokeWidth={2} />,
-  ticket:  (c = "white", s = 18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M22.536,5.172l-3.708-3.708A1.528,1.528,0,0,0,17.75,1a1.528,1.528,0,0,0-1.078.464L15.2,2.936A3.5,3.5,0,0,1,10.8,2.936L9.328,1.464A1.528,1.528,0,0,0,8.25,1,1.528,1.528,0,0,0,7.172,1.464L1.464,7.172A1.528,1.528,0,0,0,1,8.25a1.528,1.528,0,0,0,.464,1.078L2.936,10.8a3.5,3.5,0,0,1,0,4.4L1.464,16.672A1.528,1.528,0,0,0,1,17.75a1.528,1.528,0,0,0,.464,1.078l3.708,3.708A1.528,1.528,0,0,0,6.25,23a1.528,1.528,0,0,0,1.078-.464L8.8,21.064a3.5,3.5,0,0,1,4.4,0l1.472,1.472A1.528,1.528,0,0,0,15.75,23a1.528,1.528,0,0,0,1.078-.464l5.708-5.708A1.528,1.528,0,0,0,23,15.75a1.528,1.528,0,0,0-.464-1.078L21.064,13.2a3.5,3.5,0,0,1,0-4.4l1.472-1.472A1.528,1.528,0,0,0,23,6.25,1.528,1.528,0,0,0,22.536,5.172ZM9,8A1,1,0,1,1,8,9,1,1,0,0,1,9,8Zm6,8a1,1,0,1,1,1-1A1,1,0,0,1,15,16Zm.707-7.293-7,7a1,1,0,0,1-1.414-1.414l7-7a1,1,0,0,1,1.414,1.414Z"/></svg>,
+  check:   (c = T.iconColor, s = 18) => <RiCheckFill size={s} color={c} />,
+  x:       (c = T.iconColor, s = 18) => <RiCloseLine size={s} color={c} />,
+  clock:   (c = T.iconColor, s = 18) => <RiTimeFill size={s} color={c} />,
+  wallet:  (c = T.iconColor, s = 18) => <RiWallet3Fill size={s} color={c} />,
+  upload:  (c = T.iconColor, s = 18) => <RiUploadCloud2Fill size={s} color={c} />,
+  logout:  (c = T.iconColor, s = 18) => <RiLogoutBoxRLine size={s} color={c} />,
+  back:    (c = T.iconColor, s = 18) => <RiArrowLeftSLine size={s} color={c} />,
+  trophy:  (c = T.iconColor, s = 18) => <RiTrophyFill size={s} color={c} />,
+  ticket:  (c = T.iconColor, s = 18) => <RiTicket2Fill size={s} color={c} />,
+  info:    (c = T.iconColor, s = 18) => <RiInformationFill size={s} color={c} />,
+  link:    (c = T.iconColor, s = 18) => <RiExternalLinkFill size={s} color={c} />,
 };
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
-    <div style={{ position: "absolute", inset: -50, background: "radial-gradient(circle, rgba(100,100,100,0.90) 0%, rgba(100,100,100,0.50) 35%, rgba(100,100,100,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: "blur(22px)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", inset: -50, background: `radial-gradient(circle, ${T.coinGlow} 0%, ${T.coinGlowMid} 35%, rgba(100,100,100,0.15) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${T.coinGlowBlur}px)`, pointerEvents: "none" }} />
     <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
   </div>
 );
@@ -436,9 +443,9 @@ const RaffleScreen = ({ go, profile }) => {
 
   // ─── Mesmos links sociais do UserDash ───
   const socialLinks = [
-    { href: C.social.instagram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
-    { href: C.social.telegram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
-    { href: C.social.tiktok, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
+    { href: C.social.instagram, icon: <RiInstagramFill size={22} color="currentColor" /> },
+    { href: C.social.telegram, icon: <RiTelegramFill size={22} color="currentColor" /> },
+    { href: C.social.tiktok, icon: <RiTiktokFill size={22} color="currentColor" /> },
   ];
 
   return (
@@ -677,9 +684,9 @@ const UserDash = ({ profile, go, onLogout }) => {
         </div>
         <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
           {[
-            { href: C.social.instagram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.1,6.9c-.5,0-.9.4-.9.9s.4.9.9.9.9-.4.9-.9-.4-.9-.9-.9Z"/><path d="M11.9,8c-2.2,0-4,1.8-4,4s1.8,4,4,4,4-1.8,4-4-1.8-4-4-4ZM11.9,14.6c-1.4,0-2.6-1.2-2.6-2.6s1.2-2.6,2.6-2.6,2.6,1.2,2.6,2.6-1.2,2.6-2.6,2.6Z"/><path d="M12,0C5.4,0,0,5.4,0,12s5.4,12,12,12,12-5.4,12-12S18.6,0,12,0ZM19.6,15.2c0,.8-.2,1.4-.4,1.9-.2.5-.5.9-.9,1.4-.4.4-.9.7-1.4.9-.5.2-1.1.3-1.9.4-.8,0-1.1,0-3.2,0s-2.4,0-3.2,0c-.8,0-1.4-.2-1.9-.4-.5-.2-.9-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.5-.3-1.1-.4-1.9,0-.8,0-1.1,0-3.2s0-2.4,0-3.2c0-.8.2-1.4.4-1.9.2-.5.5-.9.9-1.4s.9-.7,1.4-.9c.5-.2,1.1-.3,1.9-.4.8,0,1.1,0,3.2,0s2.4,0,3.2,0c.8,0,1.4.2,1.9.4.5.2.9.5,1.4.9.4.4.7.9.9,1.4.2.5.3,1.1.4,1.9,0,.8,0,1.1,0,3.2s0,2.4,0,3.2Z"/></svg> },
-            { href: C.social.telegram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
-            { href: C.social.tiktok, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
+            { href: C.social.instagram, icon: <RiInstagramFill size={22} color="currentColor" /> },
+            { href: C.social.telegram, icon: <RiTelegramFill size={22} color="currentColor" /> },
+            { href: C.social.tiktok, icon: <RiTiktokFill size={22} color="currentColor" /> },
           ].map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
@@ -708,7 +715,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
-                            {m.link && <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
+                            {m.link && <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}><RiExternalLinkFill size={16} color="rgba(255,255,255,0.60)" /></div>}
                             <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}><Info size={16} color="#000000" strokeWidth={2.5} /></div>
                           </div>
                         </div>

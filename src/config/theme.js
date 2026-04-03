@@ -4,14 +4,14 @@
 // ═══════════════════════════════════════════
 
 // ── 1. COR PRINCIPAL ─────────────────────────
-const PRIMARY   = "#fc4d00";
-const SECONDARY = "#ffffff";
+const PRIMARY   = "#646464";
+const SECONDARY = "#646464";
 
 // ── 2. TOKENS ────────────────────────────────
 export const T = {
   primary:     PRIMARY,
   secondary:   SECONDARY,
-  primaryDark: "#fc4d00",
+  primaryDark: "#4a4a4a",
 
   // Cor sólida em todos os contextos
   gradient:     PRIMARY,
@@ -29,8 +29,8 @@ export const T = {
   glassBorder: "rgba(255,255,255,0.09)",
   blur:        "blur(20px)",
 
-  radius:   "60px",
-  radiusSm: "30px",
+  radius:   "30px",
+  radiusSm: "16px",
 
   white:  "#FFFFFF",
   muted:  "rgba(255,255,255,0.55)",
@@ -40,6 +40,15 @@ export const T = {
   yellow: "#F59E0B",
   blue:   "#6B8EAD",
   purple: "#7A6B8A",
+
+  // ── Ícones ──────────────────────────────────
+  iconColor:  "#ffffff",        // cor padrão de todos os ícones
+  iconSize:   18,               // tamanho padrão
+
+  // ── Glow da moeda ────────────────────────────
+  coinGlow:   "rgba(100,100,100,0.90)",  // cor central do glow
+  coinGlowMid: "rgba(100,100,100,0.50)", // cor do meio
+  coinGlowBlur: 22,                        // intensidade do blur (px)
 
   fontDisplay: "'Maver', sans-serif",
   fontBody:    "'Sora', sans-serif",

@@ -1,5 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { AlertCircle, Ban, Check, ChevronDown, ChevronLeft, ChevronUp, Clock, DollarSign, Eye, LayoutGrid, GripVertical, Link2, LogOut, Pencil, Search, Trash2, Users, Wallet, X, Zap, Info } from 'lucide-react';
+import {
+  RiArrowLeftSLine, RiLogoutBoxRLine, RiWallet3Fill, RiCloseLine,
+  RiCheckFill, RiTimeFill, RiAlertFill, RiEyeFill, RiSearchFill,
+  RiGroupFill, RiMoneyDollarCircleFill, RiPencilFill, RiDeleteBin6Fill,
+  RiBanFill, RiDraggable, RiArrowUpSLine, RiArrowDownSLine,
+  RiLink, RiFlashFill, RiLayoutGridFill, RiInformationFill, RiExternalLinkFill
+} from 'react-icons/ri';
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from './assets/bg-mobile.png';
 import imgBgDesktop from './assets/bg-desktop.png';
@@ -167,27 +173,27 @@ const StatC = ({ icon, val, label, color = D.red, d = 0 }) => (
 
 // ICONS
 const IC = {
-  check:   (c = "white", s = 18) => <Check size={s} color={c} strokeWidth={2} />,
-  x:       (c = "white", s = 18) => <X size={s} color={c} strokeWidth={2} />,
-  clock:   (c = "white", s = 18) => <Clock size={s} color={c} strokeWidth={2} />,
-  wallet:  (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
-  eye:     (c = "white", s = 18) => <Eye size={s} color={c} strokeWidth={2} />,
-  alert:   (c = "white", s = 18) => <AlertCircle size={s} color={c} strokeWidth={2} />,
-  search:  (c = "white", s = 18) => <Search size={s} color={c} strokeWidth={2} />,
-  users:   (c = "white", s = 18) => <Users size={s} color={c} strokeWidth={2} />,
-  dollar:  (c = "white", s = 18) => <DollarSign size={s} color={c} strokeWidth={2} />,
-  edit:    (c = "white", s = 18) => <Pencil size={s} color={c} strokeWidth={2} />,
-  trash:   (c = "white", s = 18) => <Trash2 size={s} color={c} strokeWidth={2} />,
-  ban:     (c = "white", s = 18) => <Ban size={s} color={c} strokeWidth={2} />,
-  grip:    (c = "white", s = 18) => <GripVertical size={s} color={c} strokeWidth={2} />,
-  arrowUp: (c = "white", s = 18) => <ChevronUp size={s} color={c} strokeWidth={2} />,
-  arrowDn: (c = "white", s = 18) => <ChevronDown size={s} color={c} strokeWidth={2} />,
-  link:    (c = "white", s = 18) => <Link2 size={s} color={c} strokeWidth={2} />,
-  pix:     (c = "white", s = 18) => <Zap size={s} color={c} strokeWidth={2} />,
-  grid:    (c = "white", s = 18) => <LayoutGrid size={s} color={c} strokeWidth={2} />,
-  back:    (c = "white", s = 18) => <ChevronLeft size={s} color={c} strokeWidth={2} />,
-  logout:  (c = "white", s = 18) => <LogOut size={s} color={c} strokeWidth={2} />,
-  info:    (c = "white", s = 18) => <Info size={s} color={c} strokeWidth={2} />,
+  check:   (c = T.iconColor, s = 18) => <RiCheckFill size={s} color={c} />,
+  x:       (c = T.iconColor, s = 18) => <RiCloseLine size={s} color={c} />,
+  clock:   (c = T.iconColor, s = 18) => <RiTimeFill size={s} color={c} />,
+  wallet:  (c = T.iconColor, s = 18) => <RiWallet3Fill size={s} color={c} />,
+  eye:     (c = T.iconColor, s = 18) => <RiEyeFill size={s} color={c} />,
+  alert:   (c = T.iconColor, s = 18) => <RiAlertFill size={s} color={c} />,
+  search:  (c = T.iconColor, s = 18) => <RiSearchFill size={s} color={c} />,
+  users:   (c = T.iconColor, s = 18) => <RiGroupFill size={s} color={c} />,
+  dollar:  (c = T.iconColor, s = 18) => <RiMoneyDollarCircleFill size={s} color={c} />,
+  edit:    (c = T.iconColor, s = 18) => <RiPencilFill size={s} color={c} />,
+  trash:   (c = T.iconColor, s = 18) => <RiDeleteBin6Fill size={s} color={c} />,
+  ban:     (c = T.iconColor, s = 18) => <RiBanFill size={s} color={c} />,
+  grip:    (c = T.iconColor, s = 18) => <RiDraggable size={s} color={c} />,
+  arrowUp: (c = T.iconColor, s = 18) => <RiArrowUpSLine size={s} color={c} />,
+  arrowDn: (c = T.iconColor, s = 18) => <RiArrowDownSLine size={s} color={c} />,
+  link:    (c = T.iconColor, s = 18) => <RiLink size={s} color={c} />,
+  pix:     (c = T.iconColor, s = 18) => <RiFlashFill size={s} color={c} />,
+  grid:    (c = T.iconColor, s = 18) => <RiLayoutGridFill size={s} color={c} />,
+  back:    (c = T.iconColor, s = 18) => <RiArrowLeftSLine size={s} color={c} />,
+  logout:  (c = T.iconColor, s = 18) => <RiLogoutBoxRLine size={s} color={c} />,
+  info:    (c = T.iconColor, s = 18) => <RiInformationFill size={s} color={c} />,
 };
 
 // ═══════════════════════════════════════════
