@@ -4,8 +4,8 @@
 // ═══════════════════════════════════════════
 
 // ── 1. COR PRINCIPAL ─────────────────────────
-const PRIMARY   = "#002fff";
-const SECONDARY = "#000000";
+const PRIMARY   = "#646464";
+const SECONDARY = "#646464";
 
 // ── 2. TOKENS ────────────────────────────────
 export const T = {
@@ -43,7 +43,7 @@ export const T = {
 
   // ── Ícones ──────────────────────────────────
   iconColor:  "#ffffff",        // cor padrão de todos os ícones
-  iconSize:   12,               // tamanho padrão
+  iconSize:   18,               // tamanho padrão
 
   // ── Glow da moeda ────────────────────────────
   coinGlow:   "rgba(100,100,100,0.90)",  // cor central do glow
