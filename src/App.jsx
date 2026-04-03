@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleDollarSign, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaSackDollar, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
 import { createClient } from "@supabase/supabase-js";
 
 import AdminApp from "./resusys-painel-admin";

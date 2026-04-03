@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaCircleDollarSign, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
+import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, FaCamera, FaChevronDown, FaChevronLeft, FaChevronUp, FaCircleCheck, FaSackDollar, FaCircleExclamation, FaCircleInfo, FaCircleXmark, FaClock, FaCloudArrowUp, FaDownload, FaEllipsisVertical, FaEye, FaGear, FaLink, FaMagnifyingGlass, FaMusic, FaPaintbrush, FaPaperPlane, FaPencil, FaRightFromBracket, FaSliders, FaTicket, FaTrash, FaTrophy, FaUsers, FaWallet, FaXmark } from "react-icons/fa6";
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
@@ -63,7 +63,7 @@ const IC = {
   x:       (c, s = 18) => solidIC(FaCircleXmark,           c ?? _S.iconColor, s),
   info:    (c, s = 18) => solidIC(FaCircleInfo,               c ?? _S.iconColor, s),
   alert:   (c, s = 18) => solidIC(FaCircleExclamation,        c ?? _S.iconColor, s),
-  dollar:  (c, s = 18) => solidIC(FaCircleDollarSign,  c ?? _S.iconColor, s),
+  dollar:  (c, s = 18) => solidIC(FaSackDollar,  c ?? _S.iconColor, s),
   pix:     (c, s = 18) => solidIC(FaBolt,               c ?? _S.iconColor, s),
   ban:     (c, s = 18) => solidIC(FaBan,               c ?? _S.iconColor, s),
   clock:   (c, s = 18) => boldIC(FaClock,              c ?? _S.iconColor, s),
