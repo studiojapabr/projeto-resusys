@@ -685,7 +685,7 @@ export default function AdminApp() {
     );
   }
 
-  const TAB_LABELS = { overview: "PAINEL DA BANCA", submissions: "COMPROVANTES", withdrawals: "FILA DE SAQUES", users: "USUÁRIOS", missions: "GERENCIAR TAREFAS" };
+  const TAB_LABELS = { overview: "PAINEL DA<br/>BANCA", submissions: "COMPROVAN<br/>TES", withdrawals: "FILA DE<br/>SAQUES", users: "USUÁRIOS", missions: "GERENCIAR<br/>TAREFAS" };
   const pendSubs = subs.filter(s => s.status === "pendente").length;
   const pendWith = withs.filter(w => w.status === "pendente").length;
   const pendTotal = pendSubs + pendWith;
@@ -806,7 +806,7 @@ export default function AdminApp() {
         </Glass>
 
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(180deg, #f0f0f0 0%, #646464 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: D.white }}>{TAB_LABELS[adminTab]}</h1>
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
         </div>
 
         {loadingData
