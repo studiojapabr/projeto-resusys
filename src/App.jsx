@@ -57,21 +57,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(140,252,0,0.25); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(100,100,100,0.25); border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: #8cfc00 !important; box-shadow: 0 0 0 2px rgba(140,252,0,0.14), 0 0 14px rgba(140,252,0,0.10); }
+  input:focus, textarea:focus { outline: none; border-color: #646464 !important; box-shadow: 0 0 0 2px rgba(100,100,100,0.14), 0 0 14px rgba(100,100,100,0.10); }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(140,252,0,0.22)} 50%{box-shadow:0 0 24px rgba(140,252,0,0.35)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(100,100,100,0.22)} 50%{box-shadow:0 0 24px rgba(100,100,100,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(140,252,0,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(140,252,0,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(100,100,100,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(100,100,100,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(100,100,100,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(100,100,100,0.70); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -113,8 +113,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" },
-    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(140,252,0,0.35)", boxShadow: "none" },
+    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)", boxShadow: "none" },
+    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)", boxShadow: "none" },
     danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -197,7 +197,7 @@ const IC = {
 
 const MIcon = () => (
   <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
-    <div style={{ position: "absolute", inset: -50, background: "radial-gradient(circle, rgba(140,252,0,0.90) 0%, rgba(140,252,0,0.50) 35%, rgba(140,252,0,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: "blur(22px)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", inset: -50, background: "radial-gradient(circle, rgba(100,100,100,0.90) 0%, rgba(100,100,100,0.50) 35%, rgba(100,100,100,0.15) 60%, transparent 78%)", borderRadius: "50%", filter: "blur(22px)", pointerEvents: "none" }} />
     <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
   </div>
 );
@@ -208,7 +208,7 @@ const MIcon = () => (
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(140,252,0,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(100,100,100,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>

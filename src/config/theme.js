@@ -4,23 +4,23 @@
 // ═══════════════════════════════════════════
 
 // ── 1. COR PRINCIPAL ─────────────────────────
-const PRIMARY   = "#8cfc00";
-const SECONDARY = "#8cfc00";
+const PRIMARY   = "#646464";
+const SECONDARY = "#646464";
 
 // ── 2. TOKENS ────────────────────────────────
 export const T = {
   primary:     PRIMARY,
   secondary:   SECONDARY,
-  primaryDark: "#6dce00",
+  primaryDark: "#4a4a4a",
 
   // Cor sólida em todos os contextos
   gradient:     PRIMARY,
   gradientV:    PRIMARY,
-  gradientCard: `rgba(140,252,0,0.07)`,
+  gradientCard: `rgba(100,100,100,0.07)`,
 
-  glowPrimary:   `rgba(140,252,0,0.25)`,
-  glowSecondary: `rgba(140,252,0,0.18)`,
-  bgAccent:      `rgba(140,252,0,0.04)`,
+  glowPrimary:   `rgba(100,100,100,0.25)`,
+  glowSecondary: `rgba(100,100,100,0.18)`,
+  bgAccent:      `rgba(100,100,100,0.04)`,
 
   bg1: "#080808",
   bg2: "#0f0f0f",
