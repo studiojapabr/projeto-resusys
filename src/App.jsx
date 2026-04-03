@@ -150,6 +150,7 @@ const BG = ({ children }) => {
 
 const Glass = ({ children, s = {}, a }) => (
   <div className="premium-glass" style={{
+    position: "relative", overflow: "hidden",
     background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur,
     border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm,
     animation: a, ...s
@@ -597,7 +598,7 @@ const UserDash = ({ profile, go, onLogout }) => {
   return (
     <>
       {toast && <ToastC msg={toast.msg} type={toast.type} />}
-      <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%" }}>
+      <div style={{ padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
 
         {/* Header */}
         <Glass s={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16 }} a="fadeUp 0.6s ease-out">
