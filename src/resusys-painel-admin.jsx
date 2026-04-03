@@ -4,7 +4,6 @@ import { FaArrowUpRightFromSquare, FaArrowsRotate, FaBan, FaBolt, FaBorderAll, F
 import { createClient } from "@supabase/supabase-js";
 import imgBgMobile from "./assets/bg-mobile.png";
 import imgBgDesktop from "./assets/bg-desktop.png";
-import { C } from "./config/content";
 import imgLogo from "./assets/logo-t.png";
 import imgIconePrincipal from "./assets/icone-task.png";
 
@@ -988,7 +987,7 @@ export default function AdminApp() {
 
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", marginTop: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: D.radiusSm, position: "relative", zIndex: 100, animation: "fadeUp 0.6s ease-out" }}>
-          <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
+          <img src={imgLogo} alt={"TASKY"} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: pendTotal > 0 ? D.yellow : D.muted, textTransform: "uppercase" }}>
             {pendTotal > 0 ? `${pendTotal} PENDENTE${pendTotal !== 1 ? "S" : ""}` : "SINCRONIZADO"}
           </span>
