@@ -60,7 +60,12 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { background: linear-gradient(135deg, #888888 0%, #C0C0C0 100%) !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(192,192,192,0.18), 0 10px 22px rgba(0,0,0,0.30); filter: brightness(1.08); }
+  .btn-hover-grad:hover { filter: brightness(0.78); transform: scale(1.01); }
+  .ic-btn:hover { filter: brightness(0.78); }
+  .ic-btn { transition: filter 0.18s ease, transform 0.18s ease; cursor: pointer; }
+  .ic-btn:active { transform: scale(0.94); filter: brightness(0.65); }
+  .txt-link:hover { filter: brightness(0.78); }
+  .txt-link { transition: filter 0.18s ease; cursor: pointer; }
 `}</style>;
 
 const Spotlight = () => {
@@ -272,11 +277,11 @@ const ASubs = ({ subs, setSubs }) => {
                 <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 3 }}>{IC.clock(D.dim)}<span style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase" }}>{new Date(s.created_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span></div>
               </div>
               <div style={{ display: "flex", gap: 5, flexShrink: 0 }}>
-                <div onClick={() => setSel(s)} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.eye(D.muted)}</div>
+                <div onClick={() => setSel(s)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.eye(D.muted)}</div>
                 {s.status === "pendente" && (
                   <>
-                    <div onClick={() => approve(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.check("#22C55E", 13)}</div>
-                    <div onClick={() => reject(s.id)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.x("#EF4444", 13)}</div>
+                    <div onClick={() => approve(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.check("#22C55E", 13)}</div>
+                    <div onClick={() => reject(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.x("#EF4444", 13)}</div>
                   </>
                 )}
               </div>
@@ -296,7 +301,7 @@ const ASubs = ({ subs, setSubs }) => {
                     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{sel.mission_title}</div>
                   </div>
                 </div>
-                <div onClick={() => setSel(null)} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
+                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted, 18)}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={"#22C55E"} /></div>
               {sel.observacao && (
@@ -431,7 +436,7 @@ const AUsers = ({ usrs, setUsrs }) => {
                   <span style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>Missões: <span style={{ fontWeight: 700, color: "rgba(255,255,255,0.65)" }}>{u.missoes_cnt || 0}</span></span>
                 </div>
               </div>
-              <div onClick={() => toggle(u.id, u.status)} style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
+              <div onClick={() => toggle(u.id, u.status)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 {u.status === "bloqueado" ? IC.check(D.white, 12) : IC.ban("#EF4444")}
               </div>
             </div>
@@ -497,7 +502,7 @@ const AMissions = ({ missions, setMissions }) => {
       <div style={{ animation: "fadeUp 0.45s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
-          <div onClick={() => { setView("list"); setEditing(null); }} style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back(D.muted, 18)}</div>
+          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted, 18)}</div>
         </div>
         <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
           <Inp label="TÍTULO" placeholder="Ex: Deposite R$50" value={f.titulo} onChange={e => set("titulo", e.target.value)} />
@@ -547,7 +552,7 @@ const AMissions = ({ missions, setMissions }) => {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap", marginBottom: 5 }}>
                   <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", textDecoration: m.ativa ? "none" : "line-through", textDecorationColor: "rgba(239,68,68,0.4)" }}>{m.titulo}</span>
-                  <div onClick={() => { setEditing(m); setView("edit"); }} style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.edit(D.muted)}</div>
+                  <div onClick={() => { setEditing(m); setView("edit"); }} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.edit(D.muted)}</div>
                   <div onClick={() => setDel(m)} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.10)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.trash("#EF4444")}</div>
                 </div>
                 {m.descricao && <p style={{ fontFamily: D.sora, fontSize: 12, color: D.dim, marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", textTransform: "uppercase" }}>{m.descricao}</p>}
@@ -760,8 +765,6 @@ export default function AdminApp() {
                           marginTop: 4,
                           transition: "background 0.15s ease, color 0.15s ease",
                         }}
-                        onMouseEnter={e => { e.currentTarget.style.background = "rgba(239,68,68,0.08)"; e.currentTarget.style.color = "#EF4444"; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(255,255,255,0.55)"; }}
                       >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ transform: "scaleX(-1)", flexShrink: 0 }}><path d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z"/></svg>
                         Sair
@@ -790,8 +793,6 @@ export default function AdminApp() {
                         borderLeft: active ? `3px solid ${D.red}` : "3px solid transparent",
                         transition: "background 0.15s ease, color 0.15s ease",
                       }}
-                      onMouseEnter={e => { if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
-                      onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}
                     >
                       <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
                       {item.badge > 0 && (

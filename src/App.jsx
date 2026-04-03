@@ -80,7 +80,14 @@ const Styles = () => <style>{`
   @keyframes spin      { to { transform: rotate(360deg); } }
   .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
   /* hover removed on containers */
-  .btn-hover-grad:hover { background: #000000 !important; color: #8cfc00 !important; transform: scale(1.02); box-shadow: 0 0 20px rgba(140,252,0,0.22), 0 10px 22px rgba(0,0,0,0.50); }
+  .btn-hover-grad:hover { filter: brightness(0.78); transform: scale(1.01); }
+  [data-click]:hover, .clickable:hover { filter: brightness(0.78); transition: filter 0.18s ease; }
+  a[href]:hover { filter: brightness(0.78); transition: filter 0.18s ease; }
+  .ic-btn:hover { filter: brightness(0.78); }
+  .ic-btn { transition: filter 0.18s ease, transform 0.18s ease; cursor: pointer; }
+  .ic-btn:active { transform: scale(0.94); filter: brightness(0.65); }
+  .txt-link:hover { filter: brightness(0.78); }
+  .txt-link { transition: filter 0.18s ease; cursor: pointer; }
 `}</style>;
 
 const Spotlight = () => {
@@ -252,13 +259,13 @@ const LoginScreen = ({ go }) => {
         <Glass s={{ padding: "36px 30px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
             <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-            <div onClick={() => go("landing")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+            <div onClick={() => go("landing")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
           <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 28 }}>{C.login.title}</h1>
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
-          <p onClick={() => go("register")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>{C.login.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.login.linkCta}</span></p>
+          <p onClick={() => go("register")} className="txt-link" style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase", fontWeight: 600 }}>{C.login.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.login.linkCta}</span></p>
         </Glass>
       </div>
     </BG></>
@@ -303,7 +310,7 @@ const RegisterScreen = ({ go }) => {
           <div style={{ marginTop: 12 }}>
             <Btn onClick={handleRegister} disabled={loading || !nome || !email || !senha}>{loading ? "CRIANDO..." : "CONTINUAR"}</Btn>
           </div>
-          <p onClick={() => go("login")} style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, cursor: "pointer", textTransform: "uppercase", fontWeight: 600 }}>{C.register.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.register.linkCta}</span></p>
+          <p onClick={() => go("login")} className="txt-link" style={{ textAlign: "center", marginTop: 18, fontFamily: D.sora, fontSize: 12, color: D.dim, textTransform: "uppercase", fontWeight: 600 }}>{C.register.linkText} <span style={{ color: D.red, fontWeight: 800 }}>{C.register.linkCta}</span></p>
         </Glass>
       </div>
     </BG></>
@@ -335,7 +342,7 @@ const RaffleBtnUser = ({ go, profile }) => {
   return (
     <div
       onClick={() => go("raffle")}
-      style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative", animation: "pulse 2.4s infinite", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}
+      className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}
     >
       {IC.ticket("white", 18)}
       {myTickets > 0 && (
@@ -421,7 +428,7 @@ const RaffleScreen = ({ go, profile }) => {
   );
 
   const iconBtn = (content, onClick) => (
-    <div onClick={onClick} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s", flexShrink: 0 }}>
+    <div onClick={onClick} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.30)", background: "rgba(0,0,0,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
       {content}
     </div>
   );
@@ -445,7 +452,7 @@ const RaffleScreen = ({ go, profile }) => {
             {myPending ? "EM ANÁLISE" : `${myTickets} TICKET${myTickets !== 1 ? "S" : ""}`}
           </span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+            <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
           </div>
         </Glass>
 
@@ -462,7 +469,7 @@ const RaffleScreen = ({ go, profile }) => {
         {/* ── Ícones sociais — idênticos ao UserDash ── */}
         <div style={{ display: "flex", gap: 12, marginBottom: 22, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.2s both" }}>
           {socialLinks.map(({ href, icon }, idx) => (
-            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
+            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
           <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 3px 12px rgba(0,0,0,0.50)", animation: "pulse 2.4s infinite" }}>
             {IC.ticket("white", 18)}
@@ -518,7 +525,7 @@ const RaffleScreen = ({ go, profile }) => {
                 </Btn>
                 {raffle.link && iconBtn(<LinkIcon />, () => window.open(raffle.link, "_blank"))}
                 {raffle.link2 && iconBtn(<LinkIcon />, () => window.open(raffle.link2, "_blank"))}
-                <div onClick={() => setInfoModal(true)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 3px 12px rgba(0,0,0,0.50)", flexShrink: 0 }}>
+                <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 3px 12px rgba(0,0,0,0.50)", flexShrink: 0 }}>
                   <span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span>
                 </div>
               </div>
@@ -540,7 +547,7 @@ const RaffleScreen = ({ go, profile }) => {
                   = {Math.floor(Number(valor) / 20)} TICKET(S)
                 </div>
               )}
-              <div onClick={() => document.getElementById("raffleFileInput").click()} style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "24px 16px", cursor: "pointer", marginBottom: 18, background: D.glass }}>
+              <div onClick={() => document.getElementById("raffleFileInput").click()} className="ic-btn" style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "24px 16px", marginBottom: 18, background: D.glass }}>
                 <input id="raffleFileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!", "danger"); return; } setFile(f || null); }} />
                 {file
                   ? <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p>
@@ -548,7 +555,7 @@ const RaffleScreen = ({ go, profile }) => {
               </div>
               <div style={{ display: "flex", gap: 12 }}>
                 <Btn onClick={handleSend} disabled={uploading || !file || !valor || Number(valor) < 20} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR"}</Btn>
-                <div onClick={() => setModal(false)} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+                <div onClick={() => setModal(false)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
               </div>
             </Glass>
           </div>
@@ -658,8 +665,8 @@ const UserDash = ({ profile, go, onLogout }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("withdrawal")} style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.wallet()}</div>
-            <div onClick={onLogout} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>{IC.logout("rgba(255,255,255,0.60)")}</div>
+            <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.wallet()}</div>
+            <div onClick={onLogout} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.logout("rgba(255,255,255,0.60)")}</div>
           </div>
         </Glass>
 
@@ -673,7 +680,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             { href: C.social.telegram, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M17.562,8.161c-0.18,1.897-0.962,6.502-1.359,8.627c-0.168,0.9-0.5,1.201-0.82,1.23c-0.697,0.064-1.226-0.461-1.901-0.903c-1.056-0.692-1.653-1.123-2.678-1.799c-1.185-0.781-0.417-1.21,0.258-1.911c0.177-0.184,3.247-2.977,3.307-3.23c0.007-0.032,0.015-0.15-0.056-0.212s-0.174-0.041-0.248-0.024c-0.106,0.024-1.793,1.139-5.062,3.345c-0.479,0.329-0.913,0.489-1.302,0.481c-0.428-0.009-1.252-0.242-1.865-0.442c-0.751-0.244-1.349-0.374-1.297-0.788c0.027-0.216,0.324-0.437,0.892-0.663c3.498-1.524,5.831-2.529,6.998-3.015c3.333-1.386,4.025-1.627,4.477-1.635C17.472,7.214,17.608,7.681,17.562,8.161z"/></svg> },
             { href: C.social.tiktok, icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="m12,0C5.373,0,0,5.373,0,12s5.373,12,12,12,12-5.373,12-12S18.627,0,12,0h0Zm7.439,10.483c-1.52,0-2.93-.486-4.081-1.312v5.961c0,2.977-2.422,5.399-5.399,5.399-1.151,0-2.217-.363-3.094-.978-1.393-.978-2.305-2.594-2.305-4.421,0-2.977,2.422-5.399,5.399-5.399.247,0,.489.02.727.053v2.994c-.23-.072-.474-.114-.727-.114-1.36,0-2.466,1.106-2.466,2.466,0,.947.537,1.769,1.322,2.183.342.18.731.283,1.144.283,1.329,0,2.412-1.057,2.461-2.373l.005-11.756h2.933c0,.254.025.503.069.744.207,1.117.87,2.077,1.789,2.676.64.418,1.403.661,2.222.661v2.933Zm0,0"/></svg> },
           ].map(({ href, icon }, idx) => (
-            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "rgba(255,255,255,0.70)", transition: "all 0.2s ease", textDecoration: "none" }}>{icon}</a>
+            <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
           {/* Botão Sorteio */}
           <RaffleBtnUser go={go} profile={profile} />
@@ -701,8 +708,8 @@ const UserDash = ({ profile, go, onLogout }) => {
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
-                            {m.link && <div onClick={() => window.open(m.link, "_blank")} style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.25s" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
-                            <div onClick={() => setInfo(m)} style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.2s ease", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
+                            {m.link && <div onClick={() => window.open(m.link, "_blank")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.60)"><path d="M7.896,16.104c-.586-.585-.586-1.536,0-2.121,.586-.586,1.535-.586,2.121,0,1.326,1.326,3.64,1.327,4.966,0l4.989-4.989c1.369-1.369,1.369-3.597,0-4.966s-3.597-1.369-4.966,0c-.586,.586-1.535,.586-2.121,0-.586-.585-.586-1.536,0-2.121,2.538-2.539,6.67-2.539,9.208,0,2.539,2.539,2.539,6.669,0,9.208l-4.989,4.989c-1.27,1.27-2.937,1.904-4.604,1.904s-3.335-.635-4.604-1.904Zm-1.384,7.893c1.667,0,3.334-.635,4.604-1.904,.586-.585,.586-1.536,0-2.121-.586-.586-1.535-.586-2.121,0-1.37,1.37-3.598,1.369-4.966,0-1.369-1.369-1.369-3.597,0-4.966l4.961-4.961c1.37-1.37,3.598-1.37,4.966,0,.586,.586,1.535,.586,2.121,0,.586-.585,.586-1.536,0-2.121-2.539-2.539-6.669-2.539-9.208,0L1.907,12.885c-2.539,2.539-2.539,6.669,0,9.208,1.27,1.27,2.937,1.904,4.604,1.904Z"/></svg></div>}
+                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}><span style={{ fontWeight: 800, fontSize: 12, color: "white", fontFamily: D.sora }}>i</span></div>
                           </div>
                         </div>
                         <div style={{ position: "absolute", right: -30, bottom: -20, opacity: completed ? 0.2 : 0.95 }}>
@@ -739,7 +746,7 @@ const UserDash = ({ profile, go, onLogout }) => {
             <Glass s={{ padding: "30px 24px", textAlign: "center" }}>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8, letterSpacing: 0.5 }}>ENVIAR COMPROVANTE</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 22, fontWeight: 500, textTransform: "uppercase" }}>Envie o print para validação.</p>
-              <div onClick={() => document.getElementById("fileInput").click()} style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", cursor: "pointer", marginBottom: 18, background: D.glass, transition: "all 0.2s ease" }}>
+              <div onClick={() => document.getElementById("fileInput").click()} className="ic-btn" style={{ border: `1px solid ${D.glassBorder}`, borderRadius: D.radius, padding: "32px 16px", textAlign: "center", marginBottom: 18, background: D.glass }}>
                 <input id="fileInput" type="file" accept="image/png,image/jpeg" style={{ display: "none" }} onChange={e => { const f = e.target.files[0]; if (f && f.size > 5 * 1024 * 1024) { showToast("ARQUIVO MAIOR QUE 5MB!", "danger"); e.target.value = ""; return; } setFile(f || null); }} />
                 {file
                   ? <><p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.orange, textTransform: "uppercase" }}>{file.name}</p><p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginTop: 4, textTransform: "uppercase" }}>{(file.size / 1024).toFixed(0)}KB — TOQUE PARA TROCAR</p></>
@@ -768,7 +775,7 @@ const UserDash = ({ profile, go, onLogout }) => {
               </div>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <Btn onClick={() => !uploading && file && handleSubmit(modal)} disabled={uploading || !file} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR ENVIO"}</Btn>
-                <div onClick={() => { setModal(null); setObservacao(""); }} style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+                <div onClick={() => { setModal(null); setObservacao(""); }} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
               </div>
             </Glass>
           </div>
@@ -817,7 +824,7 @@ const Withdrawal = ({ go, profile }) => {
         <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out", boxShadow: "0 3px 12px rgba(0,0,0,0.50)" }}>{IC.check("white", 20)}</div>
         <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word" }}>{C.success.title}</h2>
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
-        <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+        <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
       </Glass>
     </div>
   );
@@ -828,7 +835,7 @@ const Withdrawal = ({ go, profile }) => {
       <Glass s={{ padding: "34px 28px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
-          <div onClick={() => go("dashboard")} style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
+          <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.back("rgba(255,255,255,0.7)")}</div>
         </div>
         <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", marginBottom: 10 }}>{C.withdrawal.title}</h1>
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
