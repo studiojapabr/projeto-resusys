@@ -35,8 +35,8 @@ export const T = {
   // Fundo sutil de cards (efeito vidro com toque da cor primária)
   gradientCard:  `rgba(${P},0.07)`,
 
-  // Degradê nos títulos: vermelho → laranja em 90°
-  titleGradient: `linear-gradient(90deg, ${PRIMARY} 0%, ${SECONDARY} 100%)`,
+  // Degradê nos títulos: cinza escuro → branco em 90°
+  titleGradient: `linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)`,
 
   // ── Brilhos e sombras ───────────────────────
   glowPrimary:   `rgba(${P},0.25)`,
