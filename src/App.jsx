@@ -612,7 +612,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                   const completed = done[m.id];
                   const aprovado = done[m.id] === "aprovado";
                   return (
-                    <Glass key={m.id} s={{ padding: "28px 24px", background: aprovado ? "rgba(192,192,192,0.10)" : completed ? "rgba(192,192,192,0.06)" : D.glass, borderColor: aprovado ? "rgba(192,192,192,0.35)" : completed ? "rgba(192,192,192,0.18)" : D.glassBorder }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
+                    <Glass key={m.id} s={{ padding: "28px 24px", background: (aprovado || completed) ? "rgba(0,0,0,0.45)" : D.glass, borderColor: (aprovado || completed) ? "rgba(255,255,255,0.04)" : D.glassBorder, opacity: (aprovado || completed) ? 0.6 : 1, transition: "all 0.3s ease" }} a={`slideUp 0.6s ease-out ${0.2 + i * 0.08}s both`}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                         <div style={{ flex: 1, zIndex: 1 }}>
                           <span style={{ fontFamily: D.sora, fontSize: 10, fontWeight: 600, letterSpacing: 0.5, color: completed ? D.orange : D.muted, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 8 }}>
