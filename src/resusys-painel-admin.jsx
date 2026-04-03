@@ -12,6 +12,7 @@ import imgBgDesktop from "./assets/bg-desktop.png";
 import { T } from "./config/theme";
 import { C } from "./config/content";
 import imgLogo from "./assets/logo-t.png";
+import imgIconePrincipal from "./assets/icone-task.png";
 
 // ═══════════════════════════════════════════
 // SUPABASE
@@ -835,22 +836,12 @@ const AConfig = () => {
         />
 
         {/* Preview ao vivo do glow */}
-        <div style={{ padding: "20px", background: "rgba(0,0,0,0.40)", borderRadius: D.radiusSm, border: `1px solid ${D.glassBorder}`, marginTop: 4, display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <div style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5, position: "absolute", top: 10, left: 16 }}>PREVIEW</div>
-          <div style={{ position: "relative", width: 90, height: 90, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ position: "absolute", inset: -30, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, rgba(100,100,100,0.10) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
-            <div style={{ width: 64, height: 64, borderRadius: "50%", background: `linear-gradient(135deg, ${cfg.coinGlowHex}44, ${cfg.coinGlowHex}22)`, border: `2px solid ${cfg.coinGlowHex}66`, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", zIndex: 1 }}>
-              <span style={{ fontFamily: D.sora, fontSize: 18, fontWeight: 800, color: cfg.coinGlowHex }}>$</span>
-            </div>
+        <div style={{ padding: "28px 20px", background: "rgba(0,0,0,0.40)", borderRadius: D.radiusSm, border: `1px solid ${D.glassBorder}`, marginTop: 4, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+          <span style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5 }}>PREVIEW AO VIVO</span>
+          <div style={{ position: "relative", width: 110, height: 110, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
+            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, rgba(100,100,100,0.10) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
+            <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
           </div>
-        </div>
-
-        {/* Info dos valores gerados */}
-        <div style={{ marginTop: 12, padding: "10px 14px", background: D.glass, borderRadius: 12, border: `1px solid ${D.glassBorder}` }}>
-          <div style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 4 }}>VALORES GERADOS</div>
-          <div style={{ fontFamily: D.sora, fontSize: 11, color: D.muted, letterSpacing: 0.3 }}>coinGlow: <span style={{ color: D.white }}>{coinGlow}</span></div>
-          <div style={{ fontFamily: D.sora, fontSize: 11, color: D.muted, letterSpacing: 0.3, marginTop: 2 }}>coinGlowMid: <span style={{ color: D.white }}>{coinGlowMid}</span></div>
-          <div style={{ fontFamily: D.sora, fontSize: 11, color: D.muted, letterSpacing: 0.3, marginTop: 2 }}>coinGlowBlur: <span style={{ color: D.white }}>{cfg.coinGlowBlur}px</span></div>
         </div>
       </Glass>
 

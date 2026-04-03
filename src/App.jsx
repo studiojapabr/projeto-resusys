@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import {
   ChevronLeft, LogOut, Wallet, X, CircleCheck, CircleX,
-  Clock, CloudUpload, Ticket, Trophy, Instagram, Send, Music2,
+  Clock, CloudUpload, Ticket, Trophy, Camera, Send, Music2,
   ExternalLink, Info, CircleAlert, Zap, Link,
   Eye, Search, Users, CircleDollarSign, LayoutGrid,
   Pencil, Trash2, Ban, GripVertical, ChevronUp, ChevronDown,
@@ -418,7 +418,7 @@ const RaffleScreen = ({ go, profile }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <Instagram size={22} strokeWidth={2} /> },
+    { href: C.social.instagram, icon: <Camera size={22} strokeWidth={2} /> },
     { href: C.social.telegram,  icon: <Send     size={22} strokeWidth={2} /> },
     { href: C.social.tiktok,    icon: <Music2   size={22} strokeWidth={2} /> },
   ];
@@ -593,7 +593,7 @@ const UserDash = ({ profile, go, onLogout }) => {
   };
 
   const socialLinks = [
-    { href: C.social.instagram, icon: <Instagram size={22} strokeWidth={2} /> },
+    { href: C.social.instagram, icon: <Camera size={22} strokeWidth={2} /> },
     { href: C.social.telegram,  icon: <Send     size={22} strokeWidth={2} /> },
     { href: C.social.tiktok,    icon: <Music2   size={22} strokeWidth={2} /> },
   ];
