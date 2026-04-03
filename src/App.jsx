@@ -52,6 +52,8 @@ const D = {
   yellow: T.yellow, blue: T.blue, purple: T.purple,
   white: T.white, muted: T.muted, dim: T.dim, faint: T.faint,
   btnGrad: T.gradient, cardGrad: T.gradientCard,
+  btnGlow: T.btnGlow, btnGlowSm: T.btnGlowSm,
+  titleGrad: T.titleGradient,
   sora: T.fontBody, maver: T.fontDisplay,
 };
 
@@ -109,21 +111,21 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(100,100,100,0.25); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: ${T.scrollThumb}; border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: #646464 !important; box-shadow: 0 0 0 2px rgba(100,100,100,0.14), 0 0 14px rgba(100,100,100,0.10); }
+  input:focus, textarea:focus { outline: none; border-color: ${T.inputBorderFocus} !important; box-shadow: ${T.inputFocusShadow}; }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(100,100,100,0.22)} 50%{box-shadow:0 0 24px rgba(100,100,100,0.35)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px ${T.pulseShadowLo}} 50%{box-shadow:0 0 24px ${T.pulseShadowHi}} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
-  .pulse-dot-red { width:10px; height:10px; background:rgba(100,100,100,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(100,100,100,0.70); animation:pulseDot 2s infinite; }
-  .pulse-dot-green { width:10px; height:10px; background:rgba(100,100,100,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(100,100,100,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-red { width:10px; height:10px; background:${T.dotBg}; border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:${T.dotAfter}; animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:${T.dotBg}; border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:${T.dotAfter}; animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
@@ -164,8 +166,8 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)", boxShadow: "none" },
-    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)", boxShadow: "none" },
+    primary: { background: D.btnGrad, color: "#000000", border: `1px solid rgba(${T.primary.replace("#","").match(/.{2}/g).map(h=>parseInt(h,16)).join(",")},0.35)`, boxShadow: D.btnGlow },
+    success: { background: D.btnGrad, color: "#000000", border: `1px solid rgba(${T.primary.replace("#","").match(/.{2}/g).map(h=>parseInt(h,16)).join(",")},0.35)`, boxShadow: D.btnGlow },
     danger:  { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" },
     ghost:   { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
@@ -193,7 +195,7 @@ const Chk = ({ checked, onChange, label }) => (
 
 const ToastC = ({ msg, type }) => msg ? (
   <div style={{ position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)", maxWidth: 340, width: "calc(100% - 40px)", background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, boxShadow: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px" }}>
-    <div style={{ background: D.btnGrad, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+    <div style={{ background: D.btnGrad, boxShadow: D.btnGlowSm, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
       {IC.check("white")}
     </div>
     <span style={{ fontFamily: D.sora, fontSize: 11, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: "rgba(255,255,255,0.92)", lineHeight: 1.4, textAlign: "center" }}>{msg}</span>
@@ -219,7 +221,7 @@ const MIcon = () => {
   const s = useRuntimeSettings();
   return (
     <div style={{ width: 150, height: 150, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite", position: "relative" }}>
-      <div style={{ position: "absolute", inset: -50, background: `radial-gradient(circle, ${s.coinGlow} 0%, ${s.coinGlowMid} 35%, rgba(100,100,100,0.15) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${s.coinGlowBlur}px)`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: -50, background: `radial-gradient(circle, ${s.coinGlow} 0%, ${s.coinGlowMid} 35%, ${T.coinGlowFar} 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${s.coinGlowBlur}px)`, pointerEvents: "none" }} />
       <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
     </div>
   );
@@ -228,7 +230,7 @@ const MIcon = () => {
 const Loading = () => (
   <div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
     <div style={{ textAlign: "center" }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(100,100,100,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid ${T.spinnerTrack}`, borderTopColor: D.red, animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
       <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.muted, textTransform: "uppercase", letterSpacing: 1 }}>CARREGANDO...</span>
     </div>
   </div>
@@ -245,7 +247,7 @@ const Landing = ({ go }) => (
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>BEM VINDO</span>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 14 }} dangerouslySetInnerHTML={{ __html: C.landing.title }} />
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 14 }} dangerouslySetInnerHTML={{ __html: C.landing.title }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 30 }}>{C.landing.subtitle}</p>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <Btn onClick={() => go("register")} s={{ flex: 1 }}>CADASTRE-SE</Btn>
@@ -282,7 +284,7 @@ const LoginScreen = ({ go }) => {
             <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
             <div onClick={() => go("landing")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{<SvgBack size={18} color="rgba(255,255,255,0.7)" />}</div>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }} dangerouslySetInnerHTML={{ __html: C.login.title }} />
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }} dangerouslySetInnerHTML={{ __html: C.login.title }} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
           <Btn onClick={handleLogin} disabled={loading || !email || !senha}>{loading ? "ENTRANDO..." : "ENTRAR"}</Btn>
@@ -321,7 +323,7 @@ const RegisterScreen = ({ go }) => {
             <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
             <span style={{ fontFamily: D.sora, fontWeight: 800, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>BEM VINDO</span>
           </div>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }} dangerouslySetInnerHTML={{ __html: C.register.title }} />
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 28 }} dangerouslySetInnerHTML={{ __html: C.register.title }} />
           <Inp placeholder="NOME DE USUÁRIO:" value={nome} onChange={e => setNome(e.target.value)} />
           <Inp placeholder="E-MAIL:" type="email" value={email} onChange={e => setEmail(e.target.value)} />
           <Inp placeholder="SENHA:" type="password" value={senha} onChange={e => setSenha(e.target.value)} />
@@ -356,7 +358,7 @@ const RaffleBtnUser = ({ go, profile }) => {
 
   if (!raffle) return null;
   return (
-    <div onClick={() => go("raffle")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite" }}>
+    <div onClick={() => go("raffle")} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite" }}>
       {IC.ticket("white")}
       {myTickets > 0 && (
         <div style={{ position: "absolute", top: -4, right: -4, width: 16, height: 16, borderRadius: "50%", background: "#050505", border: `1.5px solid ${D.orange}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: D.orange }}>{myTickets}</div>
@@ -443,7 +445,7 @@ const RaffleScreen = ({ go, profile }) => {
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }} dangerouslySetInnerHTML={{ __html: C.raffle.title }} />
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }} dangerouslySetInnerHTML={{ __html: C.raffle.title }} />
 
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>R$20 = 1 <span style={{ color: D.orange }}>TICKET</span></span>
@@ -453,7 +455,7 @@ const RaffleScreen = ({ go, profile }) => {
           {socialLinks.map(({ href, icon }, idx) => (
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
-          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, animation: "pulse 2.4s infinite" }}>
+          <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, animation: "pulse 2.4s infinite" }}>
             {IC.ticket("white")}
           </div>
         </div>
@@ -492,7 +494,7 @@ const RaffleScreen = ({ go, profile }) => {
                     <SvgLink size={14} color="rgba(255,255,255,0.60)" />
                   </div>
                 )}
-                <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div onClick={() => setInfoModal(true)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   {IC.info("white", 12)}
                 </div>
               </div>
@@ -612,12 +614,12 @@ const UserDash = ({ profile, go, onLogout }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: saldo >= 5 ? D.orange : D.muted, textTransform: "uppercase" }}>R$ {Number(saldo).toFixed(2).replace(".", ",")}</span>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none" }}>{IC.wallet("white")}</div>
+            <div onClick={() => go("withdrawal")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", animation: saldo > 0 ? "pulse 2.4s infinite" : "none" }}>{IC.wallet("white")}</div>
             <div onClick={onLogout} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>{<SvgBack size={18} color="rgba(255,255,255,0.60)" />}</div>
           </div>
         </Glass>
 
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }} dangerouslySetInnerHTML={{ __html: C.dashboard.title }} />
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "18px 0 8px 4px", animation: "fadeUp 0.6s ease-out 0.1s both" }} dangerouslySetInnerHTML={{ __html: C.dashboard.title }} />
         <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 14, marginLeft: 4, animation: "fadeUp 0.6s ease-out 0.15s both" }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, color: D.white, textTransform: "uppercase", letterSpacing: 0.5 }}>{C.dashboard.subtitle}</span>
         </div>
@@ -657,7 +659,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                                 <SvgLink size={14} color="rgba(255,255,255,0.60)" />
                               </div>
                             )}
-                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <div onClick={() => setInfo(m)} className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, border: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
                               {IC.info("white", 12)}
                             </div>
                           </div>
@@ -745,8 +747,8 @@ const Withdrawal = ({ go, profile }) => {
   if (ok) return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
-        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("white")}</div>
-        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: C.success.title }} />
+        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("white")}</div>
+        <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: C.success.title }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{<SvgBack size={18} color="rgba(255,255,255,0.7)" />}</div>
       </Glass>
@@ -761,7 +763,7 @@ const Withdrawal = ({ go, profile }) => {
           <img src={imgLogo} alt={C.brandName} style={{ height: 28, width: "auto", objectFit: "contain" }} />
           <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{<SvgBack size={18} color="rgba(255,255,255,0.7)" />}</div>
         </div>
-        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 10 }} dangerouslySetInnerHTML={{ __html: C.withdrawal.title }} />
+        <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, lineHeight: 0.88, textTransform: "uppercase", letterSpacing: -2, wordBreak: "break-word", background: D.titleGrad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: 10 }} dangerouslySetInnerHTML={{ __html: C.withdrawal.title }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: D.muted, marginBottom: 22 }}>PREENCHA OS DADOS CORRETAMENTE</p>
         <div style={{ padding: "10px 22px", borderRadius: D.radius, background: D.glass, border: `1px solid ${D.glassBorder}`, marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 40 }}>
           <span style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: D.muted, textTransform: "uppercase" }}>SALDO</span>

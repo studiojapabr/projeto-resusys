@@ -50,6 +50,8 @@ const D = {
   yellow: "#F59E0B", blue: "#3B82F6", purple: "#8B5CF6",
   white: "#FFFFFF", muted: "rgba(255,255,255,0.62)", dim: "rgba(255,255,255,0.40)", faint: "rgba(255,255,255,0.10)",
   btnGrad: T.gradient, cardGrad: T.gradientCard,
+  btnGlow: T.btnGlow, btnGlowSm: T.btnGlowSm,
+  titleGrad: T.titleGradient,
   sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
 };
 
@@ -93,16 +95,16 @@ const Styles = () => <style>{`
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-thumb { background: rgba(100,100,100,0.25); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: ${T.scrollThumb}; border-radius: 10px; }
   input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
   input, textarea, button { transition: all 0.2s ease; }
-  input:focus, textarea:focus { outline: none; border-color: #646464 !important; }
+  input:focus, textarea:focus { outline: none; border-color: ${T.inputBorderFocus} !important; }
   @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
   @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
   @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
-  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(100,100,100,0.22)} 50%{box-shadow:0 0 24px rgba(100,100,100,0.35)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px ${T.pulseShadowLo}} 50%{box-shadow:0 0 24px ${T.pulseShadowHi}} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
@@ -152,11 +154,11 @@ const SB = ({ status }) => {
 };
 
 const Av = ({ ini, sz = 40 }) => (
-  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
+  <div style={{ width: sz, height: sz, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: D.sora, fontSize: sz * 0.34, fontWeight: 800, flexShrink: 0, textTransform: "uppercase" }}>{ini}</div>
 );
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
-  const vs = { primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)" }, success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(100,100,100,0.35)" }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
+  const vs = { primary: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${T.glowPrimary}` }, success: { background: D.btnGrad, boxShadow: D.btnGlowSm, color: "#000000", border: `1px solid ${T.glowPrimary}` }, danger: { background: "transparent", color: "#EF4444", border: "1.5px solid rgba(239,68,68,0.30)" }, outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1.5px solid rgba(255,255,255,0.12)" }, ghost: { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` } };
   return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, boxShadow: "none", ...vs[v], ...s }}>{children}</button>;
 };
 
@@ -170,14 +172,14 @@ const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi
 );
 
 const Tog = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? "rgba(100,100,100,0.15)" : D.faint, border: `1.5px solid ${active ? "rgba(100,100,100,0.40)" : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
+  <div onClick={onToggle} style={{ width: 48, height: 24, borderRadius: 12, cursor: "pointer", background: active ? T.gradientCard : D.faint, border: `1.5px solid ${active ? T.glowPrimary : "rgba(255,255,255,0.10)"}`, position: "relative", transition: "all 0.2s ease", flexShrink: 0 }}>
     <div style={{ width: 18, height: 18, borderRadius: "50%", background: active ? T.white : "rgba(255,255,255,0.25)", position: "absolute", top: 1.5, left: active ? 25 : 2, transition: "all 0.2s ease" }} />
   </div>
 );
 
 const ToastC = ({ msg, type }) => msg ? (
   <div style={{ position: "fixed", top: 28, left: "50%", transform: "translateX(-50%)", zIndex: 300, animation: "slideDown 0.35s cubic-bezier(0.34,1.56,0.64,1)", maxWidth: 340, width: "calc(100% - 40px)", background: D.glass, backdropFilter: D.blur, WebkitBackdropFilter: D.blur, border: `1px solid ${D.glassBorder}`, borderRadius: D.radiusSm, boxShadow: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "14px 20px" }}>
-    <div style={{ background: D.btnGrad, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+    <div style={{ background: D.btnGrad, boxShadow: D.btnGlowSm, borderRadius: "50%", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
       {IC.check("black")}
     </div>
     <span style={{ fontFamily: D.sora, fontSize: 11, fontWeight: 700, letterSpacing: 0.5, textTransform: "uppercase", color: "rgba(255,255,255,0.92)", lineHeight: 1.4, textAlign: "center" }}>{msg}</span>
@@ -609,7 +611,7 @@ const hexToRGB = (hex) => {
 // Helper: rgba string → hex (#rrggbb)
 const rgbaToHex = (rgba) => {
   const m = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (!m) return "#646464";
+  if (!m) return T.primary;
   return "#" + [m[1], m[2], m[3]].map(n => parseInt(n).toString(16).padStart(2, "0")).join("");
 };
 
@@ -673,7 +675,7 @@ const SliderRow = ({ label, value, min, max, step = 1, onChange, unit = "" }) =>
 const AConfig = () => {
   const [cfg, setCfg] = useState({
     iconColor:     T.iconColor,      // #ffffff
-    coinGlowHex:   "#646464",        // cor base do glow
+    coinGlowHex:   T.primary,        // cor base do glow
     coinGlowAlpha: 0.90,             // opacidade central
     coinGlowBlur:  T.coinGlowBlur,   // 22
   });
@@ -762,7 +764,7 @@ const AConfig = () => {
       {/* ── Seção: Ícones ── */}
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <FaPaintbrush size={25}  color="#000" />
           </div>
           <div>
@@ -803,7 +805,7 @@ const AConfig = () => {
       {/* ── Seção: Glow da Moeda ── */}
       <Glass s={{ padding: "24px 20px", marginBottom: 16 }} a="fadeUp 0.4s ease-out 0.08s both">
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 34, height: 34, borderRadius: "50%", background: D.btnGrad, boxShadow: D.btnGlowSm, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <FaSliders size={25}  color="#000" />
           </div>
           <div>
@@ -837,7 +839,7 @@ const AConfig = () => {
         <div style={{ padding: "28px 20px", background: "rgba(0,0,0,0.40)", borderRadius: D.radiusSm, border: `1px solid ${D.glassBorder}`, marginTop: 4, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
           <span style={{ fontFamily: D.sora, fontSize: 10, color: D.dim, textTransform: "uppercase", letterSpacing: 0.5 }}>PREVIEW AO VIVO</span>
           <div style={{ position: "relative", width: 110, height: 110, display: "flex", alignItems: "center", justifyContent: "center", animation: "float 3.5s ease-in-out infinite" }}>
-            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, rgba(100,100,100,0.10) 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: -40, background: `radial-gradient(circle, ${coinGlow} 0%, ${coinGlowMid} 35%, ${T.coinGlowFar} 60%, transparent 78%)`, borderRadius: "50%", filter: `blur(${cfg.coinGlowBlur}px)`, pointerEvents: "none" }} />
             <img src={imgIconePrincipal} alt="Moeda" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
           </div>
         </div>
@@ -941,7 +943,7 @@ export default function AdminApp() {
 
   if (session === undefined) return (
     <><Styles /><div style={{ minHeight: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: D.bg1 }}>
-      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid rgba(100,100,100,0.15)`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
+      <div style={{ width: 48, height: 48, borderRadius: "50%", border: `3px solid ${T.spinnerTrack}`, borderTopColor: D.red, animation: "spin 0.8s linear infinite" }} />
     </div></>
   );
 
@@ -1010,7 +1012,7 @@ export default function AdminApp() {
                   }
                   const active = adminTab === item.k;
                   return (
-                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? "#646464" : "rgba(255,255,255,0.72)", background: active ? "rgba(100,100,100,0.10)" : "transparent", borderLeft: active ? "3px solid #646464" : "3px solid transparent" }}>
+                    <div key={item.k} onClick={() => { setAdminTab(item.k); setMenuOpen(false); window.scrollTo(0, 0); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "11px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: active ? 800 : 700, textTransform: "uppercase", letterSpacing: 0.4, color: active ? T.primary : "rgba(255,255,255,0.72)", background: active ? T.gradientCard : "transparent", borderLeft: active ? `3px solid ${T.primary}` : "3px solid transparent" }}>
                       <span style={{ flex: 1, minWidth: 0 }}>{item.label}</span>
                       {item.badge > 0 && (
                         <span style={{ minWidth: 18, height: 18, borderRadius: "50%", background: D.red, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "white", flexShrink: 0 }}>{item.badge}</span>
@@ -1025,7 +1027,7 @@ export default function AdminApp() {
 
         {/* Tab title */}
         <div style={{ margin: "18px 0 8px 4px" }}>
-          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
+          <h1 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", lineHeight: 0.88, letterSpacing: -2, wordBreak: "break-word", background: T.titleGradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: TAB_LABELS[adminTab] }} />
         </div>
 
         {/* Content */}
