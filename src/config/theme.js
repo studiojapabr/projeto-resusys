@@ -5,7 +5,7 @@
 // ═══════════════════════════════════════════
 
 // ── 1. COR PRINCIPAL ─────────────────────────
-const PRIMARY   = "#8cfc00";
+const PRIMARY   = "#fc4d00";
 const SECONDARY = "#646464";
 
 // ── 2. Extrai RGB para usar em rgba() ────────
