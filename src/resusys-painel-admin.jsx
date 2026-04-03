@@ -1007,7 +1007,7 @@ export default function AdminApp() {
                   if (item.k === "logout") {
                     return (
                       <div key="logout" onClick={() => { setMenuOpen(false); handleLogout(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", cursor: "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.4, color: "rgba(255,255,255,0.55)", borderTop: `1px solid ${D.glassBorder}`, marginTop: 4, transition: "background 0.15s ease, color 0.15s ease" }}>
-                        {boldIC(FaRightFromBracket, "rgba(255,255,255,0.55)", 16)}
+                        {<SvgBack size={18} color="rgba(255,255,255,0.55)" />}
                         Sair
                       </div>
                     );
