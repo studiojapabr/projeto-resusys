@@ -23,7 +23,7 @@ const supabase = createClient(
 let _S = {
   iconColor:    "#ffffff",
   coinGlow:     "rgba(35,35,35,0.90)",
-  coinGlowMid:  "rgba(239,239,239,0.50)",
+  coinGlowMid:  "rgba(221,221,221,0.50)",
   coinGlowBlur: 22,
 };
 let _SL = [];
@@ -45,13 +45,13 @@ const D = {
   bg1: "#080808", bg2: "#0f0f0f", bgCenter: "rgba(35,35,35,0.04)",
   glass: "rgba(255,255,255,0.04)", glassBorder: "rgba(255,255,255,0.09)", blur: "blur(20px)",
   radius: "60px", radiusSm: "30px",
-  red: "#232323", redDark: "rgba(35,35,35,0.75)", orange: "#efefef",
-  redGlow: "rgba(35,35,35,0.25)", green: "#efefef", greenGlow: "rgba(239,239,239,0.18)",
+  red: "#232323", redDark: "rgba(35,35,35,0.75)", orange: "#dddddd",
+  redGlow: "rgba(35,35,35,0.25)", green: "#dddddd", greenGlow: "rgba(221,221,221,0.18)",
   yellow: "#F59E0B", blue: "#6B8EAD", purple: "#7A6B8A",
   white: "#ffffff", muted: "rgba(255,255,255,0.55)", dim: "rgba(255,255,255,0.35)", faint: "rgba(255,255,255,0.08)",
-  btnGrad: "linear-gradient(90deg, #232323 0%, #efefef 100%)", cardGrad: "rgba(35,35,35,0.07)",
-  btnGlow: "0 0 10px rgba(35,35,35,0.30), 0 0 20px rgba(239,239,239,0.12)", btnGlowSm: "0 0 8px rgba(35,35,35,0.25), 0 0 18px rgba(239,239,239,0.10)",
-  titleGrad: "linear-gradient(90deg, #3b3b3b 0%, #ffffff 100%)",
+  btnGrad: "linear-gradient(90deg, #232323 0%, #dddddd 100%)", cardGrad: "rgba(35,35,35,0.07)",
+  btnGlow: "0 0 10px rgba(35,35,35,0.30), 0 0 20px rgba(221,221,221,0.12)", btnGlowSm: "0 0 8px rgba(35,35,35,0.25), 0 0 18px rgba(221,221,221,0.10)",
+  titleGrad: "linear-gradient(90deg, #3b3b3b 0%, #dddddd 100%)",
   sora: "'Sora', sans-serif", maver: "'Maver', sans-serif",
 };
 
@@ -76,9 +76,9 @@ const Styles = () => <style>{`
   @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(35,35,35,0.22)} 50%{box-shadow:0 0 24px rgba(35,35,35,0.35)} }
   @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
   .pulse-dot-red { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(221,221,221,0.70); animation:pulseDot 2s infinite; }
   .pulse-dot-green { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
-  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(221,221,221,0.70); animation:pulseDot 2s infinite; }
   @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
   @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
   @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
