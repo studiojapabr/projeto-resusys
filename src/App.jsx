@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Wallet, LogOut, ChevronLeft, X, Check, Clock, CloudUpload, Ticket, Trophy, Info, ExternalLink, Instagram, Send, Music, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
+import { Wallet, LogOut, ChevronLeft, X, Check, Clock, CloudUpload, Ticket, Trophy, Info, ExternalLink, Globe, MessageCircle, Music2, RefreshCw, Download, Paintbrush, SlidersHorizontal } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
 import AdminApp from "./resusys-painel-admin";
@@ -73,9 +73,9 @@ const IC = {
 };
 
 const SocialIcons = [
-  { href: "https://instagram.com/SEU_PERFIL", icon: <Instagram size={14} strokeWidth={1.75} /> },
-  { href: "https://t.me/SEU_CANAL",           icon: <Send size={14} strokeWidth={1.75} /> },
-  { href: "https://tiktok.com/@SEU_PERFIL",   icon: <Music size={14} strokeWidth={1.75} /> },
+  { href: "https://instagram.com/SEU_PERFIL", icon: <Globe size={14} strokeWidth={1.75} /> },
+  { href: "https://t.me/SEU_CANAL",           icon: <MessageCircle size={14} strokeWidth={1.75} /> },
+  { href: "https://tiktok.com/@SEU_PERFIL",   icon: <Music2 size={14} strokeWidth={1.75} /> },
 ];
 
 const MIcon = () => {
