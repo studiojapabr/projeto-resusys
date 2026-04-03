@@ -138,7 +138,7 @@ const ToastC = ({ msg, type }) => msg ? (
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
     }}>
-      {IC.back("white", 14)}
+      {IC.back("white")}
     </div>
     <span style={{
       fontFamily: D.sora, fontSize: 11, fontWeight: 700,
@@ -167,27 +167,27 @@ const StatC = ({ icon, val, label, color = D.red, d = 0 }) => (
 
 // ICONS
 const IC = {
-  check:   (c = "white", s = 16) => <Check size={s} color={c} strokeWidth={2.5} />,
-  x:       (c = "white", s = 16) => <X size={s} color={c} strokeWidth={2.5} />,
-  clock:   (c = "white", s = 13) => <Clock size={s} color={c} strokeWidth={2} />,
+  check:   (c = "white", s = 18) => <Check size={s} color={c} strokeWidth={2} />,
+  x:       (c = "white", s = 18) => <X size={s} color={c} strokeWidth={2} />,
+  clock:   (c = "white", s = 18) => <Clock size={s} color={c} strokeWidth={2} />,
   wallet:  (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
-  eye:     (c = "white", s = 15) => <Eye size={s} color={c} strokeWidth={2} />,
-  alert:   (c = "white", s = 16) => <AlertCircle size={s} color={c} strokeWidth={2} />,
-  search:  (c = "white", s = 15) => <Search size={s} color={c} strokeWidth={2} />,
+  eye:     (c = "white", s = 18) => <Eye size={s} color={c} strokeWidth={2} />,
+  alert:   (c = "white", s = 18) => <AlertCircle size={s} color={c} strokeWidth={2} />,
+  search:  (c = "white", s = 18) => <Search size={s} color={c} strokeWidth={2} />,
   users:   (c = "white", s = 18) => <Users size={s} color={c} strokeWidth={2} />,
-  dollar:  (c = "white", s = 16) => <DollarSign size={s} color={c} strokeWidth={2} />,
-  edit:    (c = "white", s = 14) => <Pencil size={s} color={c} strokeWidth={2} />,
-  trash:   (c = "white", s = 14) => <Trash2 size={s} color={c} strokeWidth={2} />,
-  ban:     (c = "white", s = 13) => <Ban size={s} color={c} strokeWidth={2} />,
-  grip:    (c = "white", s = 12) => <GripVertical size={s} color={c} strokeWidth={2} />,
-  arrowUp: (c = "white", s = 11) => <ChevronUp size={s} color={c} strokeWidth={2.5} />,
-  arrowDn: (c = "white", s = 11) => <ChevronDown size={s} color={c} strokeWidth={2.5} />,
-  link:    (c = "white", s = 12) => <Link2 size={s} color={c} strokeWidth={2} />,
-  pix:     (c = "white", s = 14) => <Zap size={s} color={c} strokeWidth={2} />,
+  dollar:  (c = "white", s = 18) => <DollarSign size={s} color={c} strokeWidth={2} />,
+  edit:    (c = "white", s = 18) => <Pencil size={s} color={c} strokeWidth={2} />,
+  trash:   (c = "white", s = 18) => <Trash2 size={s} color={c} strokeWidth={2} />,
+  ban:     (c = "white", s = 18) => <Ban size={s} color={c} strokeWidth={2} />,
+  grip:    (c = "white", s = 18) => <GripVertical size={s} color={c} strokeWidth={2} />,
+  arrowUp: (c = "white", s = 18) => <ChevronUp size={s} color={c} strokeWidth={2} />,
+  arrowDn: (c = "white", s = 18) => <ChevronDown size={s} color={c} strokeWidth={2} />,
+  link:    (c = "white", s = 18) => <Link2 size={s} color={c} strokeWidth={2} />,
+  pix:     (c = "white", s = 18) => <Zap size={s} color={c} strokeWidth={2} />,
   grid:    (c = "white", s = 18) => <LayoutGrid size={s} color={c} strokeWidth={2} />,
-  back:    (c = "white", s = 20) => <ChevronLeft size={s} color={c} strokeWidth={2.5} />,
-  logout:  (c = "white", s = 20) => <LogOut size={s} color={c} strokeWidth={2} />,
-  info:    (c = "white", s = 16) => <Info size={s} color={c} strokeWidth={2} />,
+  back:    (c = "white", s = 18) => <ChevronLeft size={s} color={c} strokeWidth={2} />,
+  logout:  (c = "white", s = 18) => <LogOut size={s} color={c} strokeWidth={2} />,
+  info:    (c = "white", s = 18) => <Info size={s} color={c} strokeWidth={2} />,
 };
 
 // ═══════════════════════════════════════════
@@ -280,8 +280,8 @@ const ASubs = ({ subs, setSubs }) => {
                 <div onClick={() => setSel(s)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: D.glass, border: `1px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.eye(D.muted)}</div>
                 {s.status === "pendente" && (
                   <>
-                    <div onClick={() => approve(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.check("#22C55E", 13)}</div>
-                    <div onClick={() => reject(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.x("#EF4444", 13)}</div>
+                    <div onClick={() => approve(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.check("#22C55E")}</div>
+                    <div onClick={() => reject(s.id)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.x("#EF4444")}</div>
                   </>
                 )}
               </div>
@@ -301,7 +301,7 @@ const ASubs = ({ subs, setSubs }) => {
                     <div style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textTransform: "uppercase" }}>{sel.mission_title}</div>
                   </div>
                 </div>
-                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted, 18)}</div>
+                <div onClick={() => setSel(null)} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted)}</div>
               </div>
               <div style={{ marginBottom: 14 }}><BadgeC l={`R$ ${sel.valor}`} c={"#22C55E"} /></div>
               {sel.observacao && (
@@ -437,7 +437,7 @@ const AUsers = ({ usrs, setUsrs }) => {
                 </div>
               </div>
               <div onClick={() => toggle(u.id, u.status)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: u.status === "bloqueado" ? "rgba(192,192,192,0.08)" : "rgba(239,68,68,0.06)", border: `1px solid ${u.status === "bloqueado" ? "rgba(192,192,192,0.22)" : "rgba(239,68,68,0.12)"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                {u.status === "bloqueado" ? IC.check(D.white, 12) : IC.ban("#EF4444")}
+                {u.status === "bloqueado" ? IC.check(D.white) : IC.ban("#EF4444")}
               </div>
             </div>
           </Glass>
@@ -502,7 +502,7 @@ const AMissions = ({ missions, setMissions }) => {
       <div style={{ animation: "fadeUp 0.45s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 22 }}>
           <h2 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: 0.5 }}>{isEdit ? "EDITAR" : "NOVA"} MISSÃO</h2>
-          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted, 18)}</div>
+          <div onClick={() => { setView("list"); setEditing(null); }} className="ic-btn" style={{ width: 36, height: 36, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>{IC.back(D.muted)}</div>
         </div>
         <Glass s={{ padding: "22px 18px", marginBottom: 14 }}>
           <Inp label="TÍTULO" placeholder="Ex: Deposite R$50" value={f.titulo} onChange={e => set("titulo", e.target.value)} />
@@ -578,7 +578,7 @@ const AMissions = ({ missions, setMissions }) => {
         <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(5,5,5,0.70)", backdropFilter: "blur(20px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16, animation: "fadeIn 0.24s" }} onClick={() => setDel(null)}>
           <div onClick={e => e.stopPropagation()} style={{ width: "100%", maxWidth: 370, animation: "scaleIn 0.35s" }}>
             <Glass s={{ padding: "28px 24px", textAlign: "center" }}>
-              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444", 24)}</div>
+              <div style={{ width: 54, height: 54, borderRadius: "50%", margin: "0 auto 14px", background: "rgba(239,68,68,0.08)", border: "2px solid rgba(239,68,68,0.20)", display: "flex", alignItems: "center", justifyContent: "center", animation: "shake 0.4s ease-out" }}>{IC.trash("#EF4444")}</div>
               <h3 style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, textTransform: "uppercase", marginBottom: 8 }}>DELETAR?</h3>
               <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, marginBottom: 20, textTransform: "uppercase" }}>"{del.titulo}"</p>
               <div style={{ display: "flex", gap: 10 }}>

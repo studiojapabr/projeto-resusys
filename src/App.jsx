@@ -159,7 +159,7 @@ const ToastC = ({ msg, type }) => msg ? (
       width: 28, height: 28,
       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
     }}>
-      {IC.back("white", 14)}
+      {IC.back("white")}
     </div>
     <span style={{
       fontFamily: D.sora, fontSize: 11, fontWeight: 700,
@@ -184,15 +184,15 @@ const BG = ({ children }) => (
 );
 
 const IC = {
-  check: (c = "white", s = 16) => <Check size={s} color={c} strokeWidth={2.5} />,
-  x: (c = "white", s = 16) => <X size={s} color={c} strokeWidth={2.5} />,
-  clock: (c = "white", s = 13) => <Clock size={s} color={c} strokeWidth={2} />,
-  wallet: (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
-  upload: (c = "white", s = 24) => <Upload size={s} color={c} strokeWidth={1.5} />,
-  logout: (c = "white", s = 20) => <LogOut size={s} color={c} strokeWidth={2} />,
-  back: (c = "white", s = 20) => <ChevronLeft size={s} color={c} strokeWidth={2.5} />,
-  trophy: (c = "white", s = 20) => <Trophy size={s} color={c} strokeWidth={2} />,
-  ticket: (c = "white", s = 18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M22.536,5.172l-3.708-3.708A1.528,1.528,0,0,0,17.75,1a1.528,1.528,0,0,0-1.078.464L15.2,2.936A3.5,3.5,0,0,1,10.8,2.936L9.328,1.464A1.528,1.528,0,0,0,8.25,1,1.528,1.528,0,0,0,7.172,1.464L1.464,7.172A1.528,1.528,0,0,0,1,8.25a1.528,1.528,0,0,0,.464,1.078L2.936,10.8a3.5,3.5,0,0,1,0,4.4L1.464,16.672A1.528,1.528,0,0,0,1,17.75a1.528,1.528,0,0,0,.464,1.078l3.708,3.708A1.528,1.528,0,0,0,6.25,23a1.528,1.528,0,0,0,1.078-.464L8.8,21.064a3.5,3.5,0,0,1,4.4,0l1.472,1.472A1.528,1.528,0,0,0,15.75,23a1.528,1.528,0,0,0,1.078-.464l5.708-5.708A1.528,1.528,0,0,0,23,15.75a1.528,1.528,0,0,0-.464-1.078L21.064,13.2a3.5,3.5,0,0,1,0-4.4l1.472-1.472A1.528,1.528,0,0,0,23,6.25,1.528,1.528,0,0,0,22.536,5.172ZM9,8A1,1,0,1,1,8,9,1,1,0,0,1,9,8Zm6,8a1,1,0,1,1,1-1A1,1,0,0,1,15,16Zm.707-7.293-7,7a1,1,0,0,1-1.414-1.414l7-7a1,1,0,0,1,1.414,1.414Z"/></svg>,
+  check:   (c = "white", s = 18) => <Check size={s} color={c} strokeWidth={2} />,
+  x:       (c = "white", s = 18) => <X size={s} color={c} strokeWidth={2} />,
+  clock:   (c = "white", s = 18) => <Clock size={s} color={c} strokeWidth={2} />,
+  wallet:  (c = "white", s = 18) => <Wallet size={s} color={c} strokeWidth={2} />,
+  upload:  (c = "white", s = 18) => <Upload size={s} color={c} strokeWidth={2} />,
+  logout:  (c = "white", s = 18) => <LogOut size={s} color={c} strokeWidth={2} />,
+  back:    (c = "white", s = 18) => <ChevronLeft size={s} color={c} strokeWidth={2} />,
+  trophy:  (c = "white", s = 18) => <Trophy size={s} color={c} strokeWidth={2} />,
+  ticket:  (c = "white", s = 18) => <svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M22.536,5.172l-3.708-3.708A1.528,1.528,0,0,0,17.75,1a1.528,1.528,0,0,0-1.078.464L15.2,2.936A3.5,3.5,0,0,1,10.8,2.936L9.328,1.464A1.528,1.528,0,0,0,8.25,1,1.528,1.528,0,0,0,7.172,1.464L1.464,7.172A1.528,1.528,0,0,0,1,8.25a1.528,1.528,0,0,0,.464,1.078L2.936,10.8a3.5,3.5,0,0,1,0,4.4L1.464,16.672A1.528,1.528,0,0,0,1,17.75a1.528,1.528,0,0,0,.464,1.078l3.708,3.708A1.528,1.528,0,0,0,6.25,23a1.528,1.528,0,0,0,1.078-.464L8.8,21.064a3.5,3.5,0,0,1,4.4,0l1.472,1.472A1.528,1.528,0,0,0,15.75,23a1.528,1.528,0,0,0,1.078-.464l5.708-5.708A1.528,1.528,0,0,0,23,15.75a1.528,1.528,0,0,0-.464-1.078L21.064,13.2a3.5,3.5,0,0,1,0-4.4l1.472-1.472A1.528,1.528,0,0,0,23,6.25,1.528,1.528,0,0,0,22.536,5.172ZM9,8A1,1,0,1,1,8,9,1,1,0,0,1,9,8Zm6,8a1,1,0,1,1,1-1A1,1,0,0,1,15,16Zm.707-7.293-7,7a1,1,0,0,1-1.414-1.414l7-7a1,1,0,0,1,1.414,1.414Z"/></svg>,
 };
 
 const MIcon = () => (
@@ -345,7 +345,7 @@ const RaffleBtnUser = ({ go, profile }) => {
       onClick={() => go("raffle")}
       className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", animation: "pulse 2.4s infinite" }}
     >
-      {IC.ticket("white", 18)}
+      {IC.ticket("white")}
       {myTickets > 0 && (
         <div style={{ position: "absolute", top: -4, right: -4, width: 16, height: 16, borderRadius: "50%", background: "#050505", border: `1.5px solid ${D.orange}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, fontFamily: D.sora, color: D.orange }}>{myTickets}</div>
       )}
@@ -473,7 +473,7 @@ const RaffleScreen = ({ go, profile }) => {
             <a key={idx} href={href} target="_blank" rel="noopener noreferrer" className="ic-btn" style={{ width: 42, height: 42, borderRadius: "50%", border: "1.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.70)", textDecoration: "none" }}>{icon}</a>
           ))}
           <div style={{ width: 42, height: 42, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, animation: "pulse 2.4s infinite" }}>
-            {IC.ticket("white", 18)}
+            {IC.ticket("white")}
           </div>
         </div>
 
@@ -556,7 +556,7 @@ const RaffleScreen = ({ go, profile }) => {
               </div>
               <div style={{ display: "flex", gap: 12 }}>
                 <Btn onClick={handleSend} disabled={uploading || !file || !valor || Number(valor) < 20} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR"}</Btn>
-                <div onClick={() => setModal(false)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+                <div onClick={() => setModal(false)} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{IC.x(D.muted)}</div>
               </div>
             </Glass>
           </div>
@@ -704,7 +704,7 @@ const UserDash = ({ profile, go, onLogout }) => {
                           <p style={{ fontFamily: D.sora, fontSize: 12, fontWeight: 800, color: completed ? D.orange : D.muted, letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 16 }}>VALOR: {m.valor}R$</p>
                           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
                             {aprovado
-                              ? <div style={{ padding: "10px 22px", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange, 13)} CONCLUÍDO</div>
+                              ? <div style={{ padding: "10px 22px", background: "rgba(34,197,94,0.12)", border: "1px solid rgba(34,197,94,0.35)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.orange, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.check(D.orange)} CONCLUÍDO</div>
                               : completed
                                 ? <div style={{ padding: "10px 22px", background: "rgba(245,158,11,0.10)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: D.radius, fontFamily: D.sora, fontSize: 12, fontWeight: 800, letterSpacing: 0.5, color: D.yellow, display: "flex", alignItems: "center", gap: 8, textTransform: "uppercase" }}>{IC.clock(D.yellow)} EM ANÁLISE</div>
                                 : <Btn onClick={() => { setFile(null); setObservacao(""); setModal(m.id); }} s={{ width: "auto", maxWidth: 200 }}>COMPROVANTE</Btn>}
@@ -774,7 +774,7 @@ const UserDash = ({ profile, go, onLogout }) => {
               </div>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <Btn onClick={() => !uploading && file && handleSubmit(modal)} disabled={uploading || !file} s={{ flex: 1 }}>{uploading ? "ENVIANDO..." : "CONFIRMAR ENVIO"}</Btn>
-                <div onClick={() => { setModal(null); setObservacao(""); }} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted, 18)}</div>
+                <div onClick={() => { setModal(null); setObservacao(""); }} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", border: `1.5px solid ${D.glassBorder}`, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.05)", flexShrink: 0 }}>{IC.x(D.muted)}</div>
               </div>
             </Glass>
           </div>
@@ -820,7 +820,7 @@ const Withdrawal = ({ go, profile }) => {
   if (ok) return (
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 20px 44px", maxWidth: 430, width: "100%", margin: "0 auto" }}>
       <Glass s={{ padding: "36px 30px", display: "flex", flexDirection: "column", alignItems: "center" }} a="slideUp 0.6s ease-out">
-        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("#000000", 20)}</div>
+        <div style={{ width: 44, height: 44, borderRadius: "50%", background: D.btnGrad, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24, animation: "popIn 0.6s ease-out" }}>{IC.check("#000000")}</div>
         <h2 style={{ fontFamily: D.sora, fontSize: 35, fontWeight: 800, textTransform: "uppercase", textAlign: "center", marginBottom: 14, letterSpacing: -2, lineHeight: 0.88, wordBreak: "break-word", background: "linear-gradient(90deg, #646464 0%, #f0f0f0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }} dangerouslySetInnerHTML={{ __html: C.success.title }} />
         <p style={{ fontFamily: D.sora, fontSize: 12, color: D.muted, textAlign: "center", marginBottom: 28, textTransform: "uppercase", fontWeight: 600 }}>Processamento em até 24h.</p>
         <div onClick={() => go("dashboard")} className="ic-btn" style={{ width: 40, height: 40, borderRadius: "50%", background: "transparent", border: "1.5px solid rgba(255,255,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>{IC.back("rgba(255,255,255,0.7)")}</div>
