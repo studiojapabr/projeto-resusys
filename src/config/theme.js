@@ -4,14 +4,14 @@
 // ═══════════════════════════════════════════
 
 // ── 1. COR PRINCIPAL ─────────────────────────
-const PRIMARY   = "#646464";
+const PRIMARY   = "#fc4d00";
 const SECONDARY = "#646464";
 
 // ── 2. TOKENS ────────────────────────────────
 export const T = {
   primary:     PRIMARY,
   secondary:   SECONDARY,
-  primaryDark: "#4a4a4a",
+  primaryDark: "#fc4d00",
 
   // Cor sólida em todos os contextos
   gradient:     PRIMARY,
@@ -29,7 +29,7 @@ export const T = {
   glassBorder: "rgba(255,255,255,0.09)",
   blur:        "blur(20px)",
 
-  radius:   "30px",
+  radius:   "60px",
   radiusSm: "16px",
 
   white:  "#FFFFFF",
