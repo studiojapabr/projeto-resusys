@@ -88,7 +88,7 @@ const IC = {
 const SvgBack = ({ size = 18, color = "currentColor" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={size} height={size} fill={color} style={{ transform: "rotate(180deg)" }}><path d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z"/></svg>;
 
 // ─── Styles ────────────────────────────────
-const Styles = () => <style>{"
+const Styles = () => <style>{`
   @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
@@ -123,7 +123,7 @@ const Styles = () => <style>{"
   input[type=color] { -webkit-appearance: none; padding: 0; border: none; cursor: pointer; background: transparent; }
   input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
   input[type=color]::-webkit-color-swatch { border: none; border-radius: 10px; }
-"}</style>;
+`}</style>;
 
 const Spotlight = () => {
   const ref = useRef(null);

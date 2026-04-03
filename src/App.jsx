@@ -103,7 +103,7 @@ const useIsMobile = () => {
 };
 
 // ─── Styles ────────────────────────────────
-const Styles = () => <style>{"
+const Styles = () => <style>{`
   @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
   @font-face { font-family: 'Maver'; src: url('data:font/opentype;base64,T1RUTwANAIAAAwBQQ0ZGIPL1x6sAABNoAABuBERTSUcAAAABAAD5nAAAAAhHREVGLXIuhAAAgWwAAAEoR1BPU9rV2xsAAIKUAABjykdTVULKGQpQAADmYAAAEzxPUy8yaSqvaQAACoQAAABgY21hcOCC+eAAAA3gAAAFaGhlYWQVXdvXAAAA5AAAADZoaGVhB1wHVAAACmAAAAAkaG10eHnc+8sAAAEcAAAJRG1heHACWFAAAAAA3AAAAAZuYW1lQ8UqMAAACuQAAAL8cG9zdP+4ADIAABNIAAAAIAABAAIAAQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') format('opentype'); font-weight: normal; font-style: normal; }
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -140,7 +140,7 @@ const Styles = () => <style>{"
   .ic-btn:active { transform: scale(0.94); filter: brightness(0.45); }
   .txt-link:hover { filter: brightness(0.55); }
   .txt-link { transition: filter 0.18s ease; cursor: pointer; }
-"}</style>;
+`}</style>;
 
 const Spotlight = () => {
   const ref = useRef(null);
