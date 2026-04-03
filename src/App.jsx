@@ -164,13 +164,43 @@ const BadgeC = ({ l, c = D.red }) => (
 
 const Btn = ({ children, onClick, v = "primary", disabled = false, s = {} }) => {
   const vs = {
-    primary: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(35,35,35,0.25)", boxShadow: D.btnGlow },
-    success: { background: D.btnGrad, color: "#000000", border: "1px solid rgba(35,35,35,0.25)", boxShadow: D.btnGlow },
+    primary: { background: D.btnGrad, color: "#000000" },
+    success: { background: D.btnGrad, color: "#000000" },
     danger:  { background: "transparent", color: "#EF4444", border: "1px solid rgba(239,68,68,0.30)" },
     outline: { background: "transparent", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.12)" },
     ghost:   { background: D.faint, color: "rgba(255,255,255,0.6)", border: `1px solid ${D.glassBorder}` },
   };
-  return <button className="btn-hover-grad" onClick={disabled ? undefined : onClick} style={{ padding: "10px 22px", borderRadius: D.radius, minHeight: 40, width: "100%", justifyContent: "center", cursor: disabled ? "not-allowed" : "pointer", fontFamily: D.sora, fontSize: 12, fontWeight: 700, letterSpacing: 0.3, textTransform: "uppercase", transition: "all 0.2s ease", whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 10, opacity: disabled ? 0.35 : 1, ...vs[v], ...s }}>{children}</button>;
+  return (
+    <div
+      className="btn-hover-grad"
+      onClick={disabled ? undefined : onClick}
+      style={{
+        padding: "10px 22px",
+        borderRadius: D.radius,
+        minHeight: 40,
+        width: "100%",
+        boxSizing: "border-box",
+        justifyContent: "center",
+        cursor: disabled ? "not-allowed" : "pointer",
+        fontFamily: D.sora,
+        fontSize: 12,
+        fontWeight: 700,
+        letterSpacing: 0.3,
+        textTransform: "uppercase",
+        transition: "filter 0.18s ease",
+        whiteSpace: "nowrap",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 10,
+        opacity: disabled ? 0.35 : 1,
+        userSelect: "none",
+        ...vs[v],
+        ...s,
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 const Inp = ({ label, placeholder, type = "text", value, onChange, s = {}, multi = false }) => (
