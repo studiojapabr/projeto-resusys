@@ -56,6 +56,42 @@ const D = {
 };
 
 // ═══════════════════════════════════════════
+// STYLES
+// ═══════════════════════════════════════════
+const Styles = () => <style>{`
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body, html, #root { background: ${D.bg1}; color: ${D.white}; font-family: ${D.sora}; overflow-x: hidden; min-height: 100dvh; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-thumb { background: rgba(35,35,35,0.25); border-radius: 10px; }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.34); font-family: ${D.sora}; font-weight: 600; font-size: 13px; letter-spacing: 0.5px; }
+  input, textarea, button { transition: all 0.2s ease; outline: none; } button { border: none; appearance: none; -webkit-appearance: none; }
+  input:focus, textarea:focus { outline: none; border-color: #232323 !important; box-shadow: 0 0 0 2px rgba(35,35,35,0.14), 0 0 14px rgba(35,35,35,0.10); }
+  @keyframes fadeUp    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+  @keyframes slideUp   { from{opacity:0;transform:translateY(50px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes scaleIn   { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+  @keyframes pulse     { 0%,100%{box-shadow:0 0 10px rgba(35,35,35,0.22)} 50%{box-shadow:0 0 24px rgba(35,35,35,0.35)} }
+  @keyframes pulseDot  { 0%{transform:scale(1);opacity:0.65} 100%{transform:scale(2.1);opacity:0} }
+  .pulse-dot-red { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-red::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
+  .pulse-dot-green { width:10px; height:10px; background:rgba(35,35,35,0.60); border-radius:50%; position:relative; flex-shrink:0; }
+  .pulse-dot-green::after { content:""; position:absolute; inset:0; border-radius:50%; background:rgba(239,239,239,0.70); animation:pulseDot 2s infinite; }
+  @keyframes glowPulse { 0%,100%{opacity:0.18} 50%{opacity:0.35} }
+  @keyframes float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes shake     { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+  @keyframes countUp   { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
+  @keyframes popIn     { 0%{opacity:0;transform:scale(0.45)} 60%{transform:scale(1.02)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes slideRight{ from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes spin      { to { transform: rotate(360deg); } }
+  .premium-glass { transition: all 0.2s ease; box-shadow: 0 14px 34px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06); }
+  .btn-hover-grad:hover { filter: brightness(0.55); transform: scale(1.01); }
+  .ic-btn { cursor: pointer; transition: filter 0.15s ease; } .ic-btn:hover { filter: brightness(0.7); }
+  .txt-link { cursor: pointer; transition: opacity 0.15s; } .txt-link:hover { opacity: 0.7; }
+`}</style>;
+
+// ═══════════════════════════════════════════
 // ICON SYSTEM — Lucide React (filled/solid)
 
 const IC = {
